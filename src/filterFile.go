@@ -16,7 +16,7 @@ func isCFile(fileName string) bool {
 	return false
 }
 
-func getFileList(dir string, list []string) []string{
+func getFileList(dir string, list map[string]bool){
 	dirList, _ := ioutil.ReadDir(dir)
 	if !strings.HasSuffix(dir, "/") {
 		dir += "/"
@@ -29,10 +29,9 @@ func getFileList(dir string, list []string) []string{
 			}
 		} else {
 			if isCFile(name) {
-				list = append(list, dir + name)
+				list[dir + name] = true
 			}
 		}
 	}
-	return list
 }
 
