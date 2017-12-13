@@ -15,9 +15,3 @@ func Test_isCFile(t *testing.T) {
 		t.Error("isCFile error")
 	}
 }
-
-func Test_getFileList(t *testing.T) {
-	dir := "/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/"
-	fileList := make([]string, 0)
-	getFileList(dir, fileList)
-}

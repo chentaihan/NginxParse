@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"os"
 )
@@ -34,28 +35,39 @@ func main() {
 	//	fmt.Println("need one param as nginx source path")
 	//	return
 	//}
+
 	//dir := os.Args[1]
 	//if !isDir(dir) {
 	//	fmt.Println(dir, " is not a path")
 	//	return
 	//}
 	dir := "/Users/didi/OpenSource/nginx-1.12.2/src"
-	initParse()
 
-	fileList := make(map[string]bool, 0)
-	getFileList(dir, fileList)
-	cmdList := make([]*CommandInfo, 0, 50)
-	for fileName, _ := range fileList {
-		commandInfo := parseFile(fileName)
-		if commandInfo != nil {
-			cmdList = append(cmdList, commandInfo)
+	fileParse := FileParse{}
+
+	cmdMgr := NewCommandManager()
+	cmdStruct := StructParse{
+		structType: STRUCT_TYPE_COMMAND,
+		Parse:      cmdMgr,
+	}
+	fileParse.Register(&cmdStruct)
+
+	moduleMgr := NewModuleManager()
+	moduleStruct := StructParse{
+		structType: STRUCT_TYPE_MODULE,
+		Parse:      moduleMgr,
+	}
+	fileParse.Register(&moduleStruct)
+
+	fileList := getFileList(dir)
+
+	for _, fileName := range fileList {
+		if fileParse.Parse(fileName) {
+			//break
 		}
 	}
-	outputFile := "./nginxConf.txt"
-	os.Remove(outputFile)
-	for _, cmdInfo := range cmdList {
-		buf := commandInfoFormat(cmdInfo)
-		WriteFile(outputFile, buf, 0666)
-	}
 
+	outPutCommand(cmdMgr.CmdInfo)
+	outPutModule(moduleMgr.moduleInfo)
+	fmt.Println("ok")
 }
