@@ -7,7 +7,6 @@ const (
 	NGX_MODULE_T      = "ngx_module_t"
 )
 
-
 const(
 	STRUCT_TYPE_COMMAND	= 1
 	STRUCT_TYPE_MODULE	= 2

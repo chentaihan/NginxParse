@@ -33,7 +33,7 @@
 </head>
 <body style="overflow:-Scroll;overflow-x:hidden;">
 <div style="width:100%;overflow:inherit;">
-    <table><tr><th colspan="6">nginx</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/core/nginx.c</td><td colspan="3">struct：ngx_core_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>daemon</td><td>NGX_MAIN_CONF|NGX_DIRECT_CONF|NGX_CONF_FLAG
+    <table><tr><th colspan="6">nginx</th></tr><tr><td colspan="3">文件名：core/nginx.c</td><td colspan="3">struct：ngx_core_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>daemon</td><td>NGX_MAIN_CONF|NGX_DIRECT_CONF|NGX_CONF_FLAG
 </td><td>ngx_conf_set_flag_slot
 </td><td>0
 </td><td>offsetof(ngx_core_conf_t,daemon)
@@ -113,32 +113,32 @@
 </td><td>0
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_conf_file</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/core/ngx_conf_file.c</td><td colspan="3">struct：ngx_conf_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>include</td><td>NGX_ANY_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_conf_file</th></tr><tr><td colspan="3">文件名：core/ngx_conf_file.c</td><td colspan="3">struct：ngx_conf_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>include</td><td>NGX_ANY_CONF|NGX_CONF_TAKE1
 </td><td>ngx_conf_include
 </td><td>0
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_log</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/core/ngx_log.c</td><td colspan="3">struct：ngx_errlog_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>error_log</td><td>NGX_MAIN_CONF|NGX_CONF_1MORE
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_log</th></tr><tr><td colspan="3">文件名：core/ngx_log.c</td><td colspan="3">struct：ngx_errlog_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>error_log</td><td>NGX_MAIN_CONF|NGX_CONF_1MORE
 </td><td>ngx_error_log
 </td><td>0
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_regex</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/core/ngx_regex.c</td><td colspan="3">struct：ngx_regex_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>pcre_jit</td><td>NGX_MAIN_CONF|NGX_DIRECT_CONF|NGX_CONF_FLAG
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_regex</th></tr><tr><td colspan="3">文件名：core/ngx_regex.c</td><td colspan="3">struct：ngx_regex_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>pcre_jit</td><td>NGX_MAIN_CONF|NGX_DIRECT_CONF|NGX_CONF_FLAG
 </td><td>ngx_conf_set_flag_slot
 </td><td>0
 </td><td>offsetof(ngx_regex_conf_t,pcre_jit)
 </td><td>&amp;ngx_regex_pcre_jit_post
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_thread_pool</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/core/ngx_thread_pool.c</td><td colspan="3">struct：ngx_thread_pool_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>thread_pool</td><td>NGX_MAIN_CONF|NGX_DIRECT_CONF|NGX_CONF_TAKE23
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_thread_pool</th></tr><tr><td colspan="3">文件名：core/ngx_thread_pool.c</td><td colspan="3">struct：ngx_thread_pool_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>thread_pool</td><td>NGX_MAIN_CONF|NGX_DIRECT_CONF|NGX_CONF_TAKE23
 </td><td>ngx_thread_pool
 </td><td>0
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_event</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/event/ngx_event.c</td><td colspan="3">struct：ngx_events_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>events</td><td>NGX_MAIN_CONF|NGX_CONF_BLOCK|NGX_CONF_NOARGS
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_event</th></tr><tr><td colspan="3">文件名：event/ngx_event.c</td><td colspan="3">struct：ngx_events_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>events</td><td>NGX_MAIN_CONF|NGX_CONF_BLOCK|NGX_CONF_NOARGS
 </td><td>ngx_events_block
 </td><td>0
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_event</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/event/ngx_event.c</td><td colspan="3">struct：ngx_event_core_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>worker_connections</td><td>NGX_EVENT_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_event</th></tr><tr><td colspan="3">文件名：event/ngx_event.c</td><td colspan="3">struct：ngx_event_core_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>worker_connections</td><td>NGX_EVENT_CONF|NGX_CONF_TAKE1
 </td><td>ngx_event_connections
 </td><td>0
 </td><td>0
@@ -168,22 +168,22 @@
 </td><td>0
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_event_openssl</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/event/ngx_event_openssl.c</td><td colspan="3">struct：ngx_openssl_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>ssl_engine</td><td>NGX_MAIN_CONF|NGX_DIRECT_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_event_openssl</th></tr><tr><td colspan="3">文件名：event/ngx_event_openssl.c</td><td colspan="3">struct：ngx_openssl_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>ssl_engine</td><td>NGX_MAIN_CONF|NGX_DIRECT_CONF|NGX_CONF_TAKE1
 </td><td>ngx_openssl_engine
 </td><td>0
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/ngx_http.c</td><td colspan="3">struct：ngx_http_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>http</td><td>NGX_MAIN_CONF|NGX_CONF_BLOCK|NGX_CONF_NOARGS
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http</th></tr><tr><td colspan="3">文件名：http/ngx_http.c</td><td colspan="3">struct：ngx_http_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>http</td><td>NGX_MAIN_CONF|NGX_CONF_BLOCK|NGX_CONF_NOARGS
 </td><td>ngx_http_block
 </td><td>0
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_copy_filter_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/ngx_http_copy_filter_module.c</td><td colspan="3">struct：ngx_http_copy_filter_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>output_buffers</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE2
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_copy_filter_module</th></tr><tr><td colspan="3">文件名：http/ngx_http_copy_filter_module.c</td><td colspan="3">struct：ngx_http_copy_filter_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>output_buffers</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE2
 </td><td>ngx_conf_set_bufs_slot
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_copy_filter_conf_t,bufs)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_core_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/ngx_http_core_module.c</td><td colspan="3">struct：ngx_http_core_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>variables_hash_max_size</td><td>NGX_HTTP_MAIN_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_core_module</th></tr><tr><td colspan="3">文件名：http/ngx_http_core_module.c</td><td colspan="3">struct：ngx_http_core_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>variables_hash_max_size</td><td>NGX_HTTP_MAIN_CONF|NGX_CONF_TAKE1
 </td><td>ngx_conf_set_num_slot
 </td><td>NGX_HTTP_MAIN_CONF_OFFSET
 </td><td>offsetof(ngx_http_core_main_conf_t,variables_hash_max_size)
@@ -588,7 +588,7 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_upstream</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/ngx_http_upstream.c</td><td colspan="3">struct：ngx_http_upstream_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>upstream</td><td>NGX_HTTP_MAIN_CONF|NGX_CONF_BLOCK|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_upstream</th></tr><tr><td colspan="3">文件名：http/ngx_http_upstream.c</td><td colspan="3">struct：ngx_http_upstream_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>upstream</td><td>NGX_HTTP_MAIN_CONF|NGX_CONF_BLOCK|NGX_CONF_TAKE1
 </td><td>ngx_http_upstream
 </td><td>0
 </td><td>0
@@ -598,12 +598,12 @@
 </td><td>NGX_HTTP_SRV_CONF_OFFSET
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_mail</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/mail/ngx_mail.c</td><td colspan="3">struct：ngx_mail_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>mail</td><td>NGX_MAIN_CONF|NGX_CONF_BLOCK|NGX_CONF_NOARGS
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_mail</th></tr><tr><td colspan="3">文件名：mail/ngx_mail.c</td><td colspan="3">struct：ngx_mail_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>mail</td><td>NGX_MAIN_CONF|NGX_CONF_BLOCK|NGX_CONF_NOARGS
 </td><td>ngx_mail_block
 </td><td>0
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_mail_auth_http_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/mail/ngx_mail_auth_http_module.c</td><td colspan="3">struct：ngx_mail_auth_http_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>auth_http</td><td>NGX_MAIL_MAIN_CONF|NGX_MAIL_SRV_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_mail_auth_http_module</th></tr><tr><td colspan="3">文件名：mail/ngx_mail_auth_http_module.c</td><td colspan="3">struct：ngx_mail_auth_http_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>auth_http</td><td>NGX_MAIL_MAIN_CONF|NGX_MAIL_SRV_CONF|NGX_CONF_TAKE1
 </td><td>ngx_mail_auth_http
 </td><td>NGX_MAIL_SRV_CONF_OFFSET
 </td><td>0
@@ -623,7 +623,7 @@
 </td><td>NGX_MAIL_SRV_CONF_OFFSET
 </td><td>offsetof(ngx_mail_auth_http_conf_t,pass_client_cert)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_mail_core_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/mail/ngx_mail_core_module.c</td><td colspan="3">struct：ngx_mail_core_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>server</td><td>NGX_MAIL_MAIN_CONF|NGX_CONF_BLOCK|NGX_CONF_NOARGS
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_mail_core_module</th></tr><tr><td colspan="3">文件名：mail/ngx_mail_core_module.c</td><td colspan="3">struct：ngx_mail_core_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>server</td><td>NGX_MAIL_MAIN_CONF|NGX_CONF_BLOCK|NGX_CONF_NOARGS
 </td><td>ngx_mail_core_server
 </td><td>0
 </td><td>0
@@ -663,7 +663,7 @@
 </td><td>NGX_MAIL_SRV_CONF_OFFSET
 </td><td>offsetof(ngx_mail_core_srv_conf_t,resolver_timeout)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_mail_imap_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/mail/ngx_mail_imap_module.c</td><td colspan="3">struct：ngx_mail_imap_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>imap_client_buffer</td><td>NGX_MAIL_MAIN_CONF|NGX_MAIL_SRV_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_mail_imap_module</th></tr><tr><td colspan="3">文件名：mail/ngx_mail_imap_module.c</td><td colspan="3">struct：ngx_mail_imap_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>imap_client_buffer</td><td>NGX_MAIL_MAIN_CONF|NGX_MAIL_SRV_CONF|NGX_CONF_TAKE1
 </td><td>ngx_conf_set_size_slot
 </td><td>NGX_MAIL_SRV_CONF_OFFSET
 </td><td>offsetof(ngx_mail_imap_srv_conf_t,client_buffer_size)
@@ -678,7 +678,7 @@
 </td><td>NGX_MAIL_SRV_CONF_OFFSET
 </td><td>offsetof(ngx_mail_imap_srv_conf_t,auth_methods)
 </td><td>&amp;ngx_mail_imap_auth_methods
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_mail_pop3_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/mail/ngx_mail_pop3_module.c</td><td colspan="3">struct：ngx_mail_pop3_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>pop3_capabilities</td><td>NGX_MAIL_MAIN_CONF|NGX_MAIL_SRV_CONF|NGX_CONF_1MORE
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_mail_pop3_module</th></tr><tr><td colspan="3">文件名：mail/ngx_mail_pop3_module.c</td><td colspan="3">struct：ngx_mail_pop3_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>pop3_capabilities</td><td>NGX_MAIL_MAIN_CONF|NGX_MAIL_SRV_CONF|NGX_CONF_1MORE
 </td><td>ngx_mail_capabilities
 </td><td>NGX_MAIL_SRV_CONF_OFFSET
 </td><td>offsetof(ngx_mail_pop3_srv_conf_t,capabilities)
@@ -688,7 +688,7 @@
 </td><td>NGX_MAIL_SRV_CONF_OFFSET
 </td><td>offsetof(ngx_mail_pop3_srv_conf_t,auth_methods)
 </td><td>&amp;ngx_mail_pop3_auth_methods
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_mail_proxy_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/mail/ngx_mail_proxy_module.c</td><td colspan="3">struct：ngx_mail_proxy_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>proxy</td><td>NGX_MAIL_MAIN_CONF|NGX_MAIL_SRV_CONF|NGX_CONF_FLAG
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_mail_proxy_module</th></tr><tr><td colspan="3">文件名：mail/ngx_mail_proxy_module.c</td><td colspan="3">struct：ngx_mail_proxy_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>proxy</td><td>NGX_MAIL_MAIN_CONF|NGX_MAIL_SRV_CONF|NGX_CONF_FLAG
 </td><td>ngx_conf_set_flag_slot
 </td><td>NGX_MAIL_SRV_CONF_OFFSET
 </td><td>offsetof(ngx_mail_proxy_conf_t,enable)
@@ -713,7 +713,7 @@
 </td><td>NGX_MAIL_SRV_CONF_OFFSET
 </td><td>offsetof(ngx_mail_proxy_conf_t,xclient)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_mail_smtp_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/mail/ngx_mail_smtp_module.c</td><td colspan="3">struct：ngx_mail_smtp_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>smtp_client_buffer</td><td>NGX_MAIL_MAIN_CONF|NGX_MAIL_SRV_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_mail_smtp_module</th></tr><tr><td colspan="3">文件名：mail/ngx_mail_smtp_module.c</td><td colspan="3">struct：ngx_mail_smtp_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>smtp_client_buffer</td><td>NGX_MAIL_MAIN_CONF|NGX_MAIL_SRV_CONF|NGX_CONF_TAKE1
 </td><td>ngx_conf_set_size_slot
 </td><td>NGX_MAIL_SRV_CONF_OFFSET
 </td><td>offsetof(ngx_mail_smtp_srv_conf_t,client_buffer_size)
@@ -733,7 +733,7 @@
 </td><td>NGX_MAIL_SRV_CONF_OFFSET
 </td><td>offsetof(ngx_mail_smtp_srv_conf_t,auth_methods)
 </td><td>&amp;ngx_mail_smtp_auth_methods
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_mail_ssl_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/mail/ngx_mail_ssl_module.c</td><td colspan="3">struct：ngx_mail_ssl_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>ssl</td><td>NGX_MAIL_MAIN_CONF|NGX_MAIL_SRV_CONF|NGX_CONF_FLAG
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_mail_ssl_module</th></tr><tr><td colspan="3">文件名：mail/ngx_mail_ssl_module.c</td><td colspan="3">struct：ngx_mail_ssl_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>ssl</td><td>NGX_MAIL_MAIN_CONF|NGX_MAIL_SRV_CONF|NGX_CONF_FLAG
 </td><td>ngx_mail_ssl_enable
 </td><td>NGX_MAIL_SRV_CONF_OFFSET
 </td><td>offsetof(ngx_mail_ssl_conf_t,enable)
@@ -828,17 +828,17 @@
 </td><td>NGX_MAIL_SRV_CONF_OFFSET
 </td><td>offsetof(ngx_mail_ssl_conf_t,crl)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_google_perftools_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/misc/ngx_google_perftools_module.c</td><td colspan="3">struct：ngx_google_perftools_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>google_perftools_profiles</td><td>NGX_MAIN_CONF|NGX_DIRECT_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_google_perftools_module</th></tr><tr><td colspan="3">文件名：misc/ngx_google_perftools_module.c</td><td colspan="3">struct：ngx_google_perftools_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>google_perftools_profiles</td><td>NGX_MAIN_CONF|NGX_DIRECT_CONF|NGX_CONF_TAKE1
 </td><td>ngx_conf_set_str_slot
 </td><td>0
 </td><td>offsetof(ngx_google_perftools_conf_t,profiles)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/stream/ngx_stream.c</td><td colspan="3">struct：ngx_stream_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>stream</td><td>NGX_MAIN_CONF|NGX_CONF_BLOCK|NGX_CONF_NOARGS
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream</th></tr><tr><td colspan="3">文件名：stream/ngx_stream.c</td><td colspan="3">struct：ngx_stream_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>stream</td><td>NGX_MAIN_CONF|NGX_CONF_BLOCK|NGX_CONF_NOARGS
 </td><td>ngx_stream_block
 </td><td>0
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_access_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/stream/ngx_stream_access_module.c</td><td colspan="3">struct：ngx_stream_access_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>allow</td><td>NGX_STREAM_MAIN_CONF|NGX_STREAM_SRV_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_access_module</th></tr><tr><td colspan="3">文件名：stream/ngx_stream_access_module.c</td><td colspan="3">struct：ngx_stream_access_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>allow</td><td>NGX_STREAM_MAIN_CONF|NGX_STREAM_SRV_CONF|NGX_CONF_TAKE1
 </td><td>ngx_stream_access_rule
 </td><td>NGX_STREAM_SRV_CONF_OFFSET
 </td><td>0
@@ -848,7 +848,7 @@
 </td><td>NGX_STREAM_SRV_CONF_OFFSET
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_core_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/stream/ngx_stream_core_module.c</td><td colspan="3">struct：ngx_stream_core_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>variables_hash_max_size</td><td>NGX_STREAM_MAIN_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_core_module</th></tr><tr><td colspan="3">文件名：stream/ngx_stream_core_module.c</td><td colspan="3">struct：ngx_stream_core_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>variables_hash_max_size</td><td>NGX_STREAM_MAIN_CONF|NGX_CONF_TAKE1
 </td><td>ngx_conf_set_num_slot
 </td><td>NGX_STREAM_MAIN_CONF_OFFSET
 </td><td>offsetof(ngx_stream_core_main_conf_t,variables_hash_max_size)
@@ -903,12 +903,12 @@
 </td><td>NGX_STREAM_SRV_CONF_OFFSET
 </td><td>offsetof(ngx_stream_core_srv_conf_t,preread_timeout)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_geo_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/stream/ngx_stream_geo_module.c</td><td colspan="3">struct：ngx_stream_geo_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>geo</td><td>NGX_STREAM_MAIN_CONF|NGX_CONF_BLOCK|NGX_CONF_TAKE12
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_geo_module</th></tr><tr><td colspan="3">文件名：stream/ngx_stream_geo_module.c</td><td colspan="3">struct：ngx_stream_geo_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>geo</td><td>NGX_STREAM_MAIN_CONF|NGX_CONF_BLOCK|NGX_CONF_TAKE12
 </td><td>ngx_stream_geo_block
 </td><td>0
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_geoip_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/stream/ngx_stream_geoip_module.c</td><td colspan="3">struct：ngx_stream_geoip_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>geoip_country</td><td>NGX_STREAM_MAIN_CONF|NGX_CONF_TAKE12
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_geoip_module</th></tr><tr><td colspan="3">文件名：stream/ngx_stream_geoip_module.c</td><td colspan="3">struct：ngx_stream_geoip_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>geoip_country</td><td>NGX_STREAM_MAIN_CONF|NGX_CONF_TAKE12
 </td><td>ngx_stream_geoip_country
 </td><td>NGX_STREAM_MAIN_CONF_OFFSET
 </td><td>0
@@ -923,7 +923,7 @@
 </td><td>NGX_STREAM_MAIN_CONF_OFFSET
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_limit_conn_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/stream/ngx_stream_limit_conn_module.c</td><td colspan="3">struct：ngx_stream_limit_conn_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>limit_conn_zone</td><td>NGX_STREAM_MAIN_CONF|NGX_CONF_TAKE2
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_limit_conn_module</th></tr><tr><td colspan="3">文件名：stream/ngx_stream_limit_conn_module.c</td><td colspan="3">struct：ngx_stream_limit_conn_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>limit_conn_zone</td><td>NGX_STREAM_MAIN_CONF|NGX_CONF_TAKE2
 </td><td>ngx_stream_limit_conn_zone
 </td><td>0
 </td><td>0
@@ -938,7 +938,7 @@
 </td><td>NGX_STREAM_SRV_CONF_OFFSET
 </td><td>offsetof(ngx_stream_limit_conn_conf_t,log_level)
 </td><td>&amp;ngx_stream_limit_conn_log_levels
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_log_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/stream/ngx_stream_log_module.c</td><td colspan="3">struct：ngx_stream_log_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>log_format</td><td>NGX_STREAM_MAIN_CONF|NGX_CONF_2MORE
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_log_module</th></tr><tr><td colspan="3">文件名：stream/ngx_stream_log_module.c</td><td colspan="3">struct：ngx_stream_log_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>log_format</td><td>NGX_STREAM_MAIN_CONF|NGX_CONF_2MORE
 </td><td>ngx_stream_log_set_format
 </td><td>NGX_STREAM_MAIN_CONF_OFFSET
 </td><td>0
@@ -953,7 +953,7 @@
 </td><td>NGX_STREAM_SRV_CONF_OFFSET
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_map_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/stream/ngx_stream_map_module.c</td><td colspan="3">struct：ngx_stream_map_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>map</td><td>NGX_STREAM_MAIN_CONF|NGX_CONF_BLOCK|NGX_CONF_TAKE2
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_map_module</th></tr><tr><td colspan="3">文件名：stream/ngx_stream_map_module.c</td><td colspan="3">struct：ngx_stream_map_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>map</td><td>NGX_STREAM_MAIN_CONF|NGX_CONF_BLOCK|NGX_CONF_TAKE2
 </td><td>ngx_stream_map_block
 </td><td>NGX_STREAM_MAIN_CONF_OFFSET
 </td><td>0
@@ -968,7 +968,7 @@
 </td><td>NGX_STREAM_MAIN_CONF_OFFSET
 </td><td>offsetof(ngx_stream_map_conf_t,hash_bucket_size)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_proxy_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/stream/ngx_stream_proxy_module.c</td><td colspan="3">struct：ngx_stream_proxy_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>proxy_pass</td><td>NGX_STREAM_SRV_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_proxy_module</th></tr><tr><td colspan="3">文件名：stream/ngx_stream_proxy_module.c</td><td colspan="3">struct：ngx_stream_proxy_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>proxy_pass</td><td>NGX_STREAM_SRV_CONF|NGX_CONF_TAKE1
 </td><td>ngx_stream_proxy_pass
 </td><td>NGX_STREAM_SRV_CONF_OFFSET
 </td><td>0
@@ -1103,22 +1103,22 @@
 </td><td>NGX_STREAM_SRV_CONF_OFFSET
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_realip_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/stream/ngx_stream_realip_module.c</td><td colspan="3">struct：ngx_stream_realip_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>set_real_ip_from</td><td>NGX_STREAM_MAIN_CONF|NGX_STREAM_SRV_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_realip_module</th></tr><tr><td colspan="3">文件名：stream/ngx_stream_realip_module.c</td><td colspan="3">struct：ngx_stream_realip_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>set_real_ip_from</td><td>NGX_STREAM_MAIN_CONF|NGX_STREAM_SRV_CONF|NGX_CONF_TAKE1
 </td><td>ngx_stream_realip_from
 </td><td>NGX_STREAM_SRV_CONF_OFFSET
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_return_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/stream/ngx_stream_return_module.c</td><td colspan="3">struct：ngx_stream_return_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>return</td><td>NGX_STREAM_SRV_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_return_module</th></tr><tr><td colspan="3">文件名：stream/ngx_stream_return_module.c</td><td colspan="3">struct：ngx_stream_return_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>return</td><td>NGX_STREAM_SRV_CONF|NGX_CONF_TAKE1
 </td><td>ngx_stream_return
 </td><td>NGX_STREAM_SRV_CONF_OFFSET
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_split_clients_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/stream/ngx_stream_split_clients_module.c</td><td colspan="3">struct：ngx_stream_split_clients_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>split_clients</td><td>NGX_STREAM_MAIN_CONF|NGX_CONF_BLOCK|NGX_CONF_TAKE2
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_split_clients_module</th></tr><tr><td colspan="3">文件名：stream/ngx_stream_split_clients_module.c</td><td colspan="3">struct：ngx_stream_split_clients_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>split_clients</td><td>NGX_STREAM_MAIN_CONF|NGX_CONF_BLOCK|NGX_CONF_TAKE2
 </td><td>ngx_conf_split_clients_block
 </td><td>NGX_STREAM_MAIN_CONF_OFFSET
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_ssl_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/stream/ngx_stream_ssl_module.c</td><td colspan="3">struct：ngx_stream_ssl_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>ssl_handshake_timeout</td><td>NGX_STREAM_MAIN_CONF|NGX_STREAM_SRV_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_ssl_module</th></tr><tr><td colspan="3">文件名：stream/ngx_stream_ssl_module.c</td><td colspan="3">struct：ngx_stream_ssl_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>ssl_handshake_timeout</td><td>NGX_STREAM_MAIN_CONF|NGX_STREAM_SRV_CONF|NGX_CONF_TAKE1
 </td><td>ngx_conf_set_msec_slot
 </td><td>NGX_STREAM_SRV_CONF_OFFSET
 </td><td>offsetof(ngx_stream_ssl_conf_t,handshake_timeout)
@@ -1208,12 +1208,12 @@
 </td><td>NGX_STREAM_SRV_CONF_OFFSET
 </td><td>offsetof(ngx_stream_ssl_conf_t,crl)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_ssl_preread_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/stream/ngx_stream_ssl_preread_module.c</td><td colspan="3">struct：ngx_stream_ssl_preread_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>ssl_preread</td><td>NGX_STREAM_MAIN_CONF|NGX_STREAM_SRV_CONF|NGX_CONF_FLAG
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_ssl_preread_module</th></tr><tr><td colspan="3">文件名：stream/ngx_stream_ssl_preread_module.c</td><td colspan="3">struct：ngx_stream_ssl_preread_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>ssl_preread</td><td>NGX_STREAM_MAIN_CONF|NGX_STREAM_SRV_CONF|NGX_CONF_FLAG
 </td><td>ngx_conf_set_flag_slot
 </td><td>NGX_STREAM_SRV_CONF_OFFSET
 </td><td>offsetof(ngx_stream_ssl_preread_srv_conf_t,enabled)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_upstream</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/stream/ngx_stream_upstream.c</td><td colspan="3">struct：ngx_stream_upstream_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>upstream</td><td>NGX_STREAM_MAIN_CONF|NGX_CONF_BLOCK|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_upstream</th></tr><tr><td colspan="3">文件名：stream/ngx_stream_upstream.c</td><td colspan="3">struct：ngx_stream_upstream_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>upstream</td><td>NGX_STREAM_MAIN_CONF|NGX_CONF_BLOCK|NGX_CONF_TAKE1
 </td><td>ngx_stream_upstream
 </td><td>0
 </td><td>0
@@ -1223,22 +1223,22 @@
 </td><td>NGX_STREAM_SRV_CONF_OFFSET
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_upstream_hash_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/stream/ngx_stream_upstream_hash_module.c</td><td colspan="3">struct：ngx_stream_upstream_hash_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>hash</td><td>NGX_STREAM_UPS_CONF|NGX_CONF_TAKE12
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_upstream_hash_module</th></tr><tr><td colspan="3">文件名：stream/ngx_stream_upstream_hash_module.c</td><td colspan="3">struct：ngx_stream_upstream_hash_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>hash</td><td>NGX_STREAM_UPS_CONF|NGX_CONF_TAKE12
 </td><td>ngx_stream_upstream_hash
 </td><td>NGX_STREAM_SRV_CONF_OFFSET
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_upstream_least_conn_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/stream/ngx_stream_upstream_least_conn_module.c</td><td colspan="3">struct：ngx_stream_upstream_least_conn_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>least_conn</td><td>NGX_STREAM_UPS_CONF|NGX_CONF_NOARGS
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_upstream_least_conn_module</th></tr><tr><td colspan="3">文件名：stream/ngx_stream_upstream_least_conn_module.c</td><td colspan="3">struct：ngx_stream_upstream_least_conn_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>least_conn</td><td>NGX_STREAM_UPS_CONF|NGX_CONF_NOARGS
 </td><td>ngx_stream_upstream_least_conn
 </td><td>0
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_upstream_zone_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/stream/ngx_stream_upstream_zone_module.c</td><td colspan="3">struct：ngx_stream_upstream_zone_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>zone</td><td>NGX_STREAM_UPS_CONF|NGX_CONF_TAKE12
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_stream_upstream_zone_module</th></tr><tr><td colspan="3">文件名：stream/ngx_stream_upstream_zone_module.c</td><td colspan="3">struct：ngx_stream_upstream_zone_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>zone</td><td>NGX_STREAM_UPS_CONF|NGX_CONF_TAKE12
 </td><td>ngx_stream_upstream_zone
 </td><td>0
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_devpoll_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/event/modules/ngx_devpoll_module.c</td><td colspan="3">struct：ngx_devpoll_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>devpoll_changes</td><td>NGX_EVENT_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_devpoll_module</th></tr><tr><td colspan="3">文件名：event/modules/ngx_devpoll_module.c</td><td colspan="3">struct：ngx_devpoll_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>devpoll_changes</td><td>NGX_EVENT_CONF|NGX_CONF_TAKE1
 </td><td>ngx_conf_set_num_slot
 </td><td>0
 </td><td>offsetof(ngx_devpoll_conf_t,changes)
@@ -1248,7 +1248,7 @@
 </td><td>0
 </td><td>offsetof(ngx_devpoll_conf_t,events)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_epoll_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/event/modules/ngx_epoll_module.c</td><td colspan="3">struct：ngx_epoll_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>epoll_events</td><td>NGX_EVENT_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_epoll_module</th></tr><tr><td colspan="3">文件名：event/modules/ngx_epoll_module.c</td><td colspan="3">struct：ngx_epoll_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>epoll_events</td><td>NGX_EVENT_CONF|NGX_CONF_TAKE1
 </td><td>ngx_conf_set_num_slot
 </td><td>0
 </td><td>offsetof(ngx_epoll_conf_t,events)
@@ -1258,12 +1258,12 @@
 </td><td>0
 </td><td>offsetof(ngx_epoll_conf_t,aio_requests)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_eventport_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/event/modules/ngx_eventport_module.c</td><td colspan="3">struct：ngx_eventport_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>eventport_events</td><td>NGX_EVENT_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_eventport_module</th></tr><tr><td colspan="3">文件名：event/modules/ngx_eventport_module.c</td><td colspan="3">struct：ngx_eventport_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>eventport_events</td><td>NGX_EVENT_CONF|NGX_CONF_TAKE1
 </td><td>ngx_conf_set_num_slot
 </td><td>0
 </td><td>offsetof(ngx_eventport_conf_t,events)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_kqueue_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/event/modules/ngx_kqueue_module.c</td><td colspan="3">struct：ngx_kqueue_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>kqueue_changes</td><td>NGX_EVENT_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_kqueue_module</th></tr><tr><td colspan="3">文件名：event/modules/ngx_kqueue_module.c</td><td colspan="3">struct：ngx_kqueue_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>kqueue_changes</td><td>NGX_EVENT_CONF|NGX_CONF_TAKE1
 </td><td>ngx_conf_set_num_slot
 </td><td>0
 </td><td>offsetof(ngx_kqueue_conf_t,changes)
@@ -1273,7 +1273,7 @@
 </td><td>0
 </td><td>offsetof(ngx_kqueue_conf_t,events)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_access_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_access_module.c</td><td colspan="3">struct：ngx_http_access_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>allow</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_HTTP_LMT_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_access_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_access_module.c</td><td colspan="3">struct：ngx_http_access_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>allow</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_HTTP_LMT_CONF|NGX_CONF_TAKE1
 </td><td>ngx_http_access_rule
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>0
@@ -1283,7 +1283,7 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_addition_filter_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_addition_filter_module.c</td><td colspan="3">struct：ngx_http_addition_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>add_before_body</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_addition_filter_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_addition_filter_module.c</td><td colspan="3">struct：ngx_http_addition_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>add_before_body</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1
 </td><td>ngx_conf_set_str_slot
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_addition_conf_t,before_body)
@@ -1298,7 +1298,7 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_addition_conf_t,types_keys)
 </td><td>&amp;ngx_http_html_default_types[0]
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_auth_basic_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_auth_basic_module.c</td><td colspan="3">struct：ngx_http_auth_basic_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>auth_basic</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_HTTP_LMT_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_auth_basic_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_auth_basic_module.c</td><td colspan="3">struct：ngx_http_auth_basic_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>auth_basic</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_HTTP_LMT_CONF|NGX_CONF_TAKE1
 </td><td>ngx_http_set_complex_value_slot
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_auth_basic_loc_conf_t,realm)
@@ -1308,7 +1308,7 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_auth_basic_loc_conf_t,user_file)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_auth_request_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_auth_request_module.c</td><td colspan="3">struct：ngx_http_auth_request_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>auth_request</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_auth_request_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_auth_request_module.c</td><td colspan="3">struct：ngx_http_auth_request_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>auth_request</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1
 </td><td>ngx_http_auth_request
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>0
@@ -1318,7 +1318,7 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_autoindex_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_autoindex_module.c</td><td colspan="3">struct：ngx_http_autoindex_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>autoindex</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_FLAG
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_autoindex_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_autoindex_module.c</td><td colspan="3">struct：ngx_http_autoindex_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>autoindex</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_FLAG
 </td><td>ngx_conf_set_flag_slot
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_autoindex_loc_conf_t,enable)
@@ -1338,7 +1338,7 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_autoindex_loc_conf_t,exact_size)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_browser_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_browser_module.c</td><td colspan="3">struct：ngx_http_browser_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>modern_browser</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE12
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_browser_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_browser_module.c</td><td colspan="3">struct：ngx_http_browser_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>modern_browser</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE12
 </td><td>ngx_http_modern_browser
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>0
@@ -1358,7 +1358,7 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_charset_filter_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_charset_filter_module.c</td><td colspan="3">struct：ngx_http_charset_filter_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>charset</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_HTTP_LIF_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_charset_filter_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_charset_filter_module.c</td><td colspan="3">struct：ngx_http_charset_filter_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>charset</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_HTTP_LIF_CONF|NGX_CONF_TAKE1
 </td><td>ngx_http_set_charset_slot
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_charset_loc_conf_t,charset)
@@ -1383,7 +1383,7 @@
 </td><td>NGX_HTTP_MAIN_CONF_OFFSET
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_dav_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_dav_module.c</td><td colspan="3">struct：ngx_http_dav_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>dav_methods</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_1MORE
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_dav_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_dav_module.c</td><td colspan="3">struct：ngx_http_dav_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>dav_methods</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_1MORE
 </td><td>ngx_conf_set_bitmask_slot
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_dav_loc_conf_t,methods)
@@ -1403,7 +1403,7 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_dav_loc_conf_t,access)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_degradation_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_degradation_module.c</td><td colspan="3">struct：ngx_http_degradation_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>degradation</td><td>NGX_HTTP_MAIN_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_degradation_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_degradation_module.c</td><td colspan="3">struct：ngx_http_degradation_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>degradation</td><td>NGX_HTTP_MAIN_CONF|NGX_CONF_TAKE1
 </td><td>ngx_http_degradation
 </td><td>NGX_HTTP_MAIN_CONF_OFFSET
 </td><td>0
@@ -1413,12 +1413,12 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_degradation_loc_conf_t,degrade)
 </td><td>&amp;ngx_http_degrade
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_empty_gif_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_empty_gif_module.c</td><td colspan="3">struct：ngx_http_empty_gif_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>empty_gif</td><td>NGX_HTTP_LOC_CONF|NGX_CONF_NOARGS
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_empty_gif_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_empty_gif_module.c</td><td colspan="3">struct：ngx_http_empty_gif_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>empty_gif</td><td>NGX_HTTP_LOC_CONF|NGX_CONF_NOARGS
 </td><td>ngx_http_empty_gif
 </td><td>0
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_fastcgi_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_fastcgi_module.c</td><td colspan="3">struct：ngx_http_fastcgi_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>fastcgi_pass</td><td>NGX_HTTP_LOC_CONF|NGX_HTTP_LIF_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_fastcgi_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_fastcgi_module.c</td><td colspan="3">struct：ngx_http_fastcgi_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>fastcgi_pass</td><td>NGX_HTTP_LOC_CONF|NGX_HTTP_LIF_CONF|NGX_CONF_TAKE1
 </td><td>ngx_http_fastcgi_pass
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>0
@@ -1658,17 +1658,17 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_fastcgi_loc_conf_t,keep_conn)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_flv_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_flv_module.c</td><td colspan="3">struct：ngx_http_flv_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>flv</td><td>NGX_HTTP_LOC_CONF|NGX_CONF_NOARGS
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_flv_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_flv_module.c</td><td colspan="3">struct：ngx_http_flv_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>flv</td><td>NGX_HTTP_LOC_CONF|NGX_CONF_NOARGS
 </td><td>ngx_http_flv
 </td><td>0
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_geo_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_geo_module.c</td><td colspan="3">struct：ngx_http_geo_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>geo</td><td>NGX_HTTP_MAIN_CONF|NGX_CONF_BLOCK|NGX_CONF_TAKE12
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_geo_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_geo_module.c</td><td colspan="3">struct：ngx_http_geo_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>geo</td><td>NGX_HTTP_MAIN_CONF|NGX_CONF_BLOCK|NGX_CONF_TAKE12
 </td><td>ngx_http_geo_block
 </td><td>NGX_HTTP_MAIN_CONF_OFFSET
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_geoip_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_geoip_module.c</td><td colspan="3">struct：ngx_http_geoip_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>geoip_country</td><td>NGX_HTTP_MAIN_CONF|NGX_CONF_TAKE12
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_geoip_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_geoip_module.c</td><td colspan="3">struct：ngx_http_geoip_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>geoip_country</td><td>NGX_HTTP_MAIN_CONF|NGX_CONF_TAKE12
 </td><td>ngx_http_geoip_country
 </td><td>NGX_HTTP_MAIN_CONF_OFFSET
 </td><td>0
@@ -1693,7 +1693,7 @@
 </td><td>NGX_HTTP_MAIN_CONF_OFFSET
 </td><td>offsetof(ngx_http_geoip_conf_t,proxy_recursive)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_gunzip_filter_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_gunzip_filter_module.c</td><td colspan="3">struct：ngx_http_gunzip_filter_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>gunzip</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_FLAG
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_gunzip_filter_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_gunzip_filter_module.c</td><td colspan="3">struct：ngx_http_gunzip_filter_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>gunzip</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_FLAG
 </td><td>ngx_conf_set_flag_slot
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_gunzip_conf_t,enable)
@@ -1703,7 +1703,7 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_gunzip_conf_t,bufs)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_gzip_filter_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_gzip_filter_module.c</td><td colspan="3">struct：ngx_http_gzip_filter_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>gzip</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_HTTP_LIF_CONF|NGX_CONF_FLAG
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_gzip_filter_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_gzip_filter_module.c</td><td colspan="3">struct：ngx_http_gzip_filter_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>gzip</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_HTTP_LIF_CONF|NGX_CONF_FLAG
 </td><td>ngx_conf_set_flag_slot
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_gzip_conf_t,enable)
@@ -1748,12 +1748,12 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_gzip_conf_t,min_length)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_gzip_static_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_gzip_static_module.c</td><td colspan="3">struct：ngx_http_gzip_static_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>gzip_static</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_gzip_static_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_gzip_static_module.c</td><td colspan="3">struct：ngx_http_gzip_static_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>gzip_static</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1
 </td><td>ngx_conf_set_enum_slot
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_gzip_static_conf_t,enable)
 </td><td>&amp;ngx_http_gzip_static
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_headers_filter_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_headers_filter_module.c</td><td colspan="3">struct：ngx_http_headers_filter_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>expires</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_HTTP_LIF_CONF|NGX_CONF_TAKE12
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_headers_filter_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_headers_filter_module.c</td><td colspan="3">struct：ngx_http_headers_filter_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>expires</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_HTTP_LIF_CONF|NGX_CONF_TAKE12
 </td><td>ngx_http_headers_expires
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>0
@@ -1763,7 +1763,7 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_image_filter_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_image_filter_module.c</td><td colspan="3">struct：ngx_http_image_filter_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>image_filter</td><td>NGX_HTTP_LOC_CONF|NGX_CONF_TAKE123
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_image_filter_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_image_filter_module.c</td><td colspan="3">struct：ngx_http_image_filter_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>image_filter</td><td>NGX_HTTP_LOC_CONF|NGX_CONF_TAKE123
 </td><td>ngx_http_image_filter
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>0
@@ -1798,12 +1798,12 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_image_filter_conf_t,buffer_size)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_index_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_index_module.c</td><td colspan="3">struct：ngx_http_index_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>index</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_1MORE
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_index_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_index_module.c</td><td colspan="3">struct：ngx_http_index_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>index</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_1MORE
 </td><td>ngx_http_index_set_index
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_limit_conn_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_limit_conn_module.c</td><td colspan="3">struct：ngx_http_limit_conn_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>limit_conn_zone</td><td>NGX_HTTP_MAIN_CONF|NGX_CONF_TAKE2
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_limit_conn_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_limit_conn_module.c</td><td colspan="3">struct：ngx_http_limit_conn_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>limit_conn_zone</td><td>NGX_HTTP_MAIN_CONF|NGX_CONF_TAKE2
 </td><td>ngx_http_limit_conn_zone
 </td><td>0
 </td><td>0
@@ -1823,7 +1823,7 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_limit_conn_conf_t,status_code)
 </td><td>&amp;ngx_http_limit_conn_status_bounds
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_limit_req_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_limit_req_module.c</td><td colspan="3">struct：ngx_http_limit_req_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>limit_req_zone</td><td>NGX_HTTP_MAIN_CONF|NGX_CONF_TAKE3
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_limit_req_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_limit_req_module.c</td><td colspan="3">struct：ngx_http_limit_req_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>limit_req_zone</td><td>NGX_HTTP_MAIN_CONF|NGX_CONF_TAKE3
 </td><td>ngx_http_limit_req_zone
 </td><td>0
 </td><td>0
@@ -1843,7 +1843,7 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_limit_req_conf_t,status_code)
 </td><td>&amp;ngx_http_limit_req_status_bounds
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_log_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_log_module.c</td><td colspan="3">struct：ngx_http_log_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>log_format</td><td>NGX_HTTP_MAIN_CONF|NGX_CONF_2MORE
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_log_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_log_module.c</td><td colspan="3">struct：ngx_http_log_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>log_format</td><td>NGX_HTTP_MAIN_CONF|NGX_CONF_2MORE
 </td><td>ngx_http_log_set_format
 </td><td>NGX_HTTP_MAIN_CONF_OFFSET
 </td><td>0
@@ -1858,7 +1858,7 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_map_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_map_module.c</td><td colspan="3">struct：ngx_http_map_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>map</td><td>NGX_HTTP_MAIN_CONF|NGX_CONF_BLOCK|NGX_CONF_TAKE2
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_map_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_map_module.c</td><td colspan="3">struct：ngx_http_map_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>map</td><td>NGX_HTTP_MAIN_CONF|NGX_CONF_BLOCK|NGX_CONF_TAKE2
 </td><td>ngx_http_map_block
 </td><td>NGX_HTTP_MAIN_CONF_OFFSET
 </td><td>0
@@ -1873,7 +1873,7 @@
 </td><td>NGX_HTTP_MAIN_CONF_OFFSET
 </td><td>offsetof(ngx_http_map_conf_t,hash_bucket_size)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_memcached_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_memcached_module.c</td><td colspan="3">struct：ngx_http_memcached_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>memcached_pass</td><td>NGX_HTTP_LOC_CONF|NGX_HTTP_LIF_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_memcached_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_memcached_module.c</td><td colspan="3">struct：ngx_http_memcached_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>memcached_pass</td><td>NGX_HTTP_LOC_CONF|NGX_HTTP_LIF_CONF|NGX_CONF_TAKE1
 </td><td>ngx_http_memcached_pass
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>0
@@ -1923,7 +1923,7 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_memcached_loc_conf_t,gzip_flag)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_mp4_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_mp4_module.c</td><td colspan="3">struct：ngx_http_mp4_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>mp4</td><td>NGX_HTTP_LOC_CONF|NGX_CONF_NOARGS
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_mp4_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_mp4_module.c</td><td colspan="3">struct：ngx_http_mp4_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>mp4</td><td>NGX_HTTP_LOC_CONF|NGX_CONF_NOARGS
 </td><td>ngx_http_mp4
 </td><td>0
 </td><td>0
@@ -1938,7 +1938,7 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_mp4_conf_t,max_buffer_size)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_proxy_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_proxy_module.c</td><td colspan="3">struct：ngx_http_proxy_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>proxy_pass</td><td>NGX_HTTP_LOC_CONF|NGX_HTTP_LIF_CONF|NGX_HTTP_LMT_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_proxy_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_proxy_module.c</td><td colspan="3">struct：ngx_http_proxy_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>proxy_pass</td><td>NGX_HTTP_LOC_CONF|NGX_HTTP_LIF_CONF|NGX_HTTP_LMT_CONF|NGX_CONF_TAKE1
 </td><td>ngx_http_proxy_pass
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>0
@@ -2263,12 +2263,12 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_random_index_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_random_index_module.c</td><td colspan="3">struct：ngx_http_random_index_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>random_index</td><td>NGX_HTTP_LOC_CONF|NGX_CONF_FLAG
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_random_index_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_random_index_module.c</td><td colspan="3">struct：ngx_http_random_index_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>random_index</td><td>NGX_HTTP_LOC_CONF|NGX_CONF_FLAG
 </td><td>ngx_conf_set_flag_slot
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_random_index_loc_conf_t,enable)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_realip_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_realip_module.c</td><td colspan="3">struct：ngx_http_realip_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>set_real_ip_from</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_realip_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_realip_module.c</td><td colspan="3">struct：ngx_http_realip_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>set_real_ip_from</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1
 </td><td>ngx_http_realip_from
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>0
@@ -2283,7 +2283,7 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_realip_loc_conf_t,recursive)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_referer_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_referer_module.c</td><td colspan="3">struct：ngx_http_referer_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>valid_referers</td><td>NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_1MORE
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_referer_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_referer_module.c</td><td colspan="3">struct：ngx_http_referer_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>valid_referers</td><td>NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_1MORE
 </td><td>ngx_http_valid_referers
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>0
@@ -2298,7 +2298,7 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_referer_conf_t,referer_hash_bucket_size)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_rewrite_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_rewrite_module.c</td><td colspan="3">struct：ngx_http_rewrite_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>rewrite</td><td>NGX_HTTP_SRV_CONF|NGX_HTTP_SIF_CONF|NGX_HTTP_LOC_CONF|NGX_HTTP_LIF_CONF|NGX_CONF_TAKE23
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_rewrite_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_rewrite_module.c</td><td colspan="3">struct：ngx_http_rewrite_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>rewrite</td><td>NGX_HTTP_SRV_CONF|NGX_HTTP_SIF_CONF|NGX_HTTP_LOC_CONF|NGX_HTTP_LIF_CONF|NGX_CONF_TAKE23
 </td><td>ngx_http_rewrite
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>0
@@ -2333,7 +2333,7 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_rewrite_loc_conf_t,uninitialized_variable_warn)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_scgi_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_scgi_module.c</td><td colspan="3">struct：ngx_http_scgi_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>scgi_pass</td><td>NGX_HTTP_LOC_CONF|NGX_HTTP_LIF_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_scgi_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_scgi_module.c</td><td colspan="3">struct：ngx_http_scgi_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>scgi_pass</td><td>NGX_HTTP_LOC_CONF|NGX_HTTP_LIF_CONF|NGX_CONF_TAKE1
 </td><td>ngx_http_scgi_pass
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>0
@@ -2548,7 +2548,7 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_scgi_loc_conf_t,upstream.ignore_headers)
 </td><td>&amp;ngx_http_upstream_ignore_headers_masks
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_secure_link_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_secure_link_module.c</td><td colspan="3">struct：ngx_http_secure_link_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>secure_link</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_secure_link_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_secure_link_module.c</td><td colspan="3">struct：ngx_http_secure_link_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>secure_link</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1
 </td><td>ngx_http_set_complex_value_slot
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_secure_link_conf_t,variable)
@@ -2563,17 +2563,17 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_secure_link_conf_t,secret)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_slice_filter_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_slice_filter_module.c</td><td colspan="3">struct：ngx_http_slice_filter_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>slice</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_slice_filter_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_slice_filter_module.c</td><td colspan="3">struct：ngx_http_slice_filter_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>slice</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1
 </td><td>ngx_conf_set_size_slot
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_slice_loc_conf_t,size)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_split_clients_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_split_clients_module.c</td><td colspan="3">struct：ngx_http_split_clients_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>split_clients</td><td>NGX_HTTP_MAIN_CONF|NGX_CONF_BLOCK|NGX_CONF_TAKE2
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_split_clients_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_split_clients_module.c</td><td colspan="3">struct：ngx_http_split_clients_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>split_clients</td><td>NGX_HTTP_MAIN_CONF|NGX_CONF_BLOCK|NGX_CONF_TAKE2
 </td><td>ngx_conf_split_clients_block
 </td><td>NGX_HTTP_MAIN_CONF_OFFSET
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_ssi_filter_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_ssi_filter_module.c</td><td colspan="3">struct：ngx_http_ssi_filter_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>ssi</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_HTTP_LIF_CONF|NGX_CONF_FLAG
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_ssi_filter_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_ssi_filter_module.c</td><td colspan="3">struct：ngx_http_ssi_filter_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>ssi</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_HTTP_LIF_CONF|NGX_CONF_FLAG
 </td><td>ngx_conf_set_flag_slot
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_ssi_loc_conf_t,enable)
@@ -2608,7 +2608,7 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_ssi_loc_conf_t,last_modified)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_ssl_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_ssl_module.c</td><td colspan="3">struct：ngx_http_ssl_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>ssl</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_CONF_FLAG
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_ssl_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_ssl_module.c</td><td colspan="3">struct：ngx_http_ssl_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>ssl</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_CONF_FLAG
 </td><td>ngx_http_ssl_enable
 </td><td>NGX_HTTP_SRV_CONF_OFFSET
 </td><td>offsetof(ngx_http_ssl_srv_conf_t,enable)
@@ -2723,12 +2723,12 @@
 </td><td>NGX_HTTP_SRV_CONF_OFFSET
 </td><td>offsetof(ngx_http_ssl_srv_conf_t,stapling_verify)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_stub_status_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_stub_status_module.c</td><td colspan="3">struct：ngx_http_status_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>stub_status</td><td>NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_NOARGS|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_stub_status_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_stub_status_module.c</td><td colspan="3">struct：ngx_http_status_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>stub_status</td><td>NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_NOARGS|NGX_CONF_TAKE1
 </td><td>ngx_http_set_stub_status
 </td><td>0
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_sub_filter_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_sub_filter_module.c</td><td colspan="3">struct：ngx_http_sub_filter_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>sub_filter</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE2
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_sub_filter_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_sub_filter_module.c</td><td colspan="3">struct：ngx_http_sub_filter_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>sub_filter</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE2
 </td><td>ngx_http_sub_filter
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>0
@@ -2748,32 +2748,32 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_sub_loc_conf_t,last_modified)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_upstream_hash_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_upstream_hash_module.c</td><td colspan="3">struct：ngx_http_upstream_hash_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>hash</td><td>NGX_HTTP_UPS_CONF|NGX_CONF_TAKE12
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_upstream_hash_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_upstream_hash_module.c</td><td colspan="3">struct：ngx_http_upstream_hash_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>hash</td><td>NGX_HTTP_UPS_CONF|NGX_CONF_TAKE12
 </td><td>ngx_http_upstream_hash
 </td><td>NGX_HTTP_SRV_CONF_OFFSET
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_upstream_ip_hash_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_upstream_ip_hash_module.c</td><td colspan="3">struct：ngx_http_upstream_ip_hash_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>ip_hash</td><td>NGX_HTTP_UPS_CONF|NGX_CONF_NOARGS
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_upstream_ip_hash_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_upstream_ip_hash_module.c</td><td colspan="3">struct：ngx_http_upstream_ip_hash_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>ip_hash</td><td>NGX_HTTP_UPS_CONF|NGX_CONF_NOARGS
 </td><td>ngx_http_upstream_ip_hash
 </td><td>0
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_upstream_keepalive_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_upstream_keepalive_module.c</td><td colspan="3">struct：ngx_http_upstream_keepalive_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>keepalive</td><td>NGX_HTTP_UPS_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_upstream_keepalive_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_upstream_keepalive_module.c</td><td colspan="3">struct：ngx_http_upstream_keepalive_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>keepalive</td><td>NGX_HTTP_UPS_CONF|NGX_CONF_TAKE1
 </td><td>ngx_http_upstream_keepalive
 </td><td>NGX_HTTP_SRV_CONF_OFFSET
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_upstream_least_conn_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_upstream_least_conn_module.c</td><td colspan="3">struct：ngx_http_upstream_least_conn_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>least_conn</td><td>NGX_HTTP_UPS_CONF|NGX_CONF_NOARGS
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_upstream_least_conn_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_upstream_least_conn_module.c</td><td colspan="3">struct：ngx_http_upstream_least_conn_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>least_conn</td><td>NGX_HTTP_UPS_CONF|NGX_CONF_NOARGS
 </td><td>ngx_http_upstream_least_conn
 </td><td>0
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_upstream_zone_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_upstream_zone_module.c</td><td colspan="3">struct：ngx_http_upstream_zone_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>zone</td><td>NGX_HTTP_UPS_CONF|NGX_CONF_TAKE12
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_upstream_zone_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_upstream_zone_module.c</td><td colspan="3">struct：ngx_http_upstream_zone_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>zone</td><td>NGX_HTTP_UPS_CONF|NGX_CONF_TAKE12
 </td><td>ngx_http_upstream_zone
 </td><td>0
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_userid_filter_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_userid_filter_module.c</td><td colspan="3">struct：ngx_http_userid_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>userid</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_userid_filter_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_userid_filter_module.c</td><td colspan="3">struct：ngx_http_userid_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>userid</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1
 </td><td>ngx_conf_set_enum_slot
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_userid_conf_t,enable)
@@ -2813,7 +2813,7 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_uwsgi_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_uwsgi_module.c</td><td colspan="3">struct：ngx_http_uwsgi_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>uwsgi_pass</td><td>NGX_HTTP_LOC_CONF|NGX_HTTP_LIF_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_uwsgi_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_uwsgi_module.c</td><td colspan="3">struct：ngx_http_uwsgi_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>uwsgi_pass</td><td>NGX_HTTP_LOC_CONF|NGX_HTTP_LIF_CONF|NGX_CONF_TAKE1
 </td><td>ngx_http_uwsgi_pass
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>0
@@ -3103,7 +3103,7 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_xslt_filter_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_xslt_filter_module.c</td><td colspan="3">struct：ngx_http_xslt_filter_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>xml_entities</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_xslt_filter_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_xslt_filter_module.c</td><td colspan="3">struct：ngx_http_xslt_filter_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>xml_entities</td><td>NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1
 </td><td>ngx_http_xslt_entities
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>0
@@ -3133,7 +3133,7 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>offsetof(ngx_http_xslt_filter_loc_conf_t,last_modified)
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_v2_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/v2/ngx_http_v2_module.c</td><td colspan="3">struct：ngx_http_v2_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>http2_recv_buffer_size</td><td>NGX_HTTP_MAIN_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_v2_module</th></tr><tr><td colspan="3">文件名：http/v2/ngx_http_v2_module.c</td><td colspan="3">struct：ngx_http_v2_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>http2_recv_buffer_size</td><td>NGX_HTTP_MAIN_CONF|NGX_CONF_TAKE1
 </td><td>ngx_conf_set_size_slot
 </td><td>NGX_HTTP_MAIN_CONF_OFFSET
 </td><td>offsetof(ngx_http_v2_main_conf_t,recv_buffer_size)
@@ -3228,7 +3228,7 @@
 </td><td>NGX_HTTP_LOC_CONF_OFFSET
 </td><td>0
 </td><td>NULL
-</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_perl_module</th></tr><tr><td colspan="3">文件名：/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/perl/ngx_http_perl_module.c</td><td colspan="3">struct：ngx_http_perl_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>perl_modules</td><td>NGX_HTTP_MAIN_CONF|NGX_CONF_TAKE1
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_perl_module</th></tr><tr><td colspan="3">文件名：http/modules/perl/ngx_http_perl_module.c</td><td colspan="3">struct：ngx_http_perl_commands</td></tr><tr><td width="16%">name</td><td width="24%">type</td><td width="17%">set</td><td width="17%">conf</td><td width="13%">offset</td><td width="13%">post</td></tr><tr><td>perl_modules</td><td>NGX_HTTP_MAIN_CONF|NGX_CONF_TAKE1
 </td><td>ngx_conf_set_str_array_slot
 </td><td>NGX_HTTP_MAIN_CONF_OFFSET
 </td><td>offsetof(ngx_http_perl_main_conf_t,modules)

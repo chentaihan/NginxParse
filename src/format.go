@@ -3,6 +3,8 @@ package main
 import (
 	"html/template"
 	"io/ioutil"
+	"os"
+	"strings"
 )
 
 const (
@@ -21,11 +23,24 @@ const (
 
 type formatStruct func(sct interface{}) []byte
 
+var nginxSourcePath string = ""	//nginx源码路径
+
+func removeSourcePath(filePath string) string {
+	if nginxSourcePath == "" {
+		nginxSourcePath = os.Args[0]
+		if !strings.HasSuffix(nginxSourcePath, "/") {
+			nginxSourcePath += "/"
+		}
+	}
+	return filePath[len(nginxSourcePath)+1:]
+}
+
 func formatCommandList(list interface{}) []byte {
 	buf := make([]byte, 0, 1024)
 	cmdList := list.([]*CommandInfo)
 
 	for _, cmdInfo := range cmdList {
+		cmdInfo.FileName = removeSourcePath(cmdInfo.FileName)
 		list := make([]interface{}, 0, len(cmdInfo.CmdList))
 		for _, item := range cmdInfo.CmdList {
 			list = append(list, item)
@@ -40,6 +55,7 @@ func formatModuleList(list interface{}) []byte {
 	moduleList := list.([]*ModuleInfo)
 
 	for _, moduleInfo := range moduleList {
+		moduleInfo.FileName = removeSourcePath(moduleInfo.FileName)
 		list := make([]interface{}, 0, len(moduleInfo.ModuleList))
 		for _, item := range moduleInfo.ModuleList {
 			list = append(list, item)
