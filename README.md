@@ -1,7 +1,7 @@
 #
 NginxConf
 
-解析nginx配置、模块等信息
+解析nginx配置、模块、变量等信息
 
 # 项目的由来
 
@@ -16,5 +16,6 @@ NginxConf
 
 1. 解析源码中所有的ngx\_command\_t，即解析出所有配置
 2. 解析源码中所有的ngx\_module\_t，即解析出所有模块
+3. 解析源码中所有的ngx\_http\_variable\_t，即解析出所有模块
 
 

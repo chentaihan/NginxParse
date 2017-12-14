@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io"
 	"os"
 )
 
@@ -12,21 +11,6 @@ func isDir(filePath string) bool {
 		return false
 	}
 	return fileInfo.IsDir()
-}
-
-func WriteFile(filename string, data []byte, perm os.FileMode) error {
-	f, err := os.OpenFile(filename, os.O_WRONLY|os.O_CREATE|os.O_APPEND, perm)
-	if err != nil {
-		return err
-	}
-	n, err := f.Write(data)
-	if err == nil && n < len(data) {
-		err = io.ErrShortWrite
-	}
-	if err1 := f.Close(); err == nil {
-		err = err1
-	}
-	return err
 }
 
 func main() {
@@ -43,31 +27,38 @@ func main() {
 	//}
 	dir := "/Users/didi/OpenSource/nginx-1.12.2/src"
 
+	structList := []*StructParse{
+		&StructParse{
+			structType: STRUCT_TYPE_COMMAND,
+			Parse:      NewCommandManager(),
+		},
+		&StructParse{
+			structType: STRUCT_TYPE_MODULE,
+			Parse:      NewModuleManager(),
+		},
+		&StructParse{
+			structType: STRUCT_TYPE_VARIABLE,
+			Parse:      NewVariableManager(),
+		},
+	}
+
 	fileParse := FileParse{}
-
-	cmdMgr := NewCommandManager()
-	cmdStruct := StructParse{
-		structType: STRUCT_TYPE_COMMAND,
-		Parse:      cmdMgr,
+	for _, sut := range structList {
+		fileParse.Register(sut)
 	}
-	fileParse.Register(&cmdStruct)
-
-	moduleMgr := NewModuleManager()
-	moduleStruct := StructParse{
-		structType: STRUCT_TYPE_MODULE,
-		Parse:      moduleMgr,
-	}
-	fileParse.Register(&moduleStruct)
 
 	fileList := getFileList(dir)
 
 	for _, fileName := range fileList {
+		//fileName = "/Users/didi/OpenSource/nginx-1.12.2/src/http/v2/ngx_http_v2_module.c"
 		if fileParse.Parse(fileName) {
 			//break
 		}
 	}
 
-	outPutCommand(cmdMgr.CmdInfo)
-	outPutModule(moduleMgr.moduleInfo)
+	for _, sut := range structList {
+		OutPut(sut.Parse)
+	}
+
 	fmt.Println("ok")
 }

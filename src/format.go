@@ -21,9 +21,16 @@ const (
 	MODULE_HTML   = "module.html"
 )
 
+const (
+	VARIABLE_HEADER = "<tr><th colspan=\"6\">{{.ModuleName}}</th></tr><tr><td colspan=\"3\">文件名：{{.FileName}}</td><td colspan=\"3\">struct：{{.StructName}}</td></tr>"
+	VARIABLE_TH     = "<tr><td width=\"15%\">name</td><td width=\"15%\">set_handler</td><td width=\"20%\">get_handler</td><td width=\"20%\">data</td><td width=\"15%\">flags</td><td width=\"15%\">index</td></tr>"
+	VARIABLE_TD     = "<tr><td>{{.Name}}</td><td>{{.SetHandler}}</td><td>{{.GetHandler}}</td><td>{{.Data}}</td><td>{{.Flags}}</td><td>{{.Index}}</td></tr>"
+	VARIABLE_HTML   = "variable.html"
+)
+
 type formatStruct func(sct interface{}) []byte
 
-var nginxSourcePath string = ""	//nginx源码路径
+var nginxSourcePath string = "" //nginx源码路径
 
 func removeSourcePath(filePath string) string {
 	if nginxSourcePath == "" {
@@ -65,6 +72,21 @@ func formatModuleList(list interface{}) []byte {
 	return buf
 }
 
+func formatVariableList(list interface{}) []byte {
+	buf := make([]byte, 0, 1024)
+	varList := list.([]*VariableInfo)
+
+	for _, moduleInfo := range varList {
+		moduleInfo.FileName = removeSourcePath(moduleInfo.FileName)
+		list := make([]interface{}, 0, len(moduleInfo.VarList))
+		for _, item := range moduleInfo.VarList {
+			list = append(list, item)
+		}
+		buf = append(buf, formatTable(VARIABLE_HEADER, VARIABLE_TH, VARIABLE_TD, moduleInfo, list...)...)
+	}
+	return buf
+}
+
 func formatTable(headerFormat, thFormat, tdFormat string, structInfo interface{}, list ...interface{}) []byte {
 	writer := NewBufferWriter(0)
 	writer.Write([]byte("<table>"))
@@ -83,12 +105,32 @@ func formatTable(headerFormat, thFormat, tdFormat string, structInfo interface{}
 	return writer.buffer
 }
 
+func OutPut(structInfo interface{}) {
+	switch structInfo.(type) {
+	case *CommandManager:
+		info, _ := structInfo.(*CommandManager)
+		outPutCommand(info.CmdInfo)
+
+	case *ModuleManager:
+		info := structInfo.(*ModuleManager)
+		outPutModule(info.moduleInfo)
+
+	case *VariableManager:
+		info := structInfo.(*VariableManager)
+		outPutVariable(info.VarInfo)
+	}
+}
+
 func outPutCommand(cmdList []*CommandInfo) {
 	outputFile(FILE_CONFIG_FORMAT, COMMAND_HTML, formatCommandList, cmdList)
 }
 
 func outPutModule(moduleList []*ModuleInfo) {
 	outputFile(FILE_CONFIG_FORMAT, MODULE_HTML, formatModuleList, moduleList)
+}
+
+func outPutVariable(varList []*VariableInfo) {
+	outputFile(FILE_CONFIG_FORMAT, VARIABLE_HTML, formatVariableList, varList)
 }
 
 func outputFile(formatFile, outputFile string, formatFunc formatStruct, list interface{}) {
