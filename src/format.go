@@ -1,7 +1,7 @@
 package main
 
 import (
-	"html/template"
+	"fmt"
 	"io/ioutil"
 	"os"
 	"strings"
@@ -22,13 +22,11 @@ const (
 )
 
 const (
-	VARIABLE_HEADER = "<tr><th colspan=\"6\">{{.ModuleName}}</th></tr><tr><td colspan=\"3\">文件名：{{.FileName}}</td><td colspan=\"3\">struct：{{.StructName}}</td></tr>"
-	VARIABLE_TH     = "<tr><td width=\"15%\">name</td><td width=\"15%\">set_handler</td><td width=\"20%\">get_handler</td><td width=\"20%\">data</td><td width=\"15%\">flags</td><td width=\"15%\">index</td></tr>"
-	VARIABLE_TD     = "<tr><td>{{.Name}}</td><td>{{.SetHandler}}</td><td>{{.GetHandler}}</td><td>{{.Data}}</td><td>{{.Flags}}</td><td>{{.Index}}</td></tr>"
+	VARIABLE_HEADER = "<tr><th colspan=\"%d\">%s</th></tr><tr><td colspan=\"%d\">文件名：%s</td><td colspan=\"%d\">struct：%s</td></tr>"
 	VARIABLE_HTML   = "variable.html"
 )
 
-type formatStruct func(sct interface{}) []byte
+type formatStruct func(varList []*TableInfo) []byte
 
 var nginxSourcePath string = "" //nginx源码路径
 
@@ -42,98 +40,67 @@ func removeSourcePath(filePath string) string {
 	return filePath[len(nginxSourcePath)+1:]
 }
 
-func formatCommandList(list interface{}) []byte {
+func formatVariableList(varList []*TableInfo) []byte {
 	buf := make([]byte, 0, 1024)
-	cmdList := list.([]*CommandInfo)
 
-	for _, cmdInfo := range cmdList {
-		cmdInfo.FileName = removeSourcePath(cmdInfo.FileName)
-		list := make([]interface{}, 0, len(cmdInfo.CmdList))
-		for _, item := range cmdInfo.CmdList {
-			list = append(list, item)
-		}
-		buf = append(buf, formatTable(COMMAND_HEADER, COMMAND_TH, COMMAND_TD, cmdInfo, list...)...)
+	for _, variable := range varList {
+		variable.FileName = removeSourcePath(variable.FileName)
+		buf = append(buf, formatTable(variable)...)
 	}
 	return buf
 }
 
-func formatModuleList(list interface{}) []byte {
-	buf := make([]byte, 0, 1024)
-	moduleList := list.([]*ModuleInfo)
-
-	for _, moduleInfo := range moduleList {
-		moduleInfo.FileName = removeSourcePath(moduleInfo.FileName)
-		list := make([]interface{}, 0, len(moduleInfo.ModuleList))
-		for _, item := range moduleInfo.ModuleList {
-			list = append(list, item)
-		}
-		buf = append(buf, formatTable(MODULE_HEADER, MODULE_TH, MODULE_TD, moduleInfo, list...)...)
-	}
-	return buf
+func formatHeader(variable *TableInfo) string {
+	colspan1 := len(variable.Title)
+	colspan3 := colspan1 / 2
+	colspan2 := colspan1 - colspan3
+	return fmt.Sprintf(VARIABLE_HEADER, colspan1, variable.ModuleName, colspan2, variable.FileName, colspan3,variable.StructName)
 }
 
-func formatVariableList(list interface{}) []byte {
-	buf := make([]byte, 0, 1024)
-	varList := list.([]*VariableInfo)
-
-	for _, moduleInfo := range varList {
-		moduleInfo.FileName = removeSourcePath(moduleInfo.FileName)
-		list := make([]interface{}, 0, len(moduleInfo.VarList))
-		for _, item := range moduleInfo.VarList {
-			list = append(list, item)
-		}
-		buf = append(buf, formatTable(VARIABLE_HEADER, VARIABLE_TH, VARIABLE_TD, moduleInfo, list...)...)
+func formatTH(title []string) string {
+	writer := NewBufferWriter(0)
+	writer.Write([]byte("<tr>"))
+	for i, _ := range title {
+		td := fmt.Sprintf("<td >%s</td>", title[i])
+		writer.WriteString(td)
 	}
-	return buf
+	writer.Write([]byte("</tr>"))
+	return writer.ToString()
 }
 
-func formatTable(headerFormat, thFormat, tdFormat string, structInfo interface{}, list ...interface{}) []byte {
+func formatTD(content [][]string) string {
+	writer := NewBufferWriter(0)
+	for _, tr := range content {
+		writer.Write([]byte("<tr>"))
+		for _, td := range tr {
+			tdStr := fmt.Sprintf("<td >%s</td>", td)
+			writer.WriteString(tdStr)
+		}
+		writer.Write([]byte("</tr>"))
+	}
+
+	return writer.ToString()
+}
+
+func formatTable(variable *TableInfo) []byte {
 	writer := NewBufferWriter(0)
 	writer.Write([]byte("<table>"))
-	tmpl := template.New("tmpl1")
-	tmpl.Parse(headerFormat)
-	tmpl.Execute(writer, structInfo)
-	writer.Write([]byte(thFormat))
 
-	for _, cmd := range list {
-		tmpl = template.New("tmpl1")
-		tmpl.Parse(tdFormat)
-		tmpl.Execute(writer, cmd)
-	}
+	writer.WriteString(formatHeader(variable))
+	writer.WriteString(formatTH(variable.Title))
+	writer.WriteString(formatTD(variable.Content))
+
 	writer.Write([]byte("</table><br/><br/>"))
 
-	return writer.buffer
+	return writer.GetBuffer()
 }
 
-func OutPut(structInfo interface{}) {
-	switch structInfo.(type) {
-	case *CommandManager:
-		info, _ := structInfo.(*CommandManager)
-		outPutCommand(info.CmdInfo)
-
-	case *ModuleManager:
-		info := structInfo.(*ModuleManager)
-		outPutModule(info.moduleInfo)
-
-	case *VariableManager:
-		info := structInfo.(*VariableManager)
-		outPutVariable(info.VarInfo)
-	}
+func OutPut(structInfo *Assignment) {
+	fileName := structInfo.StructInfo.StructName + ".html"
+	outputFile(FILE_CONFIG_FORMAT, fileName, formatVariableList, structInfo.Tables)
 }
 
-func outPutCommand(cmdList []*CommandInfo) {
-	outputFile(FILE_CONFIG_FORMAT, COMMAND_HTML, formatCommandList, cmdList)
-}
-
-func outPutModule(moduleList []*ModuleInfo) {
-	outputFile(FILE_CONFIG_FORMAT, MODULE_HTML, formatModuleList, moduleList)
-}
-
-func outPutVariable(varList []*VariableInfo) {
-	outputFile(FILE_CONFIG_FORMAT, VARIABLE_HTML, formatVariableList, varList)
-}
-
-func outputFile(formatFile, outputFile string, formatFunc formatStruct, list interface{}) {
+func outputFile(formatFile, outputFile string, formatFunc formatStruct, list []*TableInfo) {
 	configFormat := getConfigFile(formatFile)
 	content, err := ioutil.ReadFile(configFormat)
 	if err != nil {
@@ -147,7 +114,7 @@ func outputFile(formatFile, outputFile string, formatFunc formatStruct, list int
 	}
 
 	outputFile = getOutPutFile(outputFile)
-	ioutil.WriteFile(outputFile, content[:index], 0666)
+	ioutil.WriteFile(outputFile, content[:index], 0777)
 
 	buf := formatFunc(list)
 	WriteFileAppend(outputFile, buf, 0666)

@@ -3,8 +3,8 @@ package main
 import "strings"
 
 type Checker struct{
-	needStr []string
-	notNeedStr []string
+	Include   []string
+	IncludeNo []string
 }
 
 
@@ -13,7 +13,7 @@ func (ckr *Checker) Check(line string) bool{
 }
 
 func (ckr *Checker) checkNeedCmd(line string) bool {
-	for _, cmd := range ckr.needStr {
+	for _, cmd := range ckr.Include {
 		if !strings.Contains(line, cmd) {
 			return false
 		}
@@ -22,7 +22,7 @@ func (ckr *Checker) checkNeedCmd(line string) bool {
 }
 
 func (ckr *Checker) checkNotNeedCmd(line string) bool {
-	for _, cmd := range ckr.notNeedStr {
+	for _, cmd := range ckr.IncludeNo {
 		if !strings.Contains(line, cmd) {
 			return false
 		}

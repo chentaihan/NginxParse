@@ -4,7 +4,6 @@ import (
 	"io"
 	"os"
 	"path"
-	"strings"
 )
 
 //获取配置文件完整路径
@@ -17,12 +16,12 @@ func getConfigFile(fileName string) string {
 func getOutPutFile(fileName string) string {
 	curDir := os.Args[0]
 	path := path.Dir(path.Dir(curDir)) + "/" + PATH_OUTPUT
-	os.MkdirAll(path, 0666)
+	os.MkdirAll(path, 0777)
 	return path + fileName
 }
 
 func WriteFileAppend(filename string, data []byte, perm os.FileMode) error {
-	f, err := os.OpenFile(filename, os.O_WRONLY|os.O_CREATE|os.O_APPEND, perm)
+	f, err := os.OpenFile(filename, os.O_RDWR|os.O_CREATE|os.O_APPEND, perm)
 	if err != nil {
 		return err
 	}
@@ -34,14 +33,4 @@ func WriteFileAppend(filename string, data []byte, perm os.FileMode) error {
 		err = err1
 	}
 	return err
-}
-
-//过滤出.c文件
-func isCFile(fileName string) bool {
-	ext := path.Ext(fileName)
-	ext = strings.ToLower(ext)
-	if ext == ".c" {
-		return true
-	}
-	return false
 }

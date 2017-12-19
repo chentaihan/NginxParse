@@ -1,0 +1,755 @@
+<!DOCTYPE HTML>
+<html lang="" >
+<head>
+    <meta charset="UTF-8">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>Nginx所有配置说明</title>
+    <style type="text/css">
+        table {
+            width : 100%;
+            font-family: verdana,arial,sans-serif;
+            font-size:11px;
+            color:#333333;
+            border-width: 1px;
+            border-color: #666666;
+            border-collapse: collapse;
+        }
+        table th {
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #dedede;
+        }
+        table td {
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #ffffff;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body style="overflow:-Scroll;overflow-x:hidden;">
+<div style="width:100%;overflow:inherit;">
+    <table><tr><th colspan="6">ngx_http_upstream</th></tr><tr><td colspan="3">文件名：http/ngx_http_upstream.c</td><td colspan="3">struct：ngx_http_upstream_vars</td></tr><tr><td >name</td><td >set_handler</td><td >get_handler</td><td >data</td><td >flags</td><td >index</td></tr><tr><td >upstream_addr</td><td >NULL
+</td><td >ngx_http_upstream_addr_variable
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >upstream_status</td><td >NULL
+</td><td >ngx_http_upstream_status_variable
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >upstream_connect_time</td><td >NULL
+</td><td >ngx_http_upstream_response_time_variable
+</td><td >2
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >upstream_header_time</td><td >NULL
+</td><td >ngx_http_upstream_response_time_variable
+</td><td >1
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >upstream_response_time</td><td >NULL
+</td><td >ngx_http_upstream_response_time_variable
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >upstream_response_length</td><td >NULL
+</td><td >ngx_http_upstream_response_length_variable
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >upstream_bytes_received</td><td >NULL
+</td><td >ngx_http_upstream_response_length_variable
+</td><td >1
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >upstream_cache_status</td><td >NULL
+</td><td >ngx_http_upstream_cache_status
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >upstream_cache_last_modified</td><td >NULL
+</td><td >ngx_http_upstream_cache_last_modified
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOCACHEABLE|NGX_HTTP_VAR_NOHASH
+</td><td >0
+</td></tr><tr><td >upstream_cache_etag</td><td >NULL
+</td><td >ngx_http_upstream_cache_etag
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOCACHEABLE|NGX_HTTP_VAR_NOHASH
+</td><td >0
+</td></tr><tr><td >upstream_http_</td><td >NULL
+</td><td >ngx_http_upstream_header_variable
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOCACHEABLE|NGX_HTTP_VAR_PREFIX
+</td><td >0
+</td></tr><tr><td >upstream_cookie_</td><td >NULL
+</td><td >ngx_http_upstream_cookie_variable
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOCACHEABLE|NGX_HTTP_VAR_PREFIX
+</td><td >0
+</td></tr><tr><td >ngx_null_string
+</td><td >NULL
+</td><td >NULL
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_variables</th></tr><tr><td colspan="3">文件名：http/ngx_http_variables.c</td><td colspan="3">struct：ngx_http_core_variables</td></tr><tr><td >name</td><td >set_handler</td><td >get_handler</td><td >data</td><td >flags</td><td >index</td></tr><tr><td >http_host</td><td >NULL
+</td><td >ngx_http_variable_header
+</td><td >offsetof(ngx_http_request_t,headers_in.host)
+</td><td >0
+</td><td >0
+</td></tr><tr><td >http_user_agent</td><td >NULL
+</td><td >ngx_http_variable_header
+</td><td >offsetof(ngx_http_request_t,headers_in.user_agent)
+</td><td >0
+</td><td >0
+</td></tr><tr><td >http_referer</td><td >NULL
+</td><td >ngx_http_variable_header
+</td><td >offsetof(ngx_http_request_t,headers_in.referer)
+</td><td >0
+</td><td >0
+</td></tr><tr><td >http_via</td><td >NULL
+</td><td >ngx_http_variable_header
+</td><td >offsetof(ngx_http_request_t,headers_in.via)
+</td><td >0
+</td><td >0
+</td></tr><tr><td >http_x_forwarded_for</td><td >NULL
+</td><td >ngx_http_variable_headers
+</td><td >offsetof(ngx_http_request_t,headers_in.x_forwarded_for)
+</td><td >0
+</td><td >0
+</td></tr><tr><td >http_cookie</td><td >NULL
+</td><td >ngx_http_variable_cookies
+</td><td >offsetof(ngx_http_request_t,headers_in.cookies)
+</td><td >0
+</td><td >0
+</td></tr><tr><td >content_length</td><td >NULL
+</td><td >ngx_http_variable_content_length
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >content_type</td><td >NULL
+</td><td >ngx_http_variable_header
+</td><td >offsetof(ngx_http_request_t,headers_in.content_type)
+</td><td >0
+</td><td >0
+</td></tr><tr><td >host</td><td >NULL
+</td><td >ngx_http_variable_host
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >binary_remote_addr</td><td >NULL
+</td><td >ngx_http_variable_binary_remote_addr
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >remote_addr</td><td >NULL
+</td><td >ngx_http_variable_remote_addr
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >remote_port</td><td >NULL
+</td><td >ngx_http_variable_remote_port
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >proxy_protocol_addr</td><td >NULL
+</td><td >ngx_http_variable_proxy_protocol_addr
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >proxy_protocol_port</td><td >NULL
+</td><td >ngx_http_variable_proxy_protocol_port
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >server_addr</td><td >NULL
+</td><td >ngx_http_variable_server_addr
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >server_port</td><td >NULL
+</td><td >ngx_http_variable_server_port
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >server_protocol</td><td >NULL
+</td><td >ngx_http_variable_request
+</td><td >offsetof(ngx_http_request_t,http_protocol)
+</td><td >0
+</td><td >0
+</td></tr><tr><td >scheme</td><td >NULL
+</td><td >ngx_http_variable_scheme
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >https</td><td >NULL
+</td><td >ngx_http_variable_https
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >request_uri</td><td >NULL
+</td><td >ngx_http_variable_request
+</td><td >offsetof(ngx_http_request_t,unparsed_uri)
+</td><td >0
+</td><td >0
+</td></tr><tr><td >uri</td><td >NULL
+</td><td >ngx_http_variable_request
+</td><td >offsetof(ngx_http_request_t,uri)
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >document_uri</td><td >NULL
+</td><td >ngx_http_variable_request
+</td><td >offsetof(ngx_http_request_t,uri)
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >request</td><td >NULL
+</td><td >ngx_http_variable_request_line
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >document_root</td><td >NULL
+</td><td >ngx_http_variable_document_root
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >realpath_root</td><td >NULL
+</td><td >ngx_http_variable_realpath_root
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >query_string</td><td >NULL
+</td><td >ngx_http_variable_request
+</td><td >offsetof(ngx_http_request_t,args)
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >args</td><td >ngx_http_variable_set_args
+</td><td >ngx_http_variable_request
+</td><td >offsetof(ngx_http_request_t,args)
+</td><td >NGX_HTTP_VAR_CHANGEABLE|NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >is_args</td><td >NULL
+</td><td >ngx_http_variable_is_args
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >request_filename</td><td >NULL
+</td><td >ngx_http_variable_request_filename
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >server_name</td><td >NULL
+</td><td >ngx_http_variable_server_name
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >request_method</td><td >NULL
+</td><td >ngx_http_variable_request_method
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >remote_user</td><td >NULL
+</td><td >ngx_http_variable_remote_user
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >bytes_sent</td><td >NULL
+</td><td >ngx_http_variable_bytes_sent
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >body_bytes_sent</td><td >NULL
+</td><td >ngx_http_variable_body_bytes_sent
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >pipe</td><td >NULL
+</td><td >ngx_http_variable_pipe
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >request_completion</td><td >NULL
+</td><td >ngx_http_variable_request_completion
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >request_body</td><td >NULL
+</td><td >ngx_http_variable_request_body
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >request_body_file</td><td >NULL
+</td><td >ngx_http_variable_request_body_file
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >request_length</td><td >NULL
+</td><td >ngx_http_variable_request_length
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >request_time</td><td >NULL
+</td><td >ngx_http_variable_request_time
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >request_id</td><td >NULL
+</td><td >ngx_http_variable_request_id
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >status</td><td >NULL
+</td><td >ngx_http_variable_status
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >sent_http_content_type</td><td >NULL
+</td><td >ngx_http_variable_sent_content_type
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >sent_http_content_length</td><td >NULL
+</td><td >ngx_http_variable_sent_content_length
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >sent_http_location</td><td >NULL
+</td><td >ngx_http_variable_sent_location
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >sent_http_last_modified</td><td >NULL
+</td><td >ngx_http_variable_sent_last_modified
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >sent_http_connection</td><td >NULL
+</td><td >ngx_http_variable_sent_connection
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >sent_http_keep_alive</td><td >NULL
+</td><td >ngx_http_variable_sent_keep_alive
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >sent_http_transfer_encoding</td><td >NULL
+</td><td >ngx_http_variable_sent_transfer_encoding
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >sent_http_cache_control</td><td >NULL
+</td><td >ngx_http_variable_headers
+</td><td >offsetof(ngx_http_request_t,headers_out.cache_control)
+</td><td >0
+</td><td >0
+</td></tr><tr><td >limit_rate</td><td >ngx_http_variable_request_set_size
+</td><td >ngx_http_variable_request_get_size
+</td><td >offsetof(ngx_http_request_t,limit_rate)
+</td><td >NGX_HTTP_VAR_CHANGEABLE|NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >connection</td><td >NULL
+</td><td >ngx_http_variable_connection
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >connection_requests</td><td >NULL
+</td><td >ngx_http_variable_connection_requests
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >nginx_version</td><td >NULL
+</td><td >ngx_http_variable_nginx_version
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >hostname</td><td >NULL
+</td><td >ngx_http_variable_hostname
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >pid</td><td >NULL
+</td><td >ngx_http_variable_pid
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >msec</td><td >NULL
+</td><td >ngx_http_variable_msec
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >time_iso8601</td><td >NULL
+</td><td >ngx_http_variable_time_iso8601
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >time_local</td><td >NULL
+</td><td >ngx_http_variable_time_local
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >tcpinfo_rtt</td><td >NULL
+</td><td >ngx_http_variable_tcpinfo
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >tcpinfo_rttvar</td><td >NULL
+</td><td >ngx_http_variable_tcpinfo
+</td><td >1
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >tcpinfo_snd_cwnd</td><td >NULL
+</td><td >ngx_http_variable_tcpinfo
+</td><td >2
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >tcpinfo_rcv_space</td><td >NULL
+</td><td >ngx_http_variable_tcpinfo
+</td><td >3
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >http_</td><td >NULL
+</td><td >ngx_http_variable_unknown_header_in
+</td><td >0
+</td><td >NGX_HTTP_VAR_PREFIX
+</td><td >0
+</td></tr><tr><td >sent_http_</td><td >NULL
+</td><td >ngx_http_variable_unknown_header_out
+</td><td >0
+</td><td >NGX_HTTP_VAR_PREFIX
+</td><td >0
+</td></tr><tr><td >cookie_</td><td >NULL
+</td><td >ngx_http_variable_cookie
+</td><td >0
+</td><td >NGX_HTTP_VAR_PREFIX
+</td><td >0
+</td></tr><tr><td >arg_</td><td >NULL
+</td><td >ngx_http_variable_argument
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOCACHEABLE|NGX_HTTP_VAR_PREFIX
+</td><td >0
+</td></tr><tr><td >ngx_null_string
+</td><td >NULL
+</td><td >NULL
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_fastcgi_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_fastcgi_module.c</td><td colspan="3">struct：ngx_http_fastcgi_vars</td></tr><tr><td >name</td><td >set_handler</td><td >get_handler</td><td >data</td><td >flags</td><td >index</td></tr><tr><td >fastcgi_script_name</td><td >NULL
+</td><td >ngx_http_fastcgi_script_name_variable
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOCACHEABLE|NGX_HTTP_VAR_NOHASH
+</td><td >0
+</td></tr><tr><td >fastcgi_path_info</td><td >NULL
+</td><td >ngx_http_fastcgi_path_info_variable
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOCACHEABLE|NGX_HTTP_VAR_NOHASH
+</td><td >0
+</td></tr><tr><td >ngx_null_string
+</td><td >NULL
+</td><td >NULL
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_geoip_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_geoip_module.c</td><td colspan="3">struct：ngx_http_geoip_vars</td></tr><tr><td >name</td><td >set_handler</td><td >get_handler</td><td >data</td><td >flags</td><td >index</td></tr><tr><td >geoip_country_code</td><td >NULL
+</td><td >ngx_http_geoip_country_variable
+</td><td >NGX_GEOIP_COUNTRY_CODE
+</td><td >0
+</td><td >0
+</td></tr><tr><td >geoip_country_code3</td><td >NULL
+</td><td >ngx_http_geoip_country_variable
+</td><td >NGX_GEOIP_COUNTRY_CODE3
+</td><td >0
+</td><td >0
+</td></tr><tr><td >geoip_country_name</td><td >NULL
+</td><td >ngx_http_geoip_country_variable
+</td><td >NGX_GEOIP_COUNTRY_NAME
+</td><td >0
+</td><td >0
+</td></tr><tr><td >geoip_org</td><td >NULL
+</td><td >ngx_http_geoip_org_variable
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >geoip_city_continent_code</td><td >NULL
+</td><td >ngx_http_geoip_city_variable
+</td><td >offsetof(GeoIPRecord,continent_code)
+</td><td >0
+</td><td >0
+</td></tr><tr><td >geoip_city_country_code</td><td >NULL
+</td><td >ngx_http_geoip_city_variable
+</td><td >offsetof(GeoIPRecord,country_code)
+</td><td >0
+</td><td >0
+</td></tr><tr><td >geoip_city_country_code3</td><td >NULL
+</td><td >ngx_http_geoip_city_variable
+</td><td >offsetof(GeoIPRecord,country_code3)
+</td><td >0
+</td><td >0
+</td></tr><tr><td >geoip_city_country_name</td><td >NULL
+</td><td >ngx_http_geoip_city_variable
+</td><td >offsetof(GeoIPRecord,country_name)
+</td><td >0
+</td><td >0
+</td></tr><tr><td >geoip_region</td><td >NULL
+</td><td >ngx_http_geoip_city_variable
+</td><td >offsetof(GeoIPRecord,region)
+</td><td >0
+</td><td >0
+</td></tr><tr><td >geoip_region_name</td><td >NULL
+</td><td >ngx_http_geoip_region_name_variable
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >geoip_city</td><td >NULL
+</td><td >ngx_http_geoip_city_variable
+</td><td >offsetof(GeoIPRecord,city)
+</td><td >0
+</td><td >0
+</td></tr><tr><td >geoip_postal_code</td><td >NULL
+</td><td >ngx_http_geoip_city_variable
+</td><td >offsetof(GeoIPRecord,postal_code)
+</td><td >0
+</td><td >0
+</td></tr><tr><td >geoip_latitude</td><td >NULL
+</td><td >ngx_http_geoip_city_float_variable
+</td><td >offsetof(GeoIPRecord,latitude)
+</td><td >0
+</td><td >0
+</td></tr><tr><td >geoip_longitude</td><td >NULL
+</td><td >ngx_http_geoip_city_float_variable
+</td><td >offsetof(GeoIPRecord,longitude)
+</td><td >0
+</td><td >0
+</td></tr><tr><td >geoip_dma_code</td><td >NULL
+</td><td >ngx_http_geoip_city_int_variable
+</td><td >offsetof(GeoIPRecord,dma_code)
+</td><td >0
+</td><td >0
+</td></tr><tr><td >geoip_area_code</td><td >NULL
+</td><td >ngx_http_geoip_city_int_variable
+</td><td >offsetof(GeoIPRecord,area_code)
+</td><td >0
+</td><td >0
+</td></tr><tr><td >ngx_null_string
+</td><td >NULL
+</td><td >NULL
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_proxy_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_proxy_module.c</td><td colspan="3">struct：ngx_http_proxy_vars</td></tr><tr><td >name</td><td >set_handler</td><td >get_handler</td><td >data</td><td >flags</td><td >index</td></tr><tr><td >proxy_host</td><td >NULL
+</td><td >ngx_http_proxy_host_variable
+</td><td >0
+</td><td >NGX_HTTP_VAR_CHANGEABLE|NGX_HTTP_VAR_NOCACHEABLE|NGX_HTTP_VAR_NOHASH
+</td><td >0
+</td></tr><tr><td >proxy_port</td><td >NULL
+</td><td >ngx_http_proxy_port_variable
+</td><td >0
+</td><td >NGX_HTTP_VAR_CHANGEABLE|NGX_HTTP_VAR_NOCACHEABLE|NGX_HTTP_VAR_NOHASH
+</td><td >0
+</td></tr><tr><td >proxy_add_x_forwarded_for</td><td >NULL
+</td><td >ngx_http_proxy_add_x_forwarded_for_variable
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOHASH
+</td><td >0
+</td></tr><tr><td >proxy_add_via</td><td >NULL
+</td><td >NULL
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOHASH
+</td><td >0
+</td></tr><tr><td >proxy_internal_body_length</td><td >NULL
+</td><td >ngx_http_proxy_internal_body_length_variable
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOCACHEABLE|NGX_HTTP_VAR_NOHASH
+</td><td >0
+</td></tr><tr><td >proxy_internal_chunked</td><td >NULL
+</td><td >ngx_http_proxy_internal_chunked_variable
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOCACHEABLE|NGX_HTTP_VAR_NOHASH
+</td><td >0
+</td></tr><tr><td >ngx_null_string
+</td><td >NULL
+</td><td >NULL
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_realip_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_realip_module.c</td><td colspan="3">struct：ngx_http_realip_vars</td></tr><tr><td >name</td><td >set_handler</td><td >get_handler</td><td >data</td><td >flags</td><td >index</td></tr><tr><td >realip_remote_addr</td><td >NULL
+</td><td >ngx_http_realip_remote_addr_variable
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >realip_remote_port</td><td >NULL
+</td><td >ngx_http_realip_remote_port_variable
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >ngx_null_string
+</td><td >NULL
+</td><td >NULL
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_ssi_filter_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_ssi_filter_module.c</td><td colspan="3">struct：ngx_http_ssi_vars</td></tr><tr><td >name</td><td >set_handler</td><td >get_handler</td><td >data</td><td >flags</td><td >index</td></tr><tr><td >date_local</td><td >NULL
+</td><td >ngx_http_ssi_date_gmt_local_variable
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >date_gmt</td><td >NULL
+</td><td >ngx_http_ssi_date_gmt_local_variable
+</td><td >1
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >ngx_null_string
+</td><td >NULL
+</td><td >NULL
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_ssl_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_ssl_module.c</td><td colspan="3">struct：ngx_http_ssl_vars</td></tr><tr><td >name</td><td >set_handler</td><td >get_handler</td><td >data</td><td >flags</td><td >index</td></tr><tr><td >ssl_protocol</td><td >NULL
+</td><td >ngx_http_ssl_static_variable
+</td><td >(uintptr_t)ngx_ssl_get_protocol
+</td><td >NGX_HTTP_VAR_CHANGEABLE
+</td><td >0
+</td></tr><tr><td >ssl_cipher</td><td >NULL
+</td><td >ngx_http_ssl_static_variable
+</td><td >(uintptr_t)ngx_ssl_get_cipher_name
+</td><td >NGX_HTTP_VAR_CHANGEABLE
+</td><td >0
+</td></tr><tr><td >ssl_ciphers</td><td >NULL
+</td><td >ngx_http_ssl_variable
+</td><td >(uintptr_t)ngx_ssl_get_ciphers
+</td><td >NGX_HTTP_VAR_CHANGEABLE
+</td><td >0
+</td></tr><tr><td >ssl_curves</td><td >NULL
+</td><td >ngx_http_ssl_variable
+</td><td >(uintptr_t)ngx_ssl_get_curves
+</td><td >NGX_HTTP_VAR_CHANGEABLE
+</td><td >0
+</td></tr><tr><td >ssl_session_id</td><td >NULL
+</td><td >ngx_http_ssl_variable
+</td><td >(uintptr_t)ngx_ssl_get_session_id
+</td><td >NGX_HTTP_VAR_CHANGEABLE
+</td><td >0
+</td></tr><tr><td >ssl_session_reused</td><td >NULL
+</td><td >ngx_http_ssl_variable
+</td><td >(uintptr_t)ngx_ssl_get_session_reused
+</td><td >NGX_HTTP_VAR_CHANGEABLE
+</td><td >0
+</td></tr><tr><td >ssl_server_name</td><td >NULL
+</td><td >ngx_http_ssl_variable
+</td><td >(uintptr_t)ngx_ssl_get_server_name
+</td><td >NGX_HTTP_VAR_CHANGEABLE
+</td><td >0
+</td></tr><tr><td >ssl_client_cert</td><td >NULL
+</td><td >ngx_http_ssl_variable
+</td><td >(uintptr_t)ngx_ssl_get_certificate
+</td><td >NGX_HTTP_VAR_CHANGEABLE
+</td><td >0
+</td></tr><tr><td >ssl_client_raw_cert</td><td >NULL
+</td><td >ngx_http_ssl_variable
+</td><td >(uintptr_t)ngx_ssl_get_raw_certificate
+</td><td >NGX_HTTP_VAR_CHANGEABLE
+</td><td >0
+</td></tr><tr><td >ssl_client_s_dn</td><td >NULL
+</td><td >ngx_http_ssl_variable
+</td><td >(uintptr_t)ngx_ssl_get_subject_dn
+</td><td >NGX_HTTP_VAR_CHANGEABLE
+</td><td >0
+</td></tr><tr><td >ssl_client_i_dn</td><td >NULL
+</td><td >ngx_http_ssl_variable
+</td><td >(uintptr_t)ngx_ssl_get_issuer_dn
+</td><td >NGX_HTTP_VAR_CHANGEABLE
+</td><td >0
+</td></tr><tr><td >ssl_client_s_dn_legacy</td><td >NULL
+</td><td >ngx_http_ssl_variable
+</td><td >(uintptr_t)ngx_ssl_get_subject_dn_legacy
+</td><td >NGX_HTTP_VAR_CHANGEABLE
+</td><td >0
+</td></tr><tr><td >ssl_client_i_dn_legacy</td><td >NULL
+</td><td >ngx_http_ssl_variable
+</td><td >(uintptr_t)ngx_ssl_get_issuer_dn_legacy
+</td><td >NGX_HTTP_VAR_CHANGEABLE
+</td><td >0
+</td></tr><tr><td >ssl_client_serial</td><td >NULL
+</td><td >ngx_http_ssl_variable
+</td><td >(uintptr_t)ngx_ssl_get_serial_number
+</td><td >NGX_HTTP_VAR_CHANGEABLE
+</td><td >0
+</td></tr><tr><td >ssl_client_fingerprint</td><td >NULL
+</td><td >ngx_http_ssl_variable
+</td><td >(uintptr_t)ngx_ssl_get_fingerprint
+</td><td >NGX_HTTP_VAR_CHANGEABLE
+</td><td >0
+</td></tr><tr><td >ssl_client_verify</td><td >NULL
+</td><td >ngx_http_ssl_variable
+</td><td >(uintptr_t)ngx_ssl_get_client_verify
+</td><td >NGX_HTTP_VAR_CHANGEABLE
+</td><td >0
+</td></tr><tr><td >ssl_client_v_start</td><td >NULL
+</td><td >ngx_http_ssl_variable
+</td><td >(uintptr_t)ngx_ssl_get_client_v_start
+</td><td >NGX_HTTP_VAR_CHANGEABLE
+</td><td >0
+</td></tr><tr><td >ssl_client_v_end</td><td >NULL
+</td><td >ngx_http_ssl_variable
+</td><td >(uintptr_t)ngx_ssl_get_client_v_end
+</td><td >NGX_HTTP_VAR_CHANGEABLE
+</td><td >0
+</td></tr><tr><td >ssl_client_v_remain</td><td >NULL
+</td><td >ngx_http_ssl_variable
+</td><td >(uintptr_t)ngx_ssl_get_client_v_remain
+</td><td >NGX_HTTP_VAR_CHANGEABLE
+</td><td >0
+</td></tr><tr><td >ngx_null_string
+</td><td >NULL
+</td><td >NULL
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_stub_status_module</th></tr><tr><td colspan="3">文件名：http/modules/ngx_http_stub_status_module.c</td><td colspan="3">struct：ngx_http_stub_status_vars</td></tr><tr><td >name</td><td >set_handler</td><td >get_handler</td><td >data</td><td >flags</td><td >index</td></tr><tr><td >connections_active</td><td >NULL
+</td><td >ngx_http_stub_status_variable
+</td><td >0
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >connections_reading</td><td >NULL
+</td><td >ngx_http_stub_status_variable
+</td><td >1
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >connections_writing</td><td >NULL
+</td><td >ngx_http_stub_status_variable
+</td><td >2
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >connections_waiting</td><td >NULL
+</td><td >ngx_http_stub_status_variable
+</td><td >3
+</td><td >NGX_HTTP_VAR_NOCACHEABLE
+</td><td >0
+</td></tr><tr><td >ngx_null_string
+</td><td >NULL
+</td><td >NULL
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr></table><br/><br/><table><tr><th colspan="6">ngx_http_v2_module</th></tr><tr><td colspan="3">文件名：http/v2/ngx_http_v2_module.c</td><td colspan="3">struct：ngx_http_v2_vars</td></tr><tr><td >name</td><td >set_handler</td><td >get_handler</td><td >data</td><td >flags</td><td >index</td></tr><tr><td >http2</td><td >NULL
+</td><td >ngx_http_v2_variable
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr><tr><td >ngx_null_string
+</td><td >NULL
+</td><td >NULL
+</td><td >0
+</td><td >0
+</td><td >0
+</td></tr></table><br/><br/>
+</div>
+</body>
+</html>
+
