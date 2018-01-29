@@ -1,6 +1,9 @@
-package main
+package logic
 
-import "strings"
+import (
+	"strings"
+	"github.com/chentaihan/NginxParse/util"
+)
 
 /**
 解析struct/union
@@ -39,7 +42,7 @@ func NewStructParsee(structType string) *StructParse {
 
 //判断是不是struct/union头部
 func (stt *StructParse) IsHead(line string) bool {
-	line = mergeSpace(line)
+	line = util.MergeSpace(line)
 	token := strings.SplitN(line, " ", 4)
 	tokenLen := len(token)
 	if tokenLen < 3 {
@@ -59,7 +62,7 @@ func (stt *StructParse) IsHead(line string) bool {
 		i := 0
 		for ; i < len(token); i++ {
 			if format[i] == "" {
-				if isLegalString(token[i]) {
+				if util.IsLegalString(token[i]) {
 					nameIndex = i
 				} else {
 					break
@@ -93,7 +96,7 @@ func (stt *StructParse) IsTail(line string) bool {
 		return false
 	}
 	line = line[0 : len(line)-1]
-	line = mergeSpace(line)
+	line = util.MergeSpace(line)
 	token := strings.SplitN(line, " ", 2)
 
 	//结构体尾部就两种结构
@@ -106,7 +109,7 @@ func (stt *StructParse) IsTail(line string) bool {
 			return false
 		}
 		if len(token) > 1 {
-			if isLegalString(token[1]) {
+			if util.IsLegalString(token[1]) {
 				stt.Rename = token[1]
 			}
 		}

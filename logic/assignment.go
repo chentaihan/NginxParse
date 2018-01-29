@@ -1,4 +1,4 @@
-package main
+package logic
 
 /*
 结构体实例化
@@ -7,15 +7,17 @@ package main
 import (
 	"strings"
 	"fmt"
+
+	"github.com/chentaihan/NginxParse/util"
 )
 
 type Assignment struct {
 	Tables     []*TableInfo
 	checker    Checker
-	StructInfo *StructPraseInfo
+	StructInfo *util.StructPraseInfo
 }
 
-func NewAssignment(sutInfo *StructPraseInfo) *Assignment {
+func NewAssignment(sutInfo *util.StructPraseInfo) *Assignment {
 	varMgr := &Assignment{
 		Tables:     make([]*TableInfo, 0),
 		StructInfo: sutInfo,
@@ -33,13 +35,13 @@ func (varMgr *Assignment) IsStartStruct(line string) bool {
 }
 
 //解析出ModuleInfo
-func (mgr *Assignment) parseTableInfo(filePath string, writer *BufferWriter) *TableInfo {
+func (mgr *Assignment) parseTableInfo(filePath string, writer *util.BufferWriter) *TableInfo {
 	writer.MoveNext()
 	line := writer.Current()
 	table := &TableInfo{}
 	table.FileName = filePath
-	table.ModuleName = parseModuleName(filePath)
-	table.StructName = parseStructName(line, mgr.StructInfo.StructName)
+	table.ModuleName = util.ParseModuleName(filePath)
+	table.StructName = util.ParseStructName(line, mgr.StructInfo.StructName)
 	table.StructString = writer.ToString()
 
 	titleLen := len(mgr.StructInfo.Fields)
@@ -58,7 +60,7 @@ func (mgr *Assignment) parseTableInfo(filePath string, writer *BufferWriter) *Ta
 }
 
 //解析出结构体内容
-func (mgr *Assignment) ParseStruct(filePath string, writer *BufferWriter) bool {
+func (mgr *Assignment) ParseStruct(filePath string, writer *util.BufferWriter) bool {
 	writer = mgr.FormatStruct(writer)
 	fmt.Println(writer.ToString())
 	table := mgr.parseTableInfo(filePath, writer)
@@ -90,16 +92,16 @@ func (mgr *Assignment) parseContent(lines []string) []string {
 	content := make([]string, 0, fieldsLen)
 	lines = lines[1:]
 	for _, val := range mgr.StructInfo.Fields {
-		line := parseName(lines[val])
+		line := util.ParseName(lines[val])
 		content = append(content, line)
 	}
 	return content
 }
 
 //将buffer中的struct赋值格式化成容易解析的样子
-func (mgr *Assignment) formatStruct(bufWriter *BufferWriter) *BufferWriter {
+func (mgr *Assignment) formatStruct(bufWriter *util.BufferWriter) *util.BufferWriter {
 	inBuf := bufWriter.GetBuffer()
-	outBuf := NewBufferWriter(bufWriter.Size + 64)
+	outBuf := util.NewBufferWriter(bufWriter.Size + 64)
 	bracketCount := 0
 	inBracketCount := 1      //大括号深度
 	inLittleBracket := false //在小括号内部
@@ -165,7 +167,7 @@ func (mgr *Assignment) formatStruct(bufWriter *BufferWriter) *BufferWriter {
 }
 
 //将buffer中的struct赋值格式化成容易解析的样子
-func (mgr *Assignment) FormatStruct(bufWriter *BufferWriter) *BufferWriter {
+func (mgr *Assignment) FormatStruct(bufWriter *util.BufferWriter) *util.BufferWriter {
 	outBuf := mgr.formatStruct(bufWriter)
 	if mgr.StructInfo.MacroExpand {
 		outBuf = mgr.replaceMacro(outBuf)
@@ -174,9 +176,9 @@ func (mgr *Assignment) FormatStruct(bufWriter *BufferWriter) *BufferWriter {
 	return outBuf
 }
 
-func (mgr *Assignment) replaceMacro(bufWriter *BufferWriter) *BufferWriter {
+func (mgr *Assignment) replaceMacro(bufWriter *util.BufferWriter) *util.BufferWriter {
 	bufWriter.Reset()
-	outBuf := NewBufferWriter(bufWriter.Size + 64)
+	outBuf := util.NewBufferWriter(bufWriter.Size + 64)
 	macro := GetMacro()
 	for bufWriter.MoveNext() {
 		line := bufWriter.Current()

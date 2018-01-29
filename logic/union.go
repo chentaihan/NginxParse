@@ -1,12 +1,14 @@
-package main
+package logic
 
 import (
 	"fmt"
 	"strings"
+
+	"github.com/chentaihan/NginxParse/util"
 )
 
 type Union struct {
-	buffer BufferWriter
+	buffer util.BufferWriter
 }
 
 func NewUnion() *Union {

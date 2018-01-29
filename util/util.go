@@ -1,4 +1,4 @@
-package main
+package util
 
 import (
 	"io"
@@ -7,13 +7,13 @@ import (
 )
 
 //获取配置文件完整路径
-func getConfigFile(fileName string) string {
+func GetConfigFile(fileName string) string {
 	curDir := os.Args[0]
 	return path.Dir(path.Dir(curDir)) + "/" + PATH_CONFIG + fileName
 }
 
 //获取输出文件完整路径
-func getOutPutFile(fileName string) string {
+func GetOutPutFile(fileName string) string {
 	curDir := os.Args[0]
 	path := path.Dir(path.Dir(curDir)) + "/" + PATH_OUTPUT
 	os.MkdirAll(path, 0777)

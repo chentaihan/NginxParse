@@ -1,6 +1,8 @@
-package main
+package util
 
-import "github.com/BurntSushi/toml"
+import (
+	"github.com/BurntSushi/toml"
+)
 
 type Config struct {
 	ParseList []StructPraseInfo
@@ -18,7 +20,7 @@ type StructPraseInfo struct {
 var ConfigInfo Config
 
 func LoadConfig() error {
-	configFile := getConfigFile(NGINX_PARSE)
+	configFile := GetConfigFile(NGINX_PARSE)
 	if _, err := toml.DecodeFile(configFile, &ConfigInfo); err != nil {
 		return err
 	}

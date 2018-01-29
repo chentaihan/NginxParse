@@ -1,4 +1,4 @@
-package main
+package util
 
 import (
 	"io/ioutil"
@@ -7,7 +7,7 @@ import (
 )
 
 //获取指定目录下所有.c和.h后缀的文件
-func getFileList(dir string) []string {
+func GetFileList(dir string) []string {
 	var queue Queue
 	queue.Enqueue(dir)
 	list := make([]string, 0, 100)

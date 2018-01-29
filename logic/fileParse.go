@@ -1,10 +1,12 @@
-package main
+package logic
 
 import (
 	"bufio"
 	"io"
 	"os"
 	"strings"
+
+	"github.com/chentaihan/NginxParse/util"
 )
 
 type FileParse struct {
@@ -35,7 +37,7 @@ func (fileParse *FileParse) Parse(fullPath string) bool {
 	rd := bufio.NewReader(f)
 	isOK := false
 	inNote := false
-	var buffer *BufferWriter
+	var buffer *util.BufferWriter
 	var curStruct IParse = nil
 	depth := 0
 	for {
@@ -46,24 +48,24 @@ func (fileParse *FileParse) Parse(fullPath string) bool {
 
 		line = strings.TrimRight(line, "\n")
 		line = strings.Trim(line, " ")
-		if isEmptyLine(line) {
+		if util.IsEmptyLine(line) {
 			continue
 		}
 		//过滤注释
 		line = filterNote(line, &inNote)
 		//合并空格
-		line = mergeSpace(line)
+		line = util.MergeSpace(line)
 
 		if curStruct == nil {
 			if curStruct = fileParse.isStartStruct(line); curStruct != nil {
-				buffer = &BufferWriter{}
+				buffer = &util.BufferWriter{}
 				isOK = true
 			}
 		}
 
 		if curStruct != nil {
 			line = strings.Trim(line, " ")
-			if isEmptyLine(line) {
+			if util.IsEmptyLine(line) {
 				continue
 			}
 
@@ -74,7 +76,7 @@ func (fileParse *FileParse) Parse(fullPath string) bool {
 				curStruct = nil
 				//str := buffer.ToString()
 				//fmt.Println(str)
-				buffer = &BufferWriter{}
+				buffer = &util.BufferWriter{}
 			}
 		}
 	}

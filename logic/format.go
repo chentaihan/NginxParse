@@ -1,10 +1,12 @@
-package main
+package logic
 
 import (
 	"fmt"
 	"io/ioutil"
 	"os"
 	"strings"
+
+	"github.com/chentaihan/NginxParse/util"
 )
 
 const (
@@ -58,7 +60,7 @@ func formatHeader(variable *TableInfo) string {
 }
 
 func formatTH(title []string) string {
-	writer := NewBufferWriter(0)
+	writer := util.NewBufferWriter(0)
 	writer.Write([]byte("<tr>"))
 	for i, _ := range title {
 		td := fmt.Sprintf("<td >%s</td>", title[i])
@@ -69,7 +71,7 @@ func formatTH(title []string) string {
 }
 
 func formatTD(content [][]string) string {
-	writer := NewBufferWriter(0)
+	writer := util.NewBufferWriter(0)
 	for _, tr := range content {
 		writer.Write([]byte("<tr>"))
 		for _, td := range tr {
@@ -83,7 +85,7 @@ func formatTD(content [][]string) string {
 }
 
 func formatTable(variable *TableInfo) []byte {
-	writer := NewBufferWriter(0)
+	writer := util.NewBufferWriter(0)
 	writer.Write([]byte("<table>"))
 
 	writer.WriteString(formatHeader(variable))
@@ -97,11 +99,11 @@ func formatTable(variable *TableInfo) []byte {
 
 func OutPut(structInfo *Assignment) {
 	fileName := structInfo.StructInfo.StructName + ".html"
-	outputFile(FILE_CONFIG_FORMAT, fileName, formatVariableList, structInfo.Tables)
+	outputFile(util.FILE_CONFIG_FORMAT, fileName, formatVariableList, structInfo.Tables)
 }
 
 func outputFile(formatFile, outputFile string, formatFunc formatStruct, list []*TableInfo) {
-	configFormat := getConfigFile(formatFile)
+	configFormat := util.GetConfigFile(formatFile)
 	content, err := ioutil.ReadFile(configFormat)
 	if err != nil {
 		return
@@ -113,12 +115,12 @@ func outputFile(formatFile, outputFile string, formatFunc formatStruct, list []*
 		}
 	}
 
-	outputFile = getOutPutFile(outputFile)
+	outputFile = util.GetOutPutFile(outputFile)
 	ioutil.WriteFile(outputFile, content[:index], 0777)
 
 	buf := formatFunc(list)
-	WriteFileAppend(outputFile, buf, 0666)
+	util.WriteFileAppend(outputFile, buf, 0666)
 
 	index += 2
-	WriteFileAppend(outputFile, content[index:], 0666)
+	util.WriteFileAppend(outputFile, content[index:], 0666)
 }

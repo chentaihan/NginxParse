@@ -3,6 +3,9 @@ package main
 import (
 	"fmt"
 	"os"
+
+	"github.com/chentaihan/NginxParse/util"
+	"github.com/chentaihan/NginxParse/logic"
 )
 
 func isDir(filePath string) bool {
@@ -26,19 +29,19 @@ func main() {
 	//	return
 	//}
 
-	LoadConfig()
+	util.LoadConfig()
 	dir := "/Users/didi/OpenSource/nginx-1.12.2/src"
 
-	fileList := getFileList(dir)
+	fileList := util.GetFileList(dir)
 
 
-	defineList := make([]IParse, 0, len(ConfigInfo.ParseList))
-	assignmentList := make([]IParse, 0, len(ConfigInfo.ParseList))
-	macroList := make([]IParse, 1, 1)
-	macroList[0] = GetMacro()
-	for i, _ := range ConfigInfo.ParseList {
-		defineList = append(defineList, NewParseDefine())
-		assignmentList = append(assignmentList, NewAssignment(&ConfigInfo.ParseList[i]))
+	defineList := make([]logic.IParse, 0, len(util.ConfigInfo.ParseList))
+	assignmentList := make([]logic.IParse, 0, len(util.ConfigInfo.ParseList))
+	macroList := make([]logic.IParse, 1, 1)
+	macroList[0] = logic.GetMacro()
+	for i, _ := range util.ConfigInfo.ParseList {
+		defineList = append(defineList, logic.NewParseDefine())
+		assignmentList = append(assignmentList, logic.NewAssignment(&util.ConfigInfo.ParseList[i]))
 	}
 
 	//解析宏
@@ -56,7 +59,7 @@ func main() {
 	//parseAssignment(assignmentList, fileList)
 
 	fmt.Println("---------------------result output------------------")
-	sstMgr := *GetStructManager()
+	sstMgr := *logic.GetStructManager()
 	for _, sstInfo := range sstMgr{
 		//fmt.Println(sttName)
 		fmt.Println(sstInfo.StructString)
@@ -65,8 +68,8 @@ func main() {
 	fmt.Println("ok")
 }
 
-func parseMacro(structList []IParse, fileList []string) {
-	fileParse := FileParse{}
+func parseMacro(structList []logic.IParse, fileList []string) {
+	fileParse := logic.FileParse{}
 	for _, sut := range structList {
 		fileParse.Register(sut)
 	}
@@ -78,8 +81,8 @@ func parseMacro(structList []IParse, fileList []string) {
 
 }
 
-func parseAssignment(structList []IParse, fileList []string) {
-	fileParse := FileParse{}
+func parseAssignment(structList []logic.IParse, fileList []string) {
+	fileParse := logic.FileParse{}
 	for _, sut := range structList {
 		fileParse.Register(sut)
 	}
@@ -89,14 +92,14 @@ func parseAssignment(structList []IParse, fileList []string) {
 		}
 	}
 	for _, sut := range structList {
-		if mgr, ok := sut.(*Assignment); ok {
-			OutPut(mgr)
+		if mgr, ok := sut.(*logic.Assignment); ok {
+			logic.OutPut(mgr)
 		}
 	}
 }
 
-func parseDefine(structList []IParse, fileList []string) {
-	fileParse := FileParse{}
+func parseDefine(structList []logic.IParse, fileList []string) {
+	fileParse := logic.FileParse{}
 	for i, _ := range structList {
 		fileParse.Register(structList[i])
 	}

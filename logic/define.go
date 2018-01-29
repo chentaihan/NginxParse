@@ -1,8 +1,10 @@
-package main
+package logic
 
 import (
 	"fmt"
 	"strings"
+
+	"github.com/chentaihan/NginxParse/util"
 )
 
 type Define struct {
@@ -40,9 +42,9 @@ func (def *Define) IsEndStruct(line string) bool {
 }
 
 //解析出结构体内容
-func (def *Define) ParseStruct(filePath string, writer *BufferWriter) bool {
+func (def *Define) ParseStruct(filePath string, writer *util.BufferWriter) bool {
 	def.Struct.FileName = filePath
-	def.Struct.ModuleName = parseModuleName(filePath)
+	def.Struct.ModuleName = util.ParseModuleName(filePath)
 	if def.Struct.StructName == "ngx_http_upstream_server_t" {
 		i := 0
 		i++
@@ -76,18 +78,18 @@ func (def *Define) getFieldName(line string) string {
 	//字段结构，如：int *val
 	if index := strings.LastIndex(line, " "); index >= 0 {
 		line = line[index:]
-		return getLegalString(line)
+		return util.GetLegalString(line)
 	}
 	return ""
 }
 
 //将buffer中的struct赋值格式化成容易解析的样子
-func (def *Define) FormatStruct(writer *BufferWriter) *BufferWriter {
+func (def *Define) FormatStruct(writer *util.BufferWriter) *util.BufferWriter {
 	inBuf := writer.GetBuffer()
 	fmt.Println(writer.ToString())
-	outBuf := NewBufferWriter(writer.Size)
+	outBuf := util.NewBufferWriter(writer.Size)
 	inMacro := false
-	macroBuf := NewBufferWriter(64)
+	macroBuf := util.NewBufferWriter(64)
 	for index := 0; index < len(inBuf); index++ {
 		val := inBuf[index]
 		//将宏处理成一行，去掉宏中的分号
@@ -129,17 +131,17 @@ func (def *Define) FormatStruct(writer *BufferWriter) *BufferWriter {
 	return def.formatMacro(outBuf)
 }
 
-func (def *Define) macroReplace(writer *BufferWriter) *BufferWriter{
+func (def *Define) macroReplace(writer *util.BufferWriter) *util.BufferWriter{
 	return writer
 }
 
 
 //格式化struct中的union
-func (def *Define) formatUnion(writer *BufferWriter) *BufferWriter {
+func (def *Define) formatUnion(writer *util.BufferWriter) *util.BufferWriter {
 	unionLineIndex := -1
 	writer.Reset()
 	def.unionParse.Reset()
-	outBuf := NewBufferWriter(writer.Size)
+	outBuf := util.NewBufferWriter(writer.Size)
 	for writer.MoveNext() {
 		line := writer.Current()
 		if unionLineIndex == -1 {
@@ -172,10 +174,10 @@ func (def *Define) formatUnion(writer *BufferWriter) *BufferWriter {
 }
 
 //struct中的宏处理
-func (def *Define) formatMacro(writer *BufferWriter) *BufferWriter {
+func (def *Define) formatMacro(writer *util.BufferWriter) *util.BufferWriter {
 	writer.Reset()
 	def.unionParse.Reset()
-	outBuf := NewBufferWriter(writer.Size)
+	outBuf := util.NewBufferWriter(writer.Size)
 	for writer.MoveNext() {
 		exist := true
 		line := writer.Current()
@@ -205,7 +207,7 @@ func (def *Define) getMacroName(line string) string {
 		return ""
 	}
 	line = line[3:]
-	return getLegalString(line)
+	return util.GetLegalString(line)
 }
 
 //获取宏包含的字段定义信息

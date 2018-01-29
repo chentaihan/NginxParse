@@ -1,4 +1,4 @@
-package main
+package util
 
 const (
 	NGX_STRING          = "ngx_string"

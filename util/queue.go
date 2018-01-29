@@ -1,4 +1,4 @@
-package main
+package util
 
 type Queue struct {
 	list   []interface{}
