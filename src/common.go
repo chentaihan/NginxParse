@@ -20,6 +20,34 @@ func isLegalChar(c rune) bool {
 	return false
 }
 
+//是否是合法变量名
+func isLegalString(line string) bool {
+	if line == "" {
+		return false
+	}
+	for _, c := range line {
+		if !isLegalChar(c) {
+			return false
+		}
+	}
+	return true
+}
+
+//是否是合法宏名称(0-9_A-Z)
+func isLegalMacro(line string) bool {
+	if line == "" {
+		return false
+	}
+	for _, c := range line {
+		isLegal := (c >= '0' && c <= '9') || c == '_' || (c >= 'A' && c <= 'Z')
+		if !isLegal {
+			return false
+		}
+	}
+	return true
+}
+
+//从字符串中取出第一个合法变量名
 func getLegalString(line string) string {
 	isStart := false
 	newLine := make([]rune, 0, len(line))
@@ -38,6 +66,7 @@ func getLegalString(line string) string {
 	return string(newLine)
 }
 
+//从字符串中取出所有合法变量名
 func getLegalStrings(line string) []string {
 	isStart := false
 	ret := make([]string, 0)
@@ -85,4 +114,33 @@ func parseStructName(line string, structType string) string {
 	index := strings.Index(line, structType) + len(structType)
 	line = line[index:]
 	return getLegalString(line)
+}
+
+//合并重复空格
+func mergeSpace(line string) string {
+	if line == "" {
+		return line
+	}
+	inBuf := []byte(line)
+	outBuf := NewBufferWriter(len(inBuf))
+	for index, val := range inBuf {
+		if val == ' ' && index < len(inBuf)-1 && inBuf[index+1] == ' ' {
+			continue
+		}
+		outBuf.WriteChar(val)
+	}
+	return outBuf.ToString()
+}
+
+//判断字符串是否是空行
+func isEmptyLine(line string) bool {
+	if line == "" {
+		return true
+	}
+	for i := len(line) - 1; i >= 0; i++ {
+		if line[i] != ' ' {
+			return false
+		}
+	}
+	return true
 }

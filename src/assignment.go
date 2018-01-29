@@ -1,6 +1,13 @@
 package main
 
-import "strings"
+/*
+结构体实例化
+ */
+
+import (
+	"strings"
+	"fmt"
+)
 
 type Assignment struct {
 	Tables     []*TableInfo
@@ -21,7 +28,7 @@ func NewAssignment(sutInfo *StructPraseInfo) *Assignment {
 }
 
 //判断是不是有效结构体
-func (varMgr *Assignment) Check(line string) bool {
+func (varMgr *Assignment) IsStartStruct(line string) bool {
 	return varMgr.checker.Check(line)
 }
 
@@ -36,9 +43,14 @@ func (mgr *Assignment) parseTableInfo(filePath string, writer *BufferWriter) *Ta
 	table.StructString = writer.ToString()
 
 	titleLen := len(mgr.StructInfo.Fields)
-	title := make([]string, titleLen, titleLen)
-	for i, index := range mgr.StructInfo.Fields {
-		title[i] = mgr.StructInfo.FieldNames[index]
+	title := make([]string, 0, titleLen)
+	for _, index := range mgr.StructInfo.Fields {
+		if index >= len(mgr.StructInfo.FieldNames) {
+			fmt.Println(index, len(mgr.StructInfo.FieldNames))
+		}else{
+			title = append(title, mgr.StructInfo.FieldNames[index])
+		}
+
 	}
 	table.Title = title
 	table.Content = make([][]string, 0, 4)
@@ -47,7 +59,8 @@ func (mgr *Assignment) parseTableInfo(filePath string, writer *BufferWriter) *Ta
 
 //解析出结构体内容
 func (mgr *Assignment) ParseStruct(filePath string, writer *BufferWriter) bool {
-	writer.Reset()
+	writer = mgr.FormatStruct(writer)
+	fmt.Println(writer.ToString())
 	table := mgr.parseTableInfo(filePath, writer)
 	fieldCount := len(mgr.StructInfo.FieldNames) + 2
 	lines := make([]string, fieldCount, fieldCount)

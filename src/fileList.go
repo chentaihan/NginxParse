@@ -6,12 +6,11 @@ import (
 	"strings"
 )
 
-//获取指定目录下所有.C后缀的文件
-func getFileList(dir string) ([]string, []string) {
-	queue := NewQueue()
+//获取指定目录下所有.c和.h后缀的文件
+func getFileList(dir string) []string {
+	var queue Queue
 	queue.Enqueue(dir)
-	cList := make([]string, 0, 100)
-	hList := make([]string, 0, 100)
+	list := make([]string, 0, 100)
 
 	for queue.Size() > 0 {
 		dir = queue.Dequeue().(string)
@@ -27,16 +26,13 @@ func getFileList(dir string) ([]string, []string) {
 					queue.Enqueue(dir + item.Name())
 				}
 			} else {
-				ext := path.Ext(name)
-				ext = strings.ToLower(ext)
-				if ext == ".c" {
-					cList = append(cList, dir+name)
-				} else if ext == ".h" {
-					hList = append(hList, dir+name)
+				ext := strings.ToLower(path.Ext(name))
+				if ext == ".c" || ext == ".h"{
+					list = append(list, dir+name)
 				}
 			}
 		}
 	}
 
-	return cList, hList
+	return list
 }

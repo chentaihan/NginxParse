@@ -3,7 +3,7 @@ package main
 import "unsafe"
 
 const (
-	BUFFER_SIZE = 1024 * 4
+	BUFFER_SIZE = 1024
 	CUT_CHAR    = '\n'
 )
 
@@ -99,4 +99,23 @@ func (writer *BufferWriter) Current() string {
 func (writer *BufferWriter) Reset() {
 	writer.line.Start = 0
 	writer.line.End = 0
+}
+
+//删除分割字符
+func (writer *BufferWriter) RemoveCutChar() {
+	decrCount := 0
+	for i := writer.Size - 1; i >= 0; i-- {
+		if writer.buffer[i] == CUT_CHAR {
+			decrCount++
+			for j := i + 1; j < writer.Size; j++ {
+				writer.buffer[j-1] = writer.buffer[j]
+			}
+		}
+	}
+	writer.Size -= decrCount
+}
+
+//缓存容量
+func (writer *BufferWriter) Cap() int{
+	return cap(writer.buffer)
 }

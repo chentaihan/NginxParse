@@ -1,6 +1,8 @@
 package main
 
-import "strings"
+import (
+	"strings"
+)
 
 type MacroInfo struct {
 	Name  string
@@ -8,29 +10,33 @@ type MacroInfo struct {
 }
 
 type Macro struct {
-	MacroList map[string]MacroInfo
+	MacroList map[string]*MacroInfo
 }
 
 var macro *Macro = nil
 
-func NewParseMacro() *Macro {
-	macro = &Macro{
-		MacroList: make(map[string]MacroInfo, 1024),
+func GetMacro() *Macro {
+	if macro == nil {
+		macro = &Macro{
+			MacroList: make(map[string]*MacroInfo, 1024),
+		}
 	}
 	return macro
 }
 
-func GetMacro() *Macro {
-	return macro
+//判断是不是有效宏
+func (macro *Macro) IsStartStruct(line string) bool {
+	return strings.HasPrefix(line, NGX_DEFINE)
 }
 
-//判断是不是有效宏
-func (macro *Macro) Check(line string) bool {
-	return strings.HasPrefix(line, NGX_DEFINE)
+func (macro *Macro) AddMacroInfo(key string, mf *MacroInfo){
+	macro.MacroList[key] = mf
 }
 
 //解析宏
 func (macro *Macro) ParseStruct(filePath string, writer *BufferWriter) bool {
+	writer = macro.FormatStruct(writer)
+	//fmt.Println(writer.ToString())
 	line := writer.ToString()
 	index := strings.Index(line, NGX_DEFINE)
 	if index >= 0 {
@@ -54,7 +60,7 @@ func (macro *Macro) ParseStruct(filePath string, writer *BufferWriter) bool {
 			value = strings.Trim(value, " ")
 		}
 
-		macro.MacroList[key] = MacroInfo{name, value}
+		macro.AddMacroInfo(key, &MacroInfo{name, value})
 	}
 	return true
 }
@@ -63,11 +69,7 @@ func (macro *Macro) ParseStruct(filePath string, writer *BufferWriter) bool {
 func (macro *Macro) FormatStruct(bufWriter *BufferWriter) *BufferWriter {
 	inBuf := bufWriter.GetBuffer()
 	outBuf := NewBufferWriter(bufWriter.Size)
-	for index, val := range inBuf {
-		//重复的空格合并
-		if val == ' ' && index < len(inBuf)-1 && inBuf[index+1] == ' ' {
-			continue
-		}
+	for _, val := range inBuf {
 		if val != '\\' {
 			outBuf.WriteChar(val)
 		}
@@ -75,7 +77,7 @@ func (macro *Macro) FormatStruct(bufWriter *BufferWriter) *BufferWriter {
 	return outBuf
 }
 
-//struct 定义以}结尾
+//宏不是已\\结尾
 func (macro *Macro) IsEndStruct(line string) bool {
 	if strings.HasSuffix(line, "\\") {
 		return false

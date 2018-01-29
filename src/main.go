@@ -29,23 +29,38 @@ func main() {
 	LoadConfig()
 	dir := "/Users/didi/OpenSource/nginx-1.12.2/src"
 
-	cFileList, hFileList := getFileList(dir)
+	fileList := getFileList(dir)
+
 
 	defineList := make([]IParse, 0, len(ConfigInfo.ParseList))
 	assignmentList := make([]IParse, 0, len(ConfigInfo.ParseList))
 	macroList := make([]IParse, 1, 1)
-	macroList[0] = NewParseMacro()
+	macroList[0] = GetMacro()
 	for i, _ := range ConfigInfo.ParseList {
-		defineList = append(defineList, NewParseDefine(&ConfigInfo.ParseList[i]))
+		defineList = append(defineList, NewParseDefine())
 		assignmentList = append(assignmentList, NewAssignment(&ConfigInfo.ParseList[i]))
 	}
 
 	//解析宏
-	parseMacro(macroList, hFileList)
+	parseMacro(macroList, fileList)
+
+	//fileList = []string{
+	//	//"/Users/didi/OpenSource/nginx-1.12.2/src/core/ngx_buf.h",
+	//	//"/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_geo_module.c",
+	//	"/Users/didi/OpenSource/nginx-1.12.2/src/http/ngx_http_upstream.h",
+	//}
+
 	//解析结构体定义
-	parseDefine(defineList, hFileList)
+	parseDefine(defineList, fileList)
 	//解析结构体变量
-	parseAssignment(assignmentList, cFileList)
+	//parseAssignment(assignmentList, fileList)
+
+	fmt.Println("---------------------result output------------------")
+	sstMgr := *GetStructManager()
+	for _, sstInfo := range sstMgr{
+		//fmt.Println(sttName)
+		fmt.Println(sstInfo.StructString)
+	}
 
 	fmt.Println("ok")
 }
@@ -60,31 +75,6 @@ func parseMacro(structList []IParse, fileList []string) {
 			//break
 		}
 	}
-	//fmt.Println("------------------------------------------")
-	//fmt.Println("------------------------------------------")
-	//for _, sut := range structList {
-	//	if mgr, ok := sut.(*Macro); ok {
-	//		list := mgr.MacroList
-	//		for key, val := range list {
-	//			if val.Name != "" {
-	//				fmt.Printf("%s%s=%s", key, val.Name, val.Value)
-	//				fmt.Println()
-	//			} else {
-	//				fmt.Printf("-------------------------%s%s=%s", key, val.Name, val.Value)
-	//				fmt.Println()
-	//			}
-	//		}
-	//	}
-	//}
-	//
-	//macro := GetMacro()
-	//fmt.Println(macro.Exist("NGX_MODULE_SIGNATURE_5"))
-	//fmt.Println(macro.Exist("NGX_MODULE_SIGNATURE_511"))
-	//fmt.Println(macro.GetMacroValue("NGX_MODULE_SIGNATURE_12"))
-	//fmt.Println(macro.GetMacroValue("NGX_MODULE_SIGNATURE_1211"))
-	//fmt.Println(macro.GetMacroValue("ngx_conf_merge_uint_value(conf__, prev__, default__)"))
-	//fmt.Println(macro.GetMacroValue("ngx_conf_merge_uint_value(conf__, prev__)"))
-	//fmt.Println(macro.GetMacroValue("ngx_conf_merge_uint_value()"))
 
 }
 
