@@ -17,6 +17,15 @@ func Test_macro(t *testing.T) {
 		Name:  "NGX_MODULE_SIGNATURE_12",
 		Value: "NGX_MODULE_SIGNATURE_12",
 	})
+	macro.AddMacroInfo("NGX_MODULE", &MacroInfo{
+		Name:  "NGX_MODULE",
+		Value: "",
+	})
+
+	macro.AddMacroInfo("ngx_conf_merge_uint_value", &MacroInfo{
+		Name:  "(conf, prev, default)",
+		Value: "if(conf == NGX_CONF_UNSET_UINT){conf = (prev == NGX_CONF_UNSET_UINT) ? default : prev;}",
+	})
 
 	list := macro.MacroList
 	for key, val := range list {
@@ -32,6 +41,7 @@ func Test_macro(t *testing.T) {
 	t.Log(macro.Exist("NGX_MODULE_SIGNATURE_5"))
 	t.Log(macro.Exist("NGX_MODULE_SIGNATURE_511"))
 	t.Log(macro.GetMacroValue("NGX_MODULE_SIGNATURE_12"))
+	t.Log(macro.GetMacroValue("NGX_MODULE"))
 	t.Log(macro.GetMacroValue("NGX_MODULE_SIGNATURE_1211"))
 	t.Log(macro.GetMacroValue("ngx_conf_merge_uint_value(conf__, prev__, default__)"))
 	t.Log(macro.GetMacroValue("ngx_conf_merge_uint_value(conf__, prev__)"))

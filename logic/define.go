@@ -3,8 +3,14 @@ package logic
 import (
 	"fmt"
 	"strings"
+	"unsafe"
+	"bytes"
 
 	"github.com/chentaihan/NginxParse/util"
+)
+
+const (
+	NEWLINE_REPLACE_KEY = '$'
 )
 
 type Define struct {
@@ -45,12 +51,13 @@ func (def *Define) IsEndStruct(line string) bool {
 func (def *Define) ParseStruct(filePath string, writer *util.BufferWriter) bool {
 	def.Struct.FileName = filePath
 	def.Struct.ModuleName = util.ParseModuleName(filePath)
-	if def.Struct.StructName == "ngx_http_upstream_server_t" {
+	if def.Struct.StructName == "ngx_http_geo_ctx_t" || def.Struct.StructName == "ngx_http_geo_ctx_s"{
 		i := 0
 		i++
 	}
-	writer = def.FormatStruct(writer)
 	structStr := writer.ToString()
+	writer = def.FormatStruct(writer)
+	structStr = writer.ToString()
 	def.Struct.StructString = structStr
 
 	lines := make([]string, 0, 4)
@@ -86,62 +93,75 @@ func (def *Define) getFieldName(line string) string {
 //将buffer中的struct赋值格式化成容易解析的样子
 func (def *Define) FormatStruct(writer *util.BufferWriter) *util.BufferWriter {
 	inBuf := writer.GetBuffer()
-	fmt.Println(writer.ToString())
-	outBuf := util.NewBufferWriter(writer.Size)
-	inMacro := false
+	outBuf := util.NewBufferWriter(writer.Size())
+	macroDepth := 0
 	macroBuf := util.NewBufferWriter(64)
 	for index := 0; index < len(inBuf); index++ {
 		val := inBuf[index]
 		//将宏处理成一行，去掉宏中的分号
-		if !inMacro {
-			if val == '#' {
-				ifStr := string(inBuf[index+1 : index+3])
-				if ifStr == "if" {
-					inMacro = true
-				}
+		if val == '#' {
+			ifStr := string(inBuf[index+1: index+3])
+			if ifStr == "if" {
+				macroDepth++
 			}
 		}
-		if inMacro {
-			if val != ';' {
-				macroBuf.WriteChar(val)
-			}
 
+		if macroDepth > 0 {
+			//\n用$替换
+			if val != '\n' {
+				macroBuf.WriteChar(val)
+			} else {
+				macroBuf.WriteChar(NEWLINE_REPLACE_KEY)
+			}
 			if val == '#' {
-				endif := string(inBuf[index+1 : index+6])
+				endif := string(inBuf[index+1: index+6])
 				if endif == "endif" {
-					inMacro = false
-					outBuf.Write(macroBuf.GetBuffer())
-					outBuf.WriteString(endif)
-					outBuf.WriteChar('\n')
-					index += 5
+					macroDepth--
+					if macroDepth == 0 {
+						outBuf.Write(macroBuf.GetBuffer())
+						macroBuf.Clear()
+						outBuf.WriteString(endif)
+						index += 5
+					}
 				}
 			}
 			continue
 		}
-
-		if val != ';' {
-			outBuf.WriteChar(val)
-		}
-		if val == ';' || val == '{' {
-			outBuf.WriteChar('\n')
-		}
-
+		outBuf.WriteChar(val)
 	}
+
+	outBuf = def.formatMacro(outBuf)
+
 	outBuf = def.formatUnion(outBuf)
-	return def.formatMacro(outBuf)
+	outBuf = util.MergeSequenceChar(outBuf.ToString(), '\n')
+	structStr := outBuf.ToString()
+	fmt.Println(structStr)
+	return outBuf
 }
 
-func (def *Define) macroReplace(writer *util.BufferWriter) *util.BufferWriter{
-	return writer
+//struct中的宏处理
+func (def *Define) formatMacro(writer *util.BufferWriter) *util.BufferWriter {
+	writer.Reset()
+	def.unionParse.Reset()
+	outBuf := util.NewBufferWriter(writer.Size())
+	for writer.MoveNext() {
+		line := writer.Current()
+		if strings.Index(line, "#if") == 0 {
+			line = GetMacroJudge().Parse(line[0: len(line)-1])
+		} else {
+			line = def.replaceMacro(line)
+		}
+		outBuf.WriteString(line)
+	}
+	return outBuf
 }
-
 
 //格式化struct中的union
 func (def *Define) formatUnion(writer *util.BufferWriter) *util.BufferWriter {
 	unionLineIndex := -1
 	writer.Reset()
 	def.unionParse.Reset()
-	outBuf := util.NewBufferWriter(writer.Size)
+	outBuf := util.NewBufferWriter(writer.Size())
 	for writer.MoveNext() {
 		line := writer.Current()
 		if unionLineIndex == -1 {
@@ -152,11 +172,8 @@ func (def *Define) formatUnion(writer *util.BufferWriter) *util.BufferWriter {
 		if unionLineIndex > -1 {
 			unionLineIndex++
 			isTail := def.unionParse.IsTail(line)
+			line = strings.Replace(line, "\n", "", -1)
 			def.unionParse.AddLine(line)
-			//union每个字段后面加;
-			if unionLineIndex > 1 && !isTail {
-				def.unionParse.AddLine(";")
-			}
 			if isTail {
 				unionLineIndex = -1
 				//完整的union结构
@@ -173,31 +190,41 @@ func (def *Define) formatUnion(writer *util.BufferWriter) *util.BufferWriter {
 	return outBuf
 }
 
-//struct中的宏处理
-func (def *Define) formatMacro(writer *util.BufferWriter) *util.BufferWriter {
-	writer.Reset()
-	def.unionParse.Reset()
-	outBuf := util.NewBufferWriter(writer.Size)
-	for writer.MoveNext() {
-		exist := true
-		line := writer.Current()
-		if strings.Index(line, "#if") == 0 {
-			macroName := def.getMacroName(line)
-			//宏不存在就去掉这个字段
-			if macroName != "" {
-				if !GetMacro().Exist(macroName) {
-					exist = false
-				}else{
-					outBuf.WriteString(def.getMacroField(line))
-				}
+func (def *Define) replaceMacro(line string) string {
+	byteSlice := bytes.SplitN([]byte(line), []byte{')'}, -1)
+	hasReplace := false
+	for i, slice := range byteSlice {
+		str := *(*string)(unsafe.Pointer(&slice))
+		index := strings.Index(str, "(")
+		var tmpStr string
+		if index > 0 {
+			str += ")"
+			tmpStr = str[0:index]
+		} else {
+			tmpStr = str
+		}
+		isEndwithN := false
+		if str[len(str)-1] == '\n' {
+			isEndwithN = true
+			tmpStr = tmpStr[0: len(tmpStr)-1]
+			str = str[0: len(str)-1]
+		}
+		if util.IsLegalMacro(tmpStr) {
+			hasReplace = true
+			macroValue := GetMacro().GetMacroValue(str)
+			if strings.HasSuffix(macroValue, ";") {
+				macroValue = macroValue[0: len(macroValue)-1]
 			}
+			if isEndwithN {
+				macroValue += "\n"
+			}
+			byteSlice[i] = []byte(macroValue)
 		}
-		if exist {
-			outBuf.WriteString(line)
-		}
-
 	}
-	return outBuf
+	if hasReplace {
+		return util.BytesToString(byteSlice)
+	}
+	return line
 }
 
 //获取宏名称
@@ -219,8 +246,8 @@ func (def *Define) getMacroField(line string) string {
 	line = line[3:]
 	index := strings.Index(line, ")")
 	end := strings.Index(line, "#")
-	if index > 0 && end > 0 && end > index{
-		line = line[index+1:end]
+	if index > 0 && end > 0 && end > index {
+		line = line[index+1: end]
 		return strings.Trim(line, " ")
 	}
 	return ""

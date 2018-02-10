@@ -42,7 +42,7 @@ func (fileParse *FileParse) Parse(fullPath string) bool {
 	depth := 0
 	for {
 		line, err := rd.ReadString('\n') //以'\n'为结束符读入一行
-		if err != nil || io.EOF == err {
+		if line == "" && (err != nil || io.EOF == err) {
 			break
 		}
 
@@ -54,7 +54,7 @@ func (fileParse *FileParse) Parse(fullPath string) bool {
 		//过滤注释
 		line = filterNote(line, &inNote)
 		//合并空格
-		line = util.MergeSpace(line)
+		line = util.MergeSequenceChar(line,' ').ToString()
 
 		if curStruct == nil {
 			if curStruct = fileParse.isStartStruct(line); curStruct != nil {
@@ -70,13 +70,12 @@ func (fileParse *FileParse) Parse(fullPath string) bool {
 			}
 
 			buffer.WriteString(line)
+			buffer.WriteChar('\n')
 			depth += getDepth(line)
 			if depth == 0 && curStruct.IsEndStruct(line) {
 				curStruct.ParseStruct(fullPath, buffer)
 				curStruct = nil
-				//str := buffer.ToString()
-				//fmt.Println(str)
-				buffer = &util.BufferWriter{}
+				buffer = util.NewBufferWriter(0)
 			}
 		}
 	}
@@ -131,8 +130,8 @@ func getDepth(line string) int {
 	count := 0
 
 	keys := map[int]string{
-		1:  "{",	//存在一个{，加1
-		-1: "}",	//存在一个}，减1
+		1:  "{", //存在一个{，加1
+		-1: "}", //存在一个}，减1
 	}
 	for cnt, key := range keys {
 		tmpLine := line
@@ -140,7 +139,7 @@ func getDepth(line string) int {
 			index := strings.Index(tmpLine, key)
 			if index >= 0 {
 				count += cnt
-				if index == len(tmpLine) -1 {
+				if index == len(tmpLine)-1 {
 					break
 				}
 				tmpLine = tmpLine[index+1:]

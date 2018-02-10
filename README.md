@@ -1,5 +1,5 @@
 #
-NginxConf
+NginxParse
 
 解析nginx配置、模块、变量、宏等信息
 

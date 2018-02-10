@@ -1,6 +1,5 @@
 package logic
 
-
 /**
 结构体的定义
  */
@@ -23,7 +22,6 @@ type TableInfo struct {
 var structManger *StructManager
 
 type StructManager map[string]*StructInfo
-
 
 func GetStructManager() *StructManager {
 	if structManger == nil {
@@ -62,7 +60,7 @@ func (sttMgr *StructManager) StructNameList() []string {
 
 func (sttMgr *StructManager) Structlist() []*StructInfo {
 	structList := make([]*StructInfo, 0, sttMgr.Size())
-	for _, structInfo := range *sttMgr{
+	for _, structInfo := range *sttMgr {
 		structList = append(structList, structInfo)
 	}
 	return structList

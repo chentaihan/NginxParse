@@ -13,31 +13,30 @@ type LineInfo struct {
 }
 
 type BufferWriter struct {
-	buffer []byte
-	Size   int
-	line   LineInfo
+	buffer  []byte
+	line    LineInfo
+	cutChar byte //分割字符
 }
 
-func NewBufferWriter(bufSize int) *BufferWriter {
+func newBufferWriter(cap int) *BufferWriter {
 	writer := &BufferWriter{}
-	if bufSize <= 0 {
-		bufSize = BUFFER_SIZE
+	if cap <= 0 {
+		cap = BUFFER_SIZE
 	}
-	writer.buffer = make([]byte, 0, bufSize)
+	writer.buffer = make([]byte, 0, cap)
+	writer.cutChar = CUT_CHAR
 	return writer
 }
 
 func (writer *BufferWriter) Write(p []byte) (n int, err error) {
 	writer.buffer = append(writer.buffer, p...)
 	n = len(p)
-	writer.Size += n
 	err = nil
 	return n, err
 }
 
 func (writer *BufferWriter) WriteChar(p byte) (n int, err error) {
 	writer.buffer = append(writer.buffer, p)
-	writer.Size += 1
 	err = nil
 	return 1, err
 }
@@ -46,54 +45,53 @@ func (writer *BufferWriter) WriteString(str string) (n int, err error) {
 	p := []byte(str)
 	writer.buffer = append(writer.buffer, p...)
 	n = len(p)
-	writer.Size += n
 	err = nil
 	return n, err
 }
 
 func (writer *BufferWriter) Clear() {
 	writer.buffer = writer.buffer[0:0]
-	writer.Size = 0
 	writer.Reset()
 }
 
 func (writer *BufferWriter) GetBuffer() []byte {
-	return writer.buffer[0:writer.Size]
+	return writer.buffer
 }
 
 func (writer *BufferWriter) ToString() string {
 	buf := writer.GetBuffer()
-	p := (*string)(unsafe.Pointer(&buf))
-	return *p
+	return *(*string)(unsafe.Pointer(&buf))
 }
 
 func (writer *BufferWriter) MoveNext() bool {
-	if writer.line.End >= writer.Size {
+	size := len(writer.buffer)
+	if writer.line.End >= size {
 		return false
 	}
 	writer.line.Start = writer.line.End
 	i := writer.line.Start
-	for ; i < writer.Size; i++ {
-		if writer.buffer[i] == CUT_CHAR {
+	for ; i < size; i++ {
+		if writer.buffer[i] == writer.cutChar {
 			writer.line.End = i + 1
 			break
 		}
 	}
-	if i >= writer.Size {
+	if i >= size {
 		writer.line.End = i
 	}
 	return true
 }
 
 func (writer *BufferWriter) IsEnd() bool {
-	if writer.line.End >= writer.Size {
+	if writer.line.End >= len(writer.buffer) {
 		return true
 	}
 	return false
 }
 
 func (writer *BufferWriter) Current() string {
-	return string(writer.buffer[writer.line.Start:writer.line.End])
+	current := writer.buffer[writer.line.Start:writer.line.End]
+	return *(*string)(unsafe.Pointer(&current))
 }
 
 func (writer *BufferWriter) Reset() {
@@ -104,18 +102,36 @@ func (writer *BufferWriter) Reset() {
 //删除分割字符
 func (writer *BufferWriter) RemoveCutChar() {
 	decrCount := 0
-	for i := writer.Size - 1; i >= 0; i-- {
-		if writer.buffer[i] == CUT_CHAR {
+	size := len(writer.buffer)
+	for i := size - 1; i >= 0; i-- {
+		if writer.buffer[i] == writer.cutChar {
 			decrCount++
-			for j := i + 1; j < writer.Size; j++ {
+			for j := i + 1; j < size; j++ {
 				writer.buffer[j-1] = writer.buffer[j]
 			}
 		}
 	}
-	writer.Size -= decrCount
+	writer.buffer = writer.buffer[0 : size-decrCount]
 }
 
 //缓存容量
-func (writer *BufferWriter) Cap() int{
+func (writer *BufferWriter) Cap() int {
 	return cap(writer.buffer)
+}
+
+//缓存大小
+func (writer *BufferWriter) Size() int {
+	return len(writer.buffer)
+}
+
+func (writer *BufferWriter) SetCutChar(cutChar byte) {
+	writer.cutChar = cutChar
+}
+
+func (writer *BufferWriter) ReplaceByte(old, new byte) {
+	for i := len(writer.buffer) - 1; i >= 0; i-- {
+		if writer.buffer[i] == old {
+			writer.buffer[i] = new
+		}
+	}
 }

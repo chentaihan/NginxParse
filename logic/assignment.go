@@ -101,7 +101,7 @@ func (mgr *Assignment) parseContent(lines []string) []string {
 //将buffer中的struct赋值格式化成容易解析的样子
 func (mgr *Assignment) formatStruct(bufWriter *util.BufferWriter) *util.BufferWriter {
 	inBuf := bufWriter.GetBuffer()
-	outBuf := util.NewBufferWriter(bufWriter.Size + 64)
+	outBuf := util.NewBufferWriter(bufWriter.Size() + 64)
 	bracketCount := 0
 	inBracketCount := 1      //大括号深度
 	inLittleBracket := false //在小括号内部
@@ -178,7 +178,7 @@ func (mgr *Assignment) FormatStruct(bufWriter *util.BufferWriter) *util.BufferWr
 
 func (mgr *Assignment) replaceMacro(bufWriter *util.BufferWriter) *util.BufferWriter {
 	bufWriter.Reset()
-	outBuf := util.NewBufferWriter(bufWriter.Size + 64)
+	outBuf := util.NewBufferWriter(bufWriter.Size() + 64)
 	macro := GetMacro()
 	for bufWriter.MoveNext() {
 		line := bufWriter.Current()

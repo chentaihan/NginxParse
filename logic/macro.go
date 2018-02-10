@@ -1,8 +1,8 @@
 package logic
 
 import (
-	"strings"
 	"github.com/chentaihan/NginxParse/util"
+	"strings"
 )
 
 type MacroInfo struct {
@@ -30,14 +30,13 @@ func (macro *Macro) IsStartStruct(line string) bool {
 	return strings.HasPrefix(line, util.NGX_DEFINE)
 }
 
-func (macro *Macro) AddMacroInfo(key string, mf *MacroInfo){
+func (macro *Macro) AddMacroInfo(key string, mf *MacroInfo) {
 	macro.MacroList[key] = mf
 }
 
 //解析宏
 func (macro *Macro) ParseStruct(filePath string, writer *util.BufferWriter) bool {
 	writer = macro.FormatStruct(writer)
-	//fmt.Println(writer.ToString())
 	line := writer.ToString()
 	index := strings.Index(line, util.NGX_DEFINE)
 	if index >= 0 {
@@ -60,7 +59,7 @@ func (macro *Macro) ParseStruct(filePath string, writer *util.BufferWriter) bool
 			value = line
 			value = strings.Trim(value, " ")
 		}
-
+		value = strings.Trim(value, "\n")
 		macro.AddMacroInfo(key, &MacroInfo{name, value})
 	}
 	return true
@@ -69,7 +68,7 @@ func (macro *Macro) ParseStruct(filePath string, writer *util.BufferWriter) bool
 //格式化宏
 func (macro *Macro) FormatStruct(bufWriter *util.BufferWriter) *util.BufferWriter {
 	inBuf := bufWriter.GetBuffer()
-	outBuf := util.NewBufferWriter(bufWriter.Size)
+	outBuf := util.NewBufferWriter(bufWriter.Size())
 	for _, val := range inBuf {
 		if val != '\\' {
 			outBuf.WriteChar(val)
@@ -110,8 +109,8 @@ func (macro *Macro) GetMacroValue(macroName string) string {
 
 	if index > 0 {
 		actualName := macroName[index:]
-		formalParams := util.GetLegalStrings(macroInfo.Name)
-		actualParams := util.GetLegalStrings(actualName)
+		formalParams := util.GetLegalStrings(macroInfo.Name) //形参
+		actualParams := util.GetLegalStrings(actualName)     //实参
 		return macro.replaceParams(value, formalParams, actualParams)
 	}
 
@@ -129,3 +128,4 @@ func (macro *Macro) replaceParams(value string, formalParams, actualParams []str
 	}
 	return value
 }
+

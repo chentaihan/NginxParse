@@ -12,17 +12,22 @@ type BufferWriterPool struct {
 	pool []*BufferWriter
 }
 
+func NewBufferWriter(cap int) *BufferWriter {
+	return GetBufferPool().NewBuffer(cap)
+}
+
 func GetBufferPool() *BufferWriterPool {
 	if bufferWriterPool == nil {
 		bufferWriterPool = &BufferWriterPool{}
 		for i := 0; i < 4; i++{
-			bufferWriterPool.Add(NewBufferWriter(0))
+			bufferWriterPool.Add(newBufferWriter(0))
 		}
 	}
 	return bufferWriterPool
 }
 
 func (pool *BufferWriterPool) Add(writer *BufferWriter) int {
+	writer.Clear()
 	index := pool.find(writer.Cap())
 	if index < pool.Len()-1 {
 		after := pool.pool[index:]
@@ -61,7 +66,7 @@ func (pool *BufferWriterPool) find(cap int) int {
 func (pool *BufferWriterPool) Get(index int) *BufferWriter {
 	poolLen := pool.Len()
 	if poolLen == 0 {
-		return NewBufferWriter(0)
+		return newBufferWriter(0)
 	}
 	if index < 0 || index >= poolLen {
 		return pool.Remove(poolLen / 2)
@@ -87,7 +92,7 @@ func (pool *BufferWriterPool) Remove(index int) *BufferWriter {
 func (pool *BufferWriterPool) NewBuffer(cap int) *BufferWriter {
 	index := pool.find(cap)
 	if index >= pool.Len() {
-		return NewBufferWriter(cap)
+		return newBufferWriter(cap)
 	}
 	return pool.Remove(index)
 }

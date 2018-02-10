@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/chentaihan/NginxParse/util"
 	"github.com/chentaihan/NginxParse/logic"
+	"github.com/chentaihan/NginxParse/util"
 )
 
 func isDir(filePath string) bool {
@@ -17,7 +17,6 @@ func isDir(filePath string) bool {
 }
 
 func main() {
-
 	//if len(os.Args) != 2 {
 	//	fmt.Println("need one param as nginx source path")
 	//	return
@@ -34,7 +33,6 @@ func main() {
 
 	fileList := util.GetFileList(dir)
 
-
 	defineList := make([]logic.IParse, 0, len(util.ConfigInfo.ParseList))
 	assignmentList := make([]logic.IParse, 0, len(util.ConfigInfo.ParseList))
 	macroList := make([]logic.IParse, 1, 1)
@@ -48,9 +46,12 @@ func main() {
 	parseMacro(macroList, fileList)
 
 	//fileList = []string{
-	//	//"/Users/didi/OpenSource/nginx-1.12.2/src/core/ngx_buf.h",
-	//	//"/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_geo_module.c",
+	//	"/Users/didi/OpenSource/nginx-1.12.2/src/core/ngx_buf.h",
+	//	"/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_geo_module.c",
 	//	"/Users/didi/OpenSource/nginx-1.12.2/src/http/ngx_http_upstream.h",
+	//	"/Users/didi/OpenSource/nginx-1.12.2/src/stream/ngx_stream_geoip_module.c",
+	//	"/Users/didi/OpenSource/nginx-1.12.2/src/http/ngx_http_upstream_round_robin.h",
+	//	"/usr/local/Cellar/go/1.9.2/src/github.com/chentaihan/NginxParse/output/test.c",
 	//}
 
 	//解析结构体定义
@@ -59,11 +60,11 @@ func main() {
 	//parseAssignment(assignmentList, fileList)
 
 	fmt.Println("---------------------result output------------------")
-	sstMgr := *logic.GetStructManager()
-	for _, sstInfo := range sstMgr{
-		//fmt.Println(sttName)
-		fmt.Println(sstInfo.StructString)
-	}
+	//sstMgr := *logic.GetStructManager()
+	//for _, sstInfo := range sstMgr{
+	//	//fmt.Println(sttName)
+	//	fmt.Println(sstInfo.StructString)
+	//}
 
 	fmt.Println("ok")
 }
@@ -78,6 +79,9 @@ func parseMacro(structList []logic.IParse, fileList []string) {
 			//break
 		}
 	}
+}
+
+func macroOutput() {
 
 }
 
@@ -108,5 +112,4 @@ func parseDefine(structList []logic.IParse, fileList []string) {
 			//break
 		}
 	}
-
 }
