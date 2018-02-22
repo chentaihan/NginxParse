@@ -46,11 +46,11 @@ func main() {
 	parseMacro(macroList, fileList)
 
 	//fileList = []string{
-	//	"/Users/didi/OpenSource/nginx-1.12.2/src/core/ngx_buf.h",
-	//	"/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_geo_module.c",
-	//	"/Users/didi/OpenSource/nginx-1.12.2/src/http/ngx_http_upstream.h",
-	//	"/Users/didi/OpenSource/nginx-1.12.2/src/stream/ngx_stream_geoip_module.c",
-	//	"/Users/didi/OpenSource/nginx-1.12.2/src/http/ngx_http_upstream_round_robin.h",
+	//	//"/Users/didi/OpenSource/nginx-1.12.2/src/core/ngx_buf.h",
+	//	//"/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_geo_module.c",
+	//	//"/Users/didi/OpenSource/nginx-1.12.2/src/http/ngx_http_upstream.h",
+	//	//"/Users/didi/OpenSource/nginx-1.12.2/src/stream/ngx_stream_geoip_module.c",
+	//	//"/Users/didi/OpenSource/nginx-1.12.2/src/http/ngx_http_upstream_round_robin.h",
 	//	"/usr/local/Cellar/go/1.9.2/src/github.com/chentaihan/NginxParse/output/test.c",
 	//}
 

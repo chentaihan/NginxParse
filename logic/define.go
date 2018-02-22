@@ -1,10 +1,10 @@
 package logic
 
 import (
+	"bytes"
 	"fmt"
 	"strings"
 	"unsafe"
-	"bytes"
 
 	"github.com/chentaihan/NginxParse/util"
 )
@@ -51,10 +51,6 @@ func (def *Define) IsEndStruct(line string) bool {
 func (def *Define) ParseStruct(filePath string, writer *util.BufferWriter) bool {
 	def.Struct.FileName = filePath
 	def.Struct.ModuleName = util.ParseModuleName(filePath)
-	if def.Struct.StructName == "ngx_http_geo_ctx_t" || def.Struct.StructName == "ngx_http_geo_ctx_s"{
-		i := 0
-		i++
-	}
 	structStr := writer.ToString()
 	writer = def.FormatStruct(writer)
 	structStr = writer.ToString()
@@ -65,25 +61,30 @@ func (def *Define) ParseStruct(filePath string, writer *util.BufferWriter) bool 
 	for writer.MoveNext() {
 		lines = append(lines, writer.Current())
 	}
-
+	fmt.Println("-----------------------------------", def.Struct.StructName)
 	for i := 1; i < len(lines)-1; i++ {
-		line := def.getFieldName(lines[i])
-		if line != "" {
-			def.Struct.Fields = append(def.Struct.Fields, line)
+		fieldName := def.getFieldName(lines[i])
+		if fieldName != "" {
+			def.Struct.Fields = append(def.Struct.Fields, fieldName)
+			fmt.Println(fieldName)
 		} else {
 			fmt.Println("错误struct：" + structStr)
-			//panic(filePath)
+			panic(filePath)
 		}
 	}
 	structInfo := def.Struct
 	GetStructManager().Add(&structInfo)
 	def.Struct = StructInfo{}
+	def.structParse.Reset()
 	return true
 }
 
+/**
+获取字段名称
+字段结构，如：int *val
+*/
 func (def *Define) getFieldName(line string) string {
-	//字段结构，如：int *val
-	if index := strings.LastIndex(line, " "); index >= 0 {
+	if index := strings.Index(line, " "); index >= 0 {
 		line = line[index:]
 		return util.GetLegalString(line)
 	}
@@ -100,7 +101,7 @@ func (def *Define) FormatStruct(writer *util.BufferWriter) *util.BufferWriter {
 		val := inBuf[index]
 		//将宏处理成一行，去掉宏中的分号
 		if val == '#' {
-			ifStr := string(inBuf[index+1: index+3])
+			ifStr := string(inBuf[index+1 : index+3])
 			if ifStr == "if" {
 				macroDepth++
 			}
@@ -114,7 +115,7 @@ func (def *Define) FormatStruct(writer *util.BufferWriter) *util.BufferWriter {
 				macroBuf.WriteChar(NEWLINE_REPLACE_KEY)
 			}
 			if val == '#' {
-				endif := string(inBuf[index+1: index+6])
+				endif := string(inBuf[index+1 : index+6])
 				if endif == "endif" {
 					macroDepth--
 					if macroDepth == 0 {
@@ -134,8 +135,9 @@ func (def *Define) FormatStruct(writer *util.BufferWriter) *util.BufferWriter {
 
 	outBuf = def.formatUnion(outBuf)
 	outBuf = util.MergeSequenceChar(outBuf.ToString(), '\n')
-	structStr := outBuf.ToString()
-	fmt.Println(structStr)
+	outBuf = def.parseMultFields(outBuf)
+	//structStr := outBuf.ToString()
+	//fmt.Println(structStr)
 	return outBuf
 }
 
@@ -147,7 +149,7 @@ func (def *Define) formatMacro(writer *util.BufferWriter) *util.BufferWriter {
 	for writer.MoveNext() {
 		line := writer.Current()
 		if strings.Index(line, "#if") == 0 {
-			line = GetMacroJudge().Parse(line[0: len(line)-1])
+			line = GetMacroJudge().Parse(line[0 : len(line)-1])
 		} else {
 			line = def.replaceMacro(line)
 		}
@@ -190,6 +192,9 @@ func (def *Define) formatUnion(writer *util.BufferWriter) *util.BufferWriter {
 	return outBuf
 }
 
+/**
+宏替换
+*/
 func (def *Define) replaceMacro(line string) string {
 	byteSlice := bytes.SplitN([]byte(line), []byte{')'}, -1)
 	hasReplace := false
@@ -206,14 +211,14 @@ func (def *Define) replaceMacro(line string) string {
 		isEndwithN := false
 		if str[len(str)-1] == '\n' {
 			isEndwithN = true
-			tmpStr = tmpStr[0: len(tmpStr)-1]
-			str = str[0: len(str)-1]
+			tmpStr = tmpStr[0 : len(tmpStr)-1]
+			str = str[0 : len(str)-1]
 		}
 		if util.IsLegalMacro(tmpStr) {
 			hasReplace = true
 			macroValue := GetMacro().GetMacroValue(str)
 			if strings.HasSuffix(macroValue, ";") {
-				macroValue = macroValue[0: len(macroValue)-1]
+				macroValue = macroValue[0 : len(macroValue)-1]
 			}
 			if isEndwithN {
 				macroValue += "\n"
@@ -247,8 +252,66 @@ func (def *Define) getMacroField(line string) string {
 	index := strings.Index(line, ")")
 	end := strings.Index(line, "#")
 	if index > 0 && end > 0 && end > index {
-		line = line[index+1: end]
+		line = line[index+1 : end]
 		return strings.Trim(line, " ")
 	}
 	return ""
+}
+
+func (def *Define) parseMultFields(writer *util.BufferWriter) *util.BufferWriter {
+	writer.Reset()
+	outBuf := util.NewBufferWriter(writer.Size())
+	for writer.MoveNext() {
+		line := writer.Current()
+		if strings.Index(line, ",") > 0 {
+			outBuf.WriteString(def.oneLineToMultFields(line))
+		} else {
+			outBuf.WriteString(line)
+		}
+	}
+	return outBuf
+}
+
+/*
+将一行包含多个字段拆分成多行
+如将int a,b,c;转成：
+int a;
+int b;
+int c;
+*/
+func (def *Define) oneLineToMultFields(line string) string {
+	inBrackets := false
+	typeStr := ""
+	size := len(line)
+	hasComma := false //是否存在逗号
+	outBuf := util.NewBufferWriter(size)
+	start := 0
+
+	if index := strings.Index(line, " "); index > 0 {
+		typeStr = line[:index]
+		index++
+		start = index
+		for ; index < size; index++ {
+			if line[index] == '(' {
+				inBrackets = true
+			} else if line[index] == ')' {
+				inBrackets = false
+			}
+			if !inBrackets && line[index] == ',' {
+				outBuf.WriteString(typeStr)
+				outBuf.WriteString(" ")
+				outBuf.WriteString(line[start:index])
+				outBuf.WriteString(";\n")
+				start = index + 1
+				hasComma = true
+			}
+		}
+	}
+	if hasComma {
+		outBuf.WriteString(typeStr)
+		outBuf.WriteString(" ")
+		outBuf.WriteString(line[start:])
+		return outBuf.ToString()
+	}
+	return line
 }

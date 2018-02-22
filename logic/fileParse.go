@@ -54,7 +54,7 @@ func (fileParse *FileParse) Parse(fullPath string) bool {
 		//过滤注释
 		line = filterNote(line, &inNote)
 		//合并空格
-		line = util.MergeSequenceChar(line,' ').ToString()
+		line = util.MergeSequenceChar(line, ' ').ToString()
 
 		if curStruct == nil {
 			if curStruct = fileParse.isStartStruct(line); curStruct != nil {
