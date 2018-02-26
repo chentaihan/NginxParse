@@ -2,22 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e49acc4f-4f96-4c52-af89-366d06627235" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/logic/macros.go" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/logic/assignmentManager.go" afterPath="$PROJECT_DIR$/logic/assignments.go" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/logic/macroJudge.go" afterPath="$PROJECT_DIR$/logic/precompile.go" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/logic/structManager.go" afterPath="$PROJECT_DIR$/logic/defines.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logic/assignment.go" afterPath="$PROJECT_DIR$/logic/assignment.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logic/define.go" afterPath="$PROJECT_DIR$/logic/define.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logic/format.go" afterPath="$PROJECT_DIR$/logic/format.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logic/macro.go" afterPath="$PROJECT_DIR$/logic/macro.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logic/macro_test.go" afterPath="$PROJECT_DIR$/logic/macro_test.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.go" afterPath="$PROJECT_DIR$/main.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output/ngx_command_t.html" afterPath="$PROJECT_DIR$/output/ngx_command_t.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output/test.c" afterPath="$PROJECT_DIR$/output/test.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/util/bufferWriter.go" afterPath="$PROJECT_DIR$/util/bufferWriter.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/util/common.go" afterPath="$PROJECT_DIR$/util/common.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/util/constant.go" afterPath="$PROJECT_DIR$/util/constant.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -28,18 +13,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="60" column="7" lean-forward="false" selection-start-line="51" selection-start-column="6" selection-end-line="60" selection-end-column="7" />
-              <folding>
-                <element signature="e#14#121#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="define.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/logic/define.go">
           <provider selected="true" editor-type-id="text-editor">
@@ -108,7 +81,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="assignments.go" pinned="false" current-in-tab="true">
+      <file leaf-file-name="assignments.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/logic/assignments.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="331">
@@ -116,6 +89,19 @@
               <folding>
                 <element signature="e#32#44#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="346">
+                <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -256,7 +242,6 @@
         <option value="$PROJECT_DIR$/test/test.go" />
         <option value="$PROJECT_DIR$/test/stringTest.go" />
         <option value="$PROJECT_DIR$/logic/macro_test.go" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/output/test.txt" />
         <option value="$PROJECT_DIR$/util/bufferWriterPool.go" />
         <option value="$PROJECT_DIR$/logic/structPrase.go" />
@@ -276,6 +261,7 @@
         <option value="$PROJECT_DIR$/logic/defines.go" />
         <option value="$PROJECT_DIR$/logic/assignment.go" />
         <option value="$PROJECT_DIR$/logic/assignments.go" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -527,12 +513,12 @@
       <workItem from="1517797383515" duration="7468000" />
       <workItem from="1517904917570" duration="61783000" />
       <workItem from="1519005414280" duration="6040000" />
-      <workItem from="1519267269373" duration="33877000" />
+      <workItem from="1519267269373" duration="34688000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="378215000" />
+    <option name="totallyTimeSpent" value="379026000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="805" extended-state="6" />
@@ -546,7 +532,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.47598255" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47598255" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37912673" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -698,16 +684,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="219">
           <caret line="25" column="16" lean-forward="false" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="308">
-            <caret line="14" column="6" lean-forward="true" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
-          </first_editor>
-          <second_editor />
         </state>
       </provider>
     </entry>
@@ -978,6 +954,17 @@
           <folding>
             <element signature="e#32#44#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="346">
+            <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
