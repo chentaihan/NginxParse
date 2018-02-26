@@ -135,3 +135,20 @@ func (writer *BufferWriter) ReplaceByte(old, new byte) {
 		}
 	}
 }
+
+func (writer *BufferWriter) Remove(start, length int) bool {
+	if start < 0 || length <= 0 || start + length > writer.Size() {
+		return false
+	}
+	size := writer.Size() - length
+	for index := start; index < size; index++{
+		writer.buffer[index] = writer.buffer[index + length]
+	}
+	writer.buffer = writer.buffer[:size]
+	return true
+}
+
+func (writer *BufferWriter) RemoveByte(index int) bool{
+	return writer.Remove(index, 1)
+}
+

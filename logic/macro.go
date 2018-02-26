@@ -1,37 +1,32 @@
 package logic
 
+/**
+宏处理
+ */
+
 import (
-	"github.com/chentaihan/NginxParse/util"
 	"strings"
+
+	"github.com/chentaihan/NginxParse/util"
 )
 
-type MacroInfo struct {
+type Macro struct {
 	Name  string
 	Value string
 }
 
-type Macro struct {
-	MacroList map[string]*MacroInfo
+func NewMacro() *Macro {
+	return &Macro{}
 }
 
-var macro *Macro = nil
-
-func GetMacro() *Macro {
-	if macro == nil {
-		macro = &Macro{
-			MacroList: make(map[string]*MacroInfo, 1024),
-		}
-	}
-	return macro
+//其中的宏直接返回实参
+var returnActualVal = []string{
+	"ngx_string",
 }
 
 //判断是不是有效宏
 func (macro *Macro) IsStartStruct(line string) bool {
 	return strings.HasPrefix(line, util.NGX_DEFINE)
-}
-
-func (macro *Macro) AddMacroInfo(key string, mf *MacroInfo) {
-	macro.MacroList[key] = mf
 }
 
 //解析宏
@@ -60,7 +55,7 @@ func (macro *Macro) ParseStruct(filePath string, writer *util.BufferWriter) bool
 			value = strings.Trim(value, " ")
 		}
 		value = strings.Trim(value, "\n")
-		macro.AddMacroInfo(key, &MacroInfo{name, value})
+		GetMacros().Add(key, &Macro{name, value})
 	}
 	return true
 }
@@ -84,48 +79,3 @@ func (macro *Macro) IsEndStruct(line string) bool {
 	}
 	return true
 }
-
-//是否存在指定的宏
-func (macro *Macro) Exist(macroName string) bool {
-	if _, ok := macro.MacroList[macroName]; ok {
-		return true
-	}
-	return false
-}
-
-func (macro *Macro) GetMacroValue(macroName string) string {
-	index := strings.Index(macroName, "(")
-	key := macroName
-	if index > 0 {
-		key = macroName[0:index]
-	}
-
-	macroInfo, ok := macro.MacroList[key]
-	if !ok {
-		return ""
-	}
-
-	value := macroInfo.Value
-
-	if index > 0 {
-		actualName := macroName[index:]
-		formalParams := util.GetLegalStrings(macroInfo.Name) //形参
-		actualParams := util.GetLegalStrings(actualName)     //实参
-		return macro.replaceParams(value, formalParams, actualParams)
-	}
-
-	return value
-}
-
-//宏替换，实参代替形参
-func (macro *Macro) replaceParams(value string, formalParams, actualParams []string) string {
-	minLen := len(formalParams)
-	if minLen > len(actualParams) {
-		minLen = len(actualParams)
-	}
-	for i := 0; i < minLen; i++ {
-		value = strings.Replace(value, formalParams[i], actualParams[i], -1)
-	}
-	return value
-}
-

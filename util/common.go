@@ -1,6 +1,7 @@
 package util
 
 import (
+	"fmt"
 	"strings"
 	"unsafe"
 )
@@ -22,7 +23,7 @@ func isLegalChar(c byte) bool {
 }
 
 //判断是否是int字符串
-func IsIntValue(line string) bool{
+func IsIntValue(line string) bool {
 	for _, c := range line {
 		if c < '0' || c > '9' {
 			return false
@@ -106,31 +107,6 @@ func GetLegalStrings(line string) []string {
 	return ret
 }
 
-func ParseName(line string) string {
-	index := strings.Index(line, NGX_STRING)
-	if index < 0 {
-		return line
-	}
-	line = line[index+NGX_STRING_LEN:]
-	start := strings.Index(line, "\"")
-	if start < 0 {
-		return ""
-	}
-	line = line[start+1:]
-	end := strings.Index(line, "\"")
-	if end < 0 {
-		return ""
-	}
-	return line[0:end]
-}
-
-//解析出模块定义配置信息的struct
-func ParseStructName(line string, structType string) string {
-	index := strings.Index(line, structType) + len(structType)
-	line = line[index:]
-	return GetLegalString(line)
-}
-
 //合并指定的连续字符
 func MergeSequenceChar(line string, c byte) *BufferWriter {
 	inBuf := []byte(line)
@@ -178,14 +154,14 @@ func NotEmptyIndex(line string) int {
 	return 0
 }
 
-func GetInt(line string) (int64, bool){
+func GetInt(line string) (int64, bool) {
 	retVal := int64(0)
 	isOk := false
 	right := true
 	i := 0
 	if line[0] == '+' {
 		i++
-	}else if line[0] == '-' {
+	} else if line[0] == '-' {
 		i++
 		right = false
 	}
@@ -193,8 +169,8 @@ func GetInt(line string) (int64, bool){
 		val := line[i]
 		if val >= '0' && val <= '9' {
 			isOk = true
-			retVal = retVal*10 + int64(val- '0')
-		}else{
+			retVal = retVal*10 + int64(val-'0')
+		} else {
 			break
 		}
 	}
@@ -204,12 +180,12 @@ func GetInt(line string) (int64, bool){
 	return retVal, isOk
 }
 
-func RemoveBlank(line string) string{
+func RemoveBlank(line string) string {
 	size := len(line)
-	buffer := make([]byte,size, size)
+	buffer := make([]byte, size, size)
 	index := 0
-	for i := 0; i < size; i++{
-		if line[i] != ' '{
+	for i := 0; i < size; i++ {
+		if line[i] != ' ' {
 			buffer[index] = line[i]
 			index++
 		}
@@ -218,3 +194,35 @@ func RemoveBlank(line string) string{
 	return *(*string)(unsafe.Pointer(&buffer))
 }
 
+func InSliceString(array []string, val string) bool {
+	for _, item := range array {
+		if item == val {
+			return true
+		}
+	}
+	return false
+}
+
+func InSliceInt(array []int, val int) bool {
+	for _, item := range array {
+		if item == val {
+			return true
+		}
+	}
+	return false
+}
+
+func Println(a ...interface{}) {
+	if SHOW_PRINTLN {
+		fmt.Println(a...)
+	}
+}
+
+func ContainsByte(str string, b byte) bool{
+	for index := 0; index < len(str); index++{
+		if str[index] == b {
+			return true
+		}
+	}
+	return false
+}

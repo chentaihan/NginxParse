@@ -1,8 +1,6 @@
 package util
 
 const (
-	NGX_STRING          = "ngx_string"
-	NGX_STRING_LEN      = len(NGX_STRING)
 	NGX_DEFINE			= "#define"
 	NGX_DEFINE_LEN		= len(NGX_DEFINE)
 )
@@ -15,4 +13,9 @@ const (
 
 const (
 	PATH_OUTPUT = "output/"
+)
+
+
+const (
+	SHOW_PRINTLN = false
 )

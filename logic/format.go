@@ -53,7 +53,7 @@ func formatVariableList(varList []*TableInfo) []byte {
 }
 
 func formatHeader(variable *TableInfo) string {
-	colspan1 := len(variable.Title)
+	colspan1 := len(variable.Fields)
 	colspan3 := colspan1 / 2
 	colspan2 := colspan1 - colspan3
 	return fmt.Sprintf(VARIABLE_HEADER, colspan1, variable.ModuleName, colspan2, variable.FileName, colspan3,variable.StructName)
@@ -89,7 +89,7 @@ func formatTable(variable *TableInfo) []byte {
 	writer.Write([]byte("<table>"))
 
 	writer.WriteString(formatHeader(variable))
-	writer.WriteString(formatTH(variable.Title))
+	writer.WriteString(formatTH(variable.Fields))
 	writer.WriteString(formatTD(variable.Content))
 
 	writer.Write([]byte("</table><br/><br/>"))
@@ -97,10 +97,6 @@ func formatTable(variable *TableInfo) []byte {
 	return writer.GetBuffer()
 }
 
-func OutPut(structInfo *Assignment) {
-	fileName := structInfo.StructInfo.StructName + ".html"
-	outputFile(util.FILE_CONFIG_FORMAT, fileName, formatVariableList, structInfo.Tables)
-}
 
 func outputFile(formatFile, outputFile string, formatFunc formatStruct, list []*TableInfo) {
 	configFormat := util.GetConfigFile(formatFile)

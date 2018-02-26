@@ -1,5 +1,9 @@
 package logic
 
+/*
+预编译处理
+ */
+
 import (
 	"strconv"
 	"strings"
@@ -9,22 +13,22 @@ import (
 
 type JudgeFun func(first, second int64) bool
 
-type MacroJudge struct {
+type PreCompile struct {
 	funMap   map[string]JudgeFun
 	priority map[string]uint8
 }
 
-var macroJudge *MacroJudge
+var macroJudge *PreCompile
 
-func GetMacroJudge() *MacroJudge {
+func GetPreCompile() *PreCompile {
 	if macroJudge == nil {
-		macroJudge = &MacroJudge{}
+		macroJudge = &PreCompile{}
 		macroJudge.initMap()
 	}
 	return macroJudge
 }
 
-func (macro *MacroJudge) initMap() {
+func (macro *PreCompile) initMap() {
 	macro.funMap = make(map[string]JudgeFun, 18)
 	macro.priority = make(map[string]uint8, 18)
 	priorityValue := uint8(0)
@@ -123,7 +127,7 @@ func (macro *MacroJudge) initMap() {
 	priorityValue++
 }
 
-func (macro *MacroJudge) Parse(line string) string {
+func (macro *PreCompile) Parse(line string) string {
 	outBuffer := util.NewBufferWriter(len(line))
 	inBuffer := util.NewBufferWriter(len(line))
 	inBuffer.WriteString(line)
@@ -132,7 +136,7 @@ func (macro *MacroJudge) Parse(line string) string {
 	return outBuffer.ToString()
 }
 
-func (macro *MacroJudge) parseContent(buffer, outBuf *util.BufferWriter) {
+func (macro *PreCompile) parseContent(buffer, outBuf *util.BufferWriter) {
 	const (
 		LOCATION_OUT    = 0
 		LOCATION_INIF   = 1
@@ -204,7 +208,7 @@ func (macro *MacroJudge) parseContent(buffer, outBuf *util.BufferWriter) {
 	}
 }
 
-func (macro *MacroJudge) judge(line string) bool {
+func (macro *PreCompile) judge(line string) bool {
 	//JUDGE_REPLACE: #if IS_OK && (IS_OK) || (IS_OK == 1) || (NGX_HAVE_FILE_AIO || NGX_COMPAT)
 	//JUDGE_BRACE: #if 1 && (1) || (1 == 1) || (1 || 1)
 	//JUDGE_CALC #if 1 && 1 || 1 || 1
@@ -214,7 +218,7 @@ func (macro *MacroJudge) judge(line string) bool {
 }
 
 //第一步 宏替换
-func (macro *MacroJudge) judgeReplace(line string) string {
+func (macro *PreCompile) judgeReplace(line string) string {
 	macroSlice := util.GetLegalStrings(line)
 	for _, macroName := range macroSlice {
 		macroValue := "0"
@@ -223,7 +227,7 @@ func (macro *MacroJudge) judgeReplace(line string) string {
 			macroValue = macroName
 		} else {
 			//其他的字符串一律当做宏来处理，不存在就给0
-			macroValue = GetMacro().GetMacroValue(macroName)
+			macroValue = GetMacros().GetMacroValue(macroName)
 			if macroValue == "" {
 				macroValue = "0"
 			}
@@ -235,7 +239,7 @@ func (macro *MacroJudge) judgeReplace(line string) string {
 }
 
 //第二步 计算括号中的值
-func (macro *MacroJudge) judgeBrace(line string) string {
+func (macro *PreCompile) judgeBrace(line string) string {
 	line = util.RemoveBlank(line)
 	start := -1
 	i := 0
@@ -259,7 +263,7 @@ func (macro *MacroJudge) judgeBrace(line string) string {
 }
 
 //将1&&0拆分成：slice{1,&&,0}
-func (macro *MacroJudge) split(line string) []string {
+func (macro *PreCompile) split(line string) []string {
 	curVal := ""
 	slice := make([]string, 0, 3)
 	size := len(line)
@@ -286,7 +290,7 @@ func (macro *MacroJudge) split(line string) []string {
 }
 
 //第三步 计算 1||2&&3或1>=2||2<3
-func (macro *MacroJudge) judgeCalc(line string) bool {
+func (macro *PreCompile) judgeCalc(line string) bool {
 	operatorSlice := macro.split(line)
 
 	for size := len(operatorSlice); size > 1;{
@@ -322,7 +326,7 @@ func (macro *MacroJudge) judgeCalc(line string) bool {
 }
 
 //优先级值越小，优先级越高
-func (macro *MacroJudge) getMinPriorityIndex(priorityMap map[int]uint8) int {
+func (macro *PreCompile) getMinPriorityIndex(priorityMap map[int]uint8) int {
 	var minKey int = -1
 	for key, value := range priorityMap {
 		if minKey == -1 {

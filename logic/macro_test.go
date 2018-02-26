@@ -7,34 +7,34 @@ import (
 )
 
 func Test_macro(t *testing.T) {
-	macro := GetMacro()
-	macro.AddMacroInfo("NGX_MODULE_SIGNATURE_5", &MacroInfo{
+	macro := GetMacros()
+	macro.Add("NGX_MODULE_SIGNATURE_5", &MacroInfo{
 		Name:  "NGX_MODULE_SIGNATURE_5",
 		Value: "NGX_MODULE_SIGNATURE_5",
 	})
 
-	macro.AddMacroInfo("NGX_MODULE_SIGNATURE_12", &MacroInfo{
+	macro.Add("NGX_MODULE_SIGNATURE_12", &MacroInfo{
 		Name:  "NGX_MODULE_SIGNATURE_12",
 		Value: "NGX_MODULE_SIGNATURE_12",
 	})
-	macro.AddMacroInfo("NGX_MODULE", &MacroInfo{
+	macro.Add("NGX_MODULE", &MacroInfo{
 		Name:  "NGX_MODULE",
 		Value: "",
 	})
 
-	macro.AddMacroInfo("ngx_conf_merge_uint_value", &MacroInfo{
+	macro.Add("ngx_conf_merge_uint_value", &MacroInfo{
 		Name:  "(conf, prev, default)",
 		Value: "if(conf == NGX_CONF_UNSET_UINT){conf = (prev == NGX_CONF_UNSET_UINT) ? default : prev;}",
 	})
 
-	list := macro.MacroList
+	list := macro.Map
 	for key, val := range list {
 		if val.Name != "" {
 			fmt.Printf("%s%s=%s", key, val.Name, val.Value)
-			fmt.Println()
+			util.Println()
 		} else {
 			fmt.Printf("-------------------------%s%s=%s", key, val.Name, val.Value)
-			fmt.Println()
+			util.Println()
 		}
 	}
 
