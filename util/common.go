@@ -1,7 +1,10 @@
 package util
 
 import (
+	"bytes"
 	"fmt"
+	"log"
+	"net/http"
 	"strings"
 	"unsafe"
 )
@@ -125,7 +128,7 @@ func IsEmptyLine(line string) bool {
 	if line == "" {
 		return true
 	}
-	for i := len(line) - 1; i >= 0; i++ {
+	for i := len(line) - 1; i >= 0; i-- {
 		if line[i] != ' ' {
 			return false
 		}
@@ -218,11 +221,26 @@ func Println(a ...interface{}) {
 	}
 }
 
-func ContainsByte(str string, b byte) bool{
-	for index := 0; index < len(str); index++{
-		if str[index] == b {
-			return true
-		}
+func ContainsByte(str string, b byte) bool {
+	return strings.IndexByte(str, b) >= 0
+}
+
+func HttpGet(url string) []byte {
+	resp, err := http.Get(url)
+	if err != nil {
+		log.Println(err)
+		return nil
 	}
-	return false
+
+	defer resp.Body.Close()
+
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
+		buf := bytes.NewBuffer(make([]byte, 0, 512))
+
+		buf.ReadFrom(resp.Body)
+
+		return buf.Bytes()
+	}
+
+	return nil
 }

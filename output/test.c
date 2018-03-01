@@ -120,34 +120,34 @@
 //    uintptr_t   spare_hook7;
 //};
 
-
-typedef struct {
-    ngx_int_t   (*preconfiguration)(ngx_conf_t *cf);
-    ngx_int_t   (*postconfiguration)(ngx_conf_t *cf);
-
-    void       *(*create_main_conf)(ngx_conf_t *cf);
-    char       *(*init_main_conf)(ngx_conf_t *cf, void *conf);
-
-    void       *(*create_srv_conf)(ngx_conf_t *cf);
-    char       *(*merge_srv_conf)(ngx_conf_t *cf, void *prev, void *conf);
-
-    void       *(*create_loc_conf)(ngx_conf_t *cf);
-    char       *(*merge_loc_conf)(ngx_conf_t *cf, void *prev, void *conf);
-} ngx_http_module_t;
-
-static ngx_http_module_t  ngx_http_v2_module_ctx = {
-    ngx_http_v2_add_variables,             /* preconfiguration */
-    NULL,                                  /* postconfiguration */
-
-    ngx_http_v2_create_main_conf,          /* create main configuration */
-    ngx_http_v2_init_main_conf,            /* init main configuration */
-
-    ngx_http_v2_create_srv_conf,           /* create server configuration */
-    ngx_http_v2_merge_srv_conf,            /* merge server configuration */
-
-    ngx_http_v2_create_loc_conf,           /* create location configuration */
-    ngx_http_v2_merge_loc_conf             /* merge location configuration */
-};
+//
+//typedef struct {
+//    ngx_int_t   (*preconfiguration)(ngx_conf_t *cf);
+//    ngx_int_t   (*postconfiguration)(ngx_conf_t *cf);
+//
+//    void       *(*create_main_conf)(ngx_conf_t *cf);
+//    char       *(*init_main_conf)(ngx_conf_t *cf, void *conf);
+//
+//    void       *(*create_srv_conf)(ngx_conf_t *cf);
+//    char       *(*merge_srv_conf)(ngx_conf_t *cf, void *prev, void *conf);
+//
+//    void       *(*create_loc_conf)(ngx_conf_t *cf);
+//    char       *(*merge_loc_conf)(ngx_conf_t *cf, void *prev, void *conf);
+//} ngx_http_module_t;
+//
+//static ngx_http_module_t  ngx_http_v2_module_ctx = {
+//    ngx_http_v2_add_variables,             /* preconfiguration */
+//    NULL,                                  /* postconfiguration */
+//
+//    ngx_http_v2_create_main_conf,          /* create main configuration */
+//    ngx_http_v2_init_main_conf,            /* init main configuration */
+//
+//    ngx_http_v2_create_srv_conf,           /* create server configuration */
+//    ngx_http_v2_merge_srv_conf,            /* merge server configuration */
+//
+//    ngx_http_v2_create_loc_conf,           /* create location configuration */
+//    ngx_http_v2_merge_loc_conf             /* merge location configuration */
+//};
 
 struct ngx_command_t {
     ngx_str_t             name;
@@ -185,6 +185,13 @@ static ngx_command_t  ngx_http_secure_link_commands[] = {
       ngx_null_command
 };
 
-typedef struct {
-    ngx_conf_post_handler_pt post_handler;
-} ngx_conf_post_t;
+//typedef struct {
+//    ngx_conf_post_handler_pt post_handler;
+//} ngx_conf_post_t;
+
+//ngx_str_t  ngx_http_html_default_types[] = {
+//    ngx_string("text/html"),
+//    ngx_null_string
+//};
+
+//typedef struct ngx_stream_session_s  ngx_stream_session_t;

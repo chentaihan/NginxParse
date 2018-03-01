@@ -1,101 +1,91 @@
 package main
 
 import (
-	"os"
+	"fmt"
 
 	"github.com/chentaihan/NginxParse/logic"
 	"github.com/chentaihan/NginxParse/util"
-	"fmt"
 )
 
-func isDir(filePath string) bool {
-	fileInfo, err := os.Stat(filePath)
-	if err != nil {
-		return false
-	}
-	return fileInfo.IsDir()
-}
-
 func main() {
-	//if len(os.Args) != 2 {
-	//	util.Println("need one param as nginx source path")
-	//	return
-	//}
-
-	//dir := os.Args[1]
-	//if !isDir(dir) {
-	//	util.Println(dir, " is not a path")
-	//	return
-	//}
-
-	util.LoadConfig()
-	dir := "/Users/didi/OpenSource/nginx-1.12.2/src"
-
-	fileList := util.GetFileList(dir)
-
-	parseList := []logic.IParse{
-		logic.NewMacro(),
-		logic.NewParseDefine(),
-		logic.NewAssignment(),
-	}
-	fileParse := logic.FileParse{}
-	for _, parse := range parseList {
-		fileParse.Register(parse)
+	err := util.LoadConfig()
+	if err != nil {
+		panic("err")
 	}
 
-	//解析宏
-	parseMacro(fileList)
+	downloadSourceCode()
 
-	//解析结构体定义
-	parseDefine(fileList)
+	fileList := util.GetFileList(util.GetSourceCodePath())
 
 	//fileList = []string{
 	//	//"/Users/didi/OpenSource/nginx-1.12.2/src/core/ngx_buf.h",
-	//    //"/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_geo_module.c",
-	//    //"/Users/didi/OpenSource/nginx-1.12.2/src/http/ngx_http_upstream.h",
-	//    //"/Users/didi/OpenSource/nginx-1.12.2/src/stream/ngx_stream_geoip_module.c",
-	//    //"/Users/didi/OpenSource/nginx-1.12.2/src/http/ngx_http_upstream_round_robin.h",
-	//    "/usr/local/Cellar/go/1.9.2/src/github.com/chentaihan/NginxParse/output/test.c",
+	//	//"/Users/didi/OpenSource/nginx-1.12.2/src/http/modules/ngx_http_geo_module.c",
+	//	//"/Users/didi/OpenSource/nginx-1.12.2/src/http/ngx_http_upstream.h",
+	//	//"/Users/didi/OpenSource/nginx-1.12.2/src/stream/ngx_stream_geoip_module.c",
+	//	//"/Users/didi/OpenSource/nginx-1.12.2/src/http/ngx_http_upstream_round_robin.h",
+	//	"/usr/local/Cellar/go/1.9.2/src/github.com/chentaihan/NginxParse/output/test.c",
 	//	//"/Users/didi/OpenSource/nginx-1.12.2/src/core/nginx.c",
 	//	//"/Users/didi/OpenSource/nginx-1.12.2/src/stream/ngx_stream.h",
 	//}
 
+	//解析析宏
+	parseMacro(fileList)
+
+	//解析结构体定义 和 结构体重定义
+	parseDefine(fileList)
+
 	//解析结构体变量
 	parseAssignment(fileList)
 
-	fmt.Println("ok")
+	fmt.Println("nginx source code parse success")
 }
 
+//解析析宏
 func parseMacro(fileList []string) {
 	fileParse := logic.FileParse{}
 	fileParse.Register(logic.NewMacro())
 	for _, fileName := range fileList {
-		if fileParse.Parse(fileName) {
-			break
-		}
+		fileParse.Parse(fileName)
 	}
 	logic.GetMacros().Print()
 }
 
+//解析结构体定义 和 结构体重定义
 func parseDefine(fileList []string) {
 	fileParse := logic.FileParse{}
 	fileParse.Register(logic.NewParseDefine())
+	fileParse.Register(logic.NewTypedef())
 	for _, fileName := range fileList {
-		if fileParse.Parse(fileName) {
-			//break
-		}
+		fileParse.Parse(fileName)
 	}
+
+	logic.GetTypedefs().Parse(logic.GetDefines())
+	logic.GetTypedefs().Print()
 	logic.GetDefines().Print()
 }
 
+//解析结构体变量
 func parseAssignment(fileList []string) {
 	fileParse := logic.FileParse{}
 	fileParse.Register(logic.NewAssignment())
 	for _, fileName := range fileList {
-		fmt.Println("fileName = ", fileName)
-		if fileParse.Parse(fileName) {
-			//break
-		}
+		fileParse.Parse(fileName)
 	}
 	logic.GetAssignments().Print()
+}
+
+//第一次运行的时候，会去下载nginx源码，并解压
+func downloadSourceCode() {
+	sourceCodePath := util.GetSourceCodePath()
+	util.MkDir(sourceCodePath)
+	zipFilePath := sourceCodePath + util.NGINX_ZIP
+	if !util.FileExists(zipFilePath) {
+		if util.Downalod(util.ConfigInfo.SourceCodeUrl, zipFilePath) {
+			util.UnZip(zipFilePath, sourceCodePath)
+		}
+	} else {
+		if util.FileCount(sourceCodePath) < 2 {
+			util.UnZip(zipFilePath, sourceCodePath)
+		}
+	}
 }

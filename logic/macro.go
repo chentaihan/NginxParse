@@ -19,11 +19,6 @@ func NewMacro() *Macro {
 	return &Macro{}
 }
 
-//其中的宏直接返回实参
-var returnActualVal = []string{
-	"ngx_string",
-}
-
 //判断是不是有效宏
 func (macro *Macro) IsStartStruct(line string) bool {
 	return strings.HasPrefix(line, util.NGX_DEFINE)

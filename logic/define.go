@@ -2,13 +2,13 @@ package logic
 
 /**
 struct定义解析
- */
+*/
 
 import (
 	"bytes"
+	"fmt"
 	"strings"
 	"unsafe"
-	"fmt"
 
 	"github.com/chentaihan/NginxParse/util"
 )
@@ -25,7 +25,7 @@ type Define struct {
 
 func NewParseDefine() *Define {
 	return &Define{
-		structParse: NewStructParsee(STRUCT),
+		structParse: NewStructParsee(util.STRUCT),
 		unionParse:  NewUnion(),
 	}
 }
@@ -78,7 +78,7 @@ func (def *Define) ParseStruct(filePath string, writer *util.BufferWriter) bool 
 		}
 	}
 	structInfo := def.Struct
-	GetDefines().Add(&structInfo)
+	GetDefines().Add(structInfo.StructName, &structInfo)
 	def.Struct = StructInfo{}
 	def.structParse.Reset()
 	return true
@@ -115,7 +115,7 @@ func (def *Define) precompileHandler(writer *util.BufferWriter) *util.BufferWrit
 	for index := 0; index < len(inBuf); index++ {
 		val := inBuf[index]
 		if val == '#' {
-			ifStr := string(inBuf[index+1: index+3])
+			ifStr := string(inBuf[index+1 : index+3])
 			if ifStr == "if" {
 				macroDepth++
 			}
@@ -129,7 +129,7 @@ func (def *Define) precompileHandler(writer *util.BufferWriter) *util.BufferWrit
 				macroBuf.WriteChar(NEWLINE_REPLACE_KEY)
 			}
 			if val == '#' {
-				endif := string(inBuf[index+1: index+6])
+				endif := string(inBuf[index+1 : index+6])
 				if endif == "endif" {
 					macroDepth--
 					if macroDepth == 0 {
@@ -155,7 +155,7 @@ func (def *Define) macroHandler(writer *util.BufferWriter) *util.BufferWriter {
 	for writer.MoveNext() {
 		line := writer.Current()
 		if strings.Index(line, "#if") == 0 {
-			line = GetPreCompile().Parse(line[0: len(line)-1])
+			line = GetPreCompile().Parse(line[0 : len(line)-1])
 		} else {
 			line = def.replaceMacro(line)
 		}
@@ -217,14 +217,14 @@ func (def *Define) replaceMacro(line string) string {
 		isEndwithN := false
 		if str[len(str)-1] == '\n' {
 			isEndwithN = true
-			tmpStr = tmpStr[0: len(tmpStr)-1]
-			str = str[0: len(str)-1]
+			tmpStr = tmpStr[0 : len(tmpStr)-1]
+			str = str[0 : len(str)-1]
 		}
 		if util.IsLegalMacro(tmpStr) {
 			hasReplace = true
 			macroValue := GetMacros().GetMacroValue(str)
 			if strings.HasSuffix(macroValue, ";") {
-				macroValue = macroValue[0: len(macroValue)-1]
+				macroValue = macroValue[0 : len(macroValue)-1]
 			}
 			if isEndwithN {
 				macroValue += "\n"
@@ -258,7 +258,7 @@ func (def *Define) getMacroField(line string) string {
 	index := strings.Index(line, ")")
 	end := strings.Index(line, "#")
 	if index > 0 && end > 0 && end > index {
-		line = line[index+1: end]
+		line = line[index+1 : end]
 		return strings.Trim(line, " ")
 	}
 	return ""
@@ -294,6 +294,12 @@ func (def *Define) oneLineToMultFields(line string) string {
 	outBuf := util.NewBufferWriter(size)
 	start := 0
 
+	writeString := func(str1, str2 string) {
+		outBuf.WriteString(str1)
+		outBuf.WriteString(" ")
+		outBuf.WriteString(str2)
+	}
+
 	if index := strings.Index(line, " "); index > 0 {
 		typeStr = line[:index]
 		index++
@@ -305,19 +311,14 @@ func (def *Define) oneLineToMultFields(line string) string {
 				inBrackets = false
 			}
 			if !inBrackets && line[index] == ',' {
-				outBuf.WriteString(typeStr)
-				outBuf.WriteString(" ")
-				outBuf.WriteString(line[start:index])
-				outBuf.WriteString(";\n")
+				writeString(typeStr, line[start:index] + ";\n")
 				start = index + 1
 				hasComma = true
 			}
 		}
 	}
 	if hasComma {
-		outBuf.WriteString(typeStr)
-		outBuf.WriteString(" ")
-		outBuf.WriteString(line[start:])
+		writeString(typeStr, line[start:])
 		return outBuf.ToString()
 	}
 	return line
@@ -327,7 +328,7 @@ func (def *Define) oneLineToMultFields(line string) string {
 5.多行一个字段转换成一行一字段
 将多行构成的一个字段转成一行，即一行一个字段
 struct每个字段都是以";"结尾，如果\n前面不是";"说明这个\n就是多余的
- */
+*/
 func (def *Define) partFieldHandler(writer *util.BufferWriter) *util.BufferWriter {
 	inBuf := writer.GetBuffer()
 	specialChars := ";{}"

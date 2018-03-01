@@ -17,11 +17,6 @@ type StructParse struct {
 	Rename      string
 }
 
-const (
-	STRUCT    = "struct"
-	UNION     = "union"
-	UNION_TAG = "/* union */"
-)
 
 func NewStructParsee(structType string) *StructParse {
 	sttParse := &StructParse{

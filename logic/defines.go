@@ -37,7 +37,7 @@ func GetDefines() *Defines {
 	return defines
 }
 
-func (defines *Defines) Add(sttInfo *StructInfo) bool {
+func (defines *Defines) Add(structName string, sttInfo *StructInfo) bool {
 	if sttInfo != nil {
 		defines.Map[sttInfo.StructName] = sttInfo
 		return true

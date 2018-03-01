@@ -55,7 +55,9 @@ func (fileParse *FileParse) Parse(fullPath string) bool {
 		line = filterNote(line, &inNote)
 		//合并空格
 		line = util.MergeSequenceChar(line, ' ').ToString()
-
+		if util.IsEmptyLine(line) {
+			continue
+		}
 		if curStruct == nil {
 			if curStruct = fileParse.isStartStruct(line); curStruct != nil {
 				buffer = &util.BufferWriter{}
@@ -129,14 +131,14 @@ func filterNotInNote(line string, inNote *bool) string {
 func getDepth(line string) int {
 	count := 0
 
-	keys := map[int]string{
-		1:  "{", //存在一个{，加1
-		-1: "}", //存在一个}，减1
+	keys := map[int]byte{
+		1:  '{', //存在一个{，加1
+		-1: '}', //存在一个}，减1
 	}
 	for cnt, key := range keys {
 		tmpLine := line
 		for {
-			index := strings.Index(tmpLine, key)
+			index := strings.IndexByte(tmpLine, key)
 			if index >= 0 {
 				count += cnt
 				if index == len(tmpLine)-1 {

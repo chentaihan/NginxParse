@@ -67,9 +67,6 @@ func (macros *Macros) GetMacroValue(macroName string) string {
 			util.Println("错误：宏 ", macroName, " 解析有误")
 			return ""
 		}
-		if util.InSliceString(returnActualVal, key) {
-			return actualParams[0]
-		}
 		formalParams := macros.getMacroParams(macroInfo.Name) //形参
 		return macros.replaceParams(value, formalParams, actualParams)
 	}
@@ -100,6 +97,8 @@ func (macros *Macros) replaceParams(value string, formalParams, actualParams []s
 }
 
 func (macros *Macros) Print() {
+	fmt.Println()
+	fmt.Println("----------------macro----------------")
 	for key, macro := range macros.Map {
 		fmt.Println("#define ", key, macro.Name, macro.Value)
 	}
