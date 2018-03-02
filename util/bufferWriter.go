@@ -58,6 +58,9 @@ func (writer *BufferWriter) GetBuffer() []byte {
 	return writer.buffer
 }
 
+/**
+在多协程的情况，不能这样写，需要复制
+ */
 func (writer *BufferWriter) ToString() string {
 	buf := writer.GetBuffer()
 	return *(*string)(unsafe.Pointer(&buf))
@@ -150,5 +153,9 @@ func (writer *BufferWriter) Remove(start, length int) bool {
 
 func (writer *BufferWriter) RemoveByte(index int) bool{
 	return writer.Remove(index, 1)
+}
+
+func (writer *BufferWriter) Recycle() {
+	GetBufferPool().Add(writer)
 }
 

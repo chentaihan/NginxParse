@@ -6,24 +6,32 @@ Add：添加元素
 所有被使用的元素都会从slice中移除，如果需要回收请调Add
 */
 
+//优化前new BufferWriter count = 558355
+
 var bufferWriterPool *BufferWriterPool
 
 type BufferWriterPool struct {
-	pool []*BufferWriter
+	pool     []*BufferWriter
+	newCount int
 }
 
 func NewBufferWriter(cap int) *BufferWriter {
-	return GetBufferPool().NewBuffer(cap)
+	return GetBufferPool().NewBufferWriter(cap)
 }
 
 func GetBufferPool() *BufferWriterPool {
 	if bufferWriterPool == nil {
 		bufferWriterPool = &BufferWriterPool{}
 		for i := 0; i < 4; i++{
-			bufferWriterPool.Add(newBufferWriter(0))
+			bufferWriterPool.Add(bufferWriterPool.newBufferWriter(0))
 		}
 	}
 	return bufferWriterPool
+}
+
+func (pool *BufferWriterPool) newBufferWriter(cap int) *BufferWriter{
+	pool.newCount++
+	return newBufferWriter(cap)
 }
 
 func (pool *BufferWriterPool) Add(writer *BufferWriter) int {
@@ -66,7 +74,7 @@ func (pool *BufferWriterPool) find(cap int) int {
 func (pool *BufferWriterPool) Get(index int) *BufferWriter {
 	poolLen := pool.Len()
 	if poolLen == 0 {
-		return newBufferWriter(0)
+		return pool.newBufferWriter(0)
 	}
 	if index < 0 || index >= poolLen {
 		return pool.Remove(poolLen / 2)
@@ -89,10 +97,10 @@ func (pool *BufferWriterPool) Remove(index int) *BufferWriter {
 	return ret
 }
 
-func (pool *BufferWriterPool) NewBuffer(cap int) *BufferWriter {
+func (pool *BufferWriterPool) NewBufferWriter(cap int) *BufferWriter {
 	index := pool.find(cap)
 	if index >= pool.Len() {
-		return newBufferWriter(cap)
+		return pool.newBufferWriter(cap)
 	}
 	return pool.Remove(index)
 }
@@ -103,4 +111,8 @@ func (pool *BufferWriterPool) Len() int {
 
 func (pool *BufferWriterPool) Cap() int {
 	return cap(pool.pool)
+}
+
+func (pool *BufferWriterPool) GetNewCount() int {
+	return pool.newCount
 }

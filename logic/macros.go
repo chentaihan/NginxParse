@@ -2,11 +2,11 @@ package logic
 
 /**
 宏管理
- */
+*/
 
 import (
-	"strings"
 	"fmt"
+	"strings"
 
 	"github.com/chentaihan/NginxParse/util"
 )
@@ -78,7 +78,7 @@ func (macros *Macros) GetMacroValue(macroName string) string {
 //将("secure_link",1)解析成[]string{"secure_link",1}
 func (macros *Macros) getMacroParams(actualName string) []string {
 	if actualName != "" {
-		actualName = actualName[1:len(actualName)-1]
+		actualName = actualName[1 : len(actualName)-1]
 		return strings.Split(actualName, ",")
 	}
 	return []string{}
@@ -86,14 +86,40 @@ func (macros *Macros) getMacroParams(actualName string) []string {
 
 //宏替换，实参代替形参
 func (macros *Macros) replaceParams(value string, formalParams, actualParams []string) string {
+	if value == "" {
+		return value
+	}
 	minLen := len(formalParams)
 	if minLen > len(actualParams) {
 		minLen = len(actualParams)
 	}
+	outBuf := util.NewBufferWriter(len(value))
 	for i := 0; i < minLen; i++ {
-		value = strings.Replace(value, formalParams[i], actualParams[i], -1)
+		for len(value) > 0 {
+			index := strings.Index(value, formalParams[i])
+			isMatch := true
+			if index >= 0 {
+				end := index+len(formalParams[i])
+				if index >= 1 && util.IsLegalChar(value[index-1]) {
+					isMatch = false
+				} else if end < len(value) && util.IsLegalChar(value[end]) {
+					isMatch = false
+				}
+				if isMatch {
+					outBuf.WriteString(value[:index])
+					value = value[index:]
+					value = strings.Replace(value, formalParams[i], actualParams[i], 1)
+				}else{
+					outBuf.WriteString(value[:end])
+					value = value[end:]
+				}
+			} else {
+				outBuf.WriteString(value)
+				break
+			}
+		}
 	}
-	return value
+	return outBuf.ToString()
 }
 
 func (macros *Macros) Print() {

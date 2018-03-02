@@ -6,7 +6,6 @@ struct定义解析
 
 import (
 	"bytes"
-	"fmt"
 	"strings"
 	"unsafe"
 
@@ -59,9 +58,6 @@ func (def *Define) ParseStruct(filePath string, writer *util.BufferWriter) bool 
 	writer = def.FormatStruct(writer)
 	structStr = writer.ToString()
 	def.Struct.StructString = structStr
-	if def.Struct.StructName == "ngx_stream_module_t" {
-		fmt.Println(structStr)
-	}
 	lines := make([]string, 0, 4)
 	writer.Reset()
 	for writer.MoveNext() {
@@ -97,58 +93,17 @@ func (def *Define) getFieldName(line string) string {
 }
 
 //将buffer中的struct赋值格式化成容易解析的样子
-func (def *Define) FormatStruct(writer *util.BufferWriter) *util.BufferWriter {
-	outBuf := def.precompileHandler(writer) //1.预编译处理成一行
-	outBuf = def.macroHandler(outBuf)       //2.宏处理
-	outBuf = def.unionHandler(outBuf)       //3.联合体处理
-	outBuf = def.multFieldHandler(outBuf)   //4.一行多个字段转换成一行一字段
-	outBuf = def.partFieldHandler(outBuf)   //5.多行一个字段转换成一行一字段
+func (def *Define) FormatStruct(inBuf *util.BufferWriter) *util.BufferWriter {
+	outBuf := def.macroHandler(inBuf)      //1.宏处理
+	outBuf = def.unionHandler(outBuf)      //2.联合体处理
+	outBuf = def.multFieldHandler(outBuf)  //3.一行多个字段转换成一行一字段
+	outBuf = def.partFieldHandler(outBuf)  //4.多行一个字段转换成一行一字段
 	return outBuf
 }
 
-//1.预编译处理成一行
-func (def *Define) precompileHandler(writer *util.BufferWriter) *util.BufferWriter {
-	inBuf := writer.GetBuffer()
-	outBuf := util.NewBufferWriter(writer.Size())
-	macroDepth := 0
-	macroBuf := util.NewBufferWriter(64)
-	for index := 0; index < len(inBuf); index++ {
-		val := inBuf[index]
-		if val == '#' {
-			ifStr := string(inBuf[index+1 : index+3])
-			if ifStr == "if" {
-				macroDepth++
-			}
-		}
-
-		if macroDepth > 0 {
-			//\n用$替换
-			if val != '\n' {
-				macroBuf.WriteChar(val)
-			} else {
-				macroBuf.WriteChar(NEWLINE_REPLACE_KEY)
-			}
-			if val == '#' {
-				endif := string(inBuf[index+1 : index+6])
-				if endif == "endif" {
-					macroDepth--
-					if macroDepth == 0 {
-						outBuf.Write(macroBuf.GetBuffer())
-						macroBuf.Clear()
-						outBuf.WriteString(endif)
-						index += 5
-					}
-				}
-			}
-			continue
-		}
-		outBuf.WriteChar(val)
-	}
-	return outBuf
-}
-
-//2.宏处理
+//1.宏处理
 func (def *Define) macroHandler(writer *util.BufferWriter) *util.BufferWriter {
+	writer = GetPreCompile().InOneLine(writer) //1.预编译处理成一行
 	writer.Reset()
 	def.unionParse.Reset()
 	outBuf := util.NewBufferWriter(writer.Size())
@@ -161,10 +116,11 @@ func (def *Define) macroHandler(writer *util.BufferWriter) *util.BufferWriter {
 		}
 		outBuf.WriteString(line)
 	}
+	writer.Recycle()
 	return outBuf
 }
 
-//3.联合体处理
+//2.联合体处理
 func (def *Define) unionHandler(writer *util.BufferWriter) *util.BufferWriter {
 	unionLineIndex := -1
 	writer.Reset()
@@ -194,8 +150,9 @@ func (def *Define) unionHandler(writer *util.BufferWriter) *util.BufferWriter {
 			outBuf.WriteString(line)
 		}
 	}
+	writer.Recycle()
 	//删除多余的空行
-	return util.MergeSequenceChar(outBuf.ToString(), '\n')
+	return util.MergeSequenceCharEx(outBuf, '\n')
 }
 
 /**
@@ -264,7 +221,7 @@ func (def *Define) getMacroField(line string) string {
 	return ""
 }
 
-//4.一行多个字段转换成一行一字段
+//3.一行多个字段转换成一行一字段
 func (def *Define) multFieldHandler(writer *util.BufferWriter) *util.BufferWriter {
 	writer.Reset()
 	outBuf := util.NewBufferWriter(writer.Size())
@@ -276,7 +233,25 @@ func (def *Define) multFieldHandler(writer *util.BufferWriter) *util.BufferWrite
 			outBuf.WriteString(line)
 		}
 	}
+	//writer.Recycle()
 	return outBuf
+}
+
+
+/**
+4.多行一个字段转换成一行一字段
+将多行构成的一个字段转成一行，即一行一个字段
+struct每个字段都是以";"结尾，如果\n前面不是";"说明这个\n就是多余的
+*/
+func (def *Define) partFieldHandler(writer *util.BufferWriter) *util.BufferWriter {
+	inBuf := writer.GetBuffer()
+	specialChars := ";{}"
+	for index := 1; index < len(inBuf); index++ {
+		if inBuf[index] == '\n' && !util.ContainsByte(specialChars, inBuf[index-1]) {
+			writer.RemoveByte(index)
+		}
+	}
+	return writer
 }
 
 /*
@@ -320,22 +295,9 @@ func (def *Define) oneLineToMultFields(line string) string {
 	if hasComma {
 		writeString(typeStr, line[start:])
 		return outBuf.ToString()
+	}else{
+		outBuf.Recycle()
 	}
 	return line
 }
 
-/**
-5.多行一个字段转换成一行一字段
-将多行构成的一个字段转成一行，即一行一个字段
-struct每个字段都是以";"结尾，如果\n前面不是";"说明这个\n就是多余的
-*/
-func (def *Define) partFieldHandler(writer *util.BufferWriter) *util.BufferWriter {
-	inBuf := writer.GetBuffer()
-	specialChars := ";{}"
-	for index := 1; index < len(inBuf); index++ {
-		if inBuf[index] == '\n' && !util.ContainsByte(specialChars, inBuf[index-1]) {
-			writer.RemoveByte(index)
-		}
-	}
-	return writer
-}

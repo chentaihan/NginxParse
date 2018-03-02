@@ -28,115 +28,156 @@ func GetPreCompile() *PreCompile {
 	return macroJudge
 }
 
-func (macro *PreCompile) initMap() {
-	macro.funMap = make(map[string]JudgeFun, 18)
-	macro.priority = make(map[string]uint8, 18)
+func (compile *PreCompile) initMap() {
+	compile.funMap = make(map[string]JudgeFun, 18)
+	compile.priority = make(map[string]uint8, 18)
 	priorityValue := uint8(0)
-	macro.funMap["!"] = func(first, second int64) bool { //!val
+	compile.funMap["!"] = func(first, second int64) bool { //!val
 		return second == 0
 	}
-	macro.funMap["++"] = func(first, second int64) bool { //val++
+	compile.funMap["++"] = func(first, second int64) bool { //val++
 		first++
 		return first > 0
 	}
-	macro.funMap["--"] = func(first, second int64) bool { //val--
+	compile.funMap["--"] = func(first, second int64) bool { //val--
 		first--
 		return first > 0
 	}
-	macro.priority["!"] = priorityValue
-	macro.priority["++"] = priorityValue
-	macro.priority["--"] = priorityValue
+	compile.priority["!"] = priorityValue
+	compile.priority["++"] = priorityValue
+	compile.priority["--"] = priorityValue
 	priorityValue++
 
-	macro.funMap["+"] = func(first, second int64) bool {
+	compile.funMap["+"] = func(first, second int64) bool {
 		return first+second > 0
 	}
-	macro.funMap["-"] = func(first, second int64) bool {
+	compile.funMap["-"] = func(first, second int64) bool {
 		return first-second > 0
 	}
-	macro.priority["+"] = priorityValue
-	macro.priority["-"] = priorityValue
+	compile.priority["+"] = priorityValue
+	compile.priority["-"] = priorityValue
 	priorityValue++
 
-	macro.funMap["<<"] = func(first, second int64) bool {
+	compile.funMap["<<"] = func(first, second int64) bool {
 		return first<<uint64(second) > 0
 	}
-	macro.funMap[">>"] = func(first, second int64) bool {
+	compile.funMap[">>"] = func(first, second int64) bool {
 		return first>>uint64(second) > 0
 	}
-	macro.priority["<<"] = priorityValue
-	macro.priority[">>"] = priorityValue
+	compile.priority["<<"] = priorityValue
+	compile.priority[">>"] = priorityValue
 	priorityValue++
 
-	macro.funMap[">="] = func(first, second int64) bool {
+	compile.funMap[">="] = func(first, second int64) bool {
 		return first >= second
 	}
-	macro.funMap[">"] = func(first, second int64) bool {
+	compile.funMap[">"] = func(first, second int64) bool {
 		return first > second
 	}
-	macro.funMap["<="] = func(first, second int64) bool {
+	compile.funMap["<="] = func(first, second int64) bool {
 		return first <= second
 	}
-	macro.funMap["<"] = func(first, second int64) bool {
+	compile.funMap["<"] = func(first, second int64) bool {
 		return first >= second
 	}
-	macro.priority[">="] = priorityValue
-	macro.priority[">"] = priorityValue
-	macro.priority["<="] = priorityValue
-	macro.priority["<"] = priorityValue
+	compile.priority[">="] = priorityValue
+	compile.priority[">"] = priorityValue
+	compile.priority["<="] = priorityValue
+	compile.priority["<"] = priorityValue
 	priorityValue++
 
-	macro.funMap["!="] = func(first, second int64) bool {
+	compile.funMap["!="] = func(first, second int64) bool {
 		return first != second
 	}
-	macro.funMap["=="] = func(first, second int64) bool {
+	compile.funMap["=="] = func(first, second int64) bool {
 		return first == second
 	}
-	macro.priority["!="] = priorityValue
-	macro.priority["=="] = priorityValue
+	compile.priority["!="] = priorityValue
+	compile.priority["=="] = priorityValue
 	priorityValue++
 
-	macro.funMap["&"] = func(first, second int64) bool {
+	compile.funMap["&"] = func(first, second int64) bool {
 		return (first & second) > 0
 	}
-	macro.priority["&"] = priorityValue
+	compile.priority["&"] = priorityValue
 	priorityValue++
 
-	macro.funMap["^"] = func(first, second int64) bool {
+	compile.funMap["^"] = func(first, second int64) bool {
 		return first^second > 0
 	}
-	macro.priority["^"] = priorityValue
+	compile.priority["^"] = priorityValue
 	priorityValue++
 
-	macro.funMap["|"] = func(first, second int64) bool {
+	compile.funMap["|"] = func(first, second int64) bool {
 		return (first | second) > 0
 	}
-	macro.priority["|"] = priorityValue
+	compile.priority["|"] = priorityValue
 	priorityValue++
 
-	macro.funMap["&&"] = func(first, second int64) bool {
+	compile.funMap["&&"] = func(first, second int64) bool {
 		return first > 0 && second > 0
 	}
-	macro.priority["&&"] = priorityValue
+	compile.priority["&&"] = priorityValue
 	priorityValue++
 
-	macro.funMap["||"] = func(first, second int64) bool {
+	compile.funMap["||"] = func(first, second int64) bool {
 		return first > 0 || second > 0
 	}
-	macro.priority["||"] = priorityValue
+	compile.priority["||"] = priorityValue
 	priorityValue++
 }
 
-func (macro *PreCompile) Parse(line string) string {
+func (compile *PreCompile) Parse(line string) string {
 	outBuffer := util.NewBufferWriter(len(line))
 	inBuffer := util.NewBufferWriter(len(line))
 	inBuffer.WriteString(line)
 	inBuffer.ReplaceByte(NEWLINE_REPLACE_KEY, '\n')
-	macro.parseContent(inBuffer, outBuffer)
+	compile.parseContent(inBuffer, outBuffer)
 	return outBuffer.ToString()
 }
 
-func (macro *PreCompile) parseContent(buffer, outBuf *util.BufferWriter) {
+//1.预编译处理成一行
+func (compile *PreCompile) InOneLine(writer *util.BufferWriter) *util.BufferWriter {
+	inBuf := writer.GetBuffer()
+	outBuf := util.NewBufferWriter(writer.Size())
+	macroDepth := 0
+	macroBuf := util.NewBufferWriter(128)
+	for index := 0; index < len(inBuf); index++ {
+		val := inBuf[index]
+		if val == '#' {
+			ifStr := string(inBuf[index+1 : index+3])
+			if ifStr == "if" {
+				macroDepth++
+			}
+		}
+
+		if macroDepth > 0 {
+			//\n用$替换
+			if val != '\n' {
+				macroBuf.WriteChar(val)
+			} else {
+				macroBuf.WriteChar(NEWLINE_REPLACE_KEY)
+			}
+			if val == '#' {
+				endif := string(inBuf[index+1 : index+6])
+				if endif == "endif" {
+					macroDepth--
+					if macroDepth == 0 {
+						outBuf.Write(macroBuf.GetBuffer())
+						macroBuf.Clear()
+						outBuf.WriteString(endif)
+						index += 5
+					}
+				}
+			}
+			continue
+		}
+		outBuf.WriteChar(val)
+	}
+	return outBuf
+}
+
+func (compile *PreCompile) parseContent(buffer, outBuf *util.BufferWriter) {
 	const (
 		LOCATION_OUT    = 0
 		LOCATION_INIF   = 1
@@ -161,7 +202,7 @@ func (macro *PreCompile) parseContent(buffer, outBuf *util.BufferWriter) {
 			if !isJudge {
 				isJudge = true
 				tmpLine := strings.TrimRight(str[3:], "\n")
-				ifTrue = macro.judge(tmpLine)
+				ifTrue = compile.judge(tmpLine)
 				continue
 			}
 
@@ -204,21 +245,21 @@ func (macro *PreCompile) parseContent(buffer, outBuf *util.BufferWriter) {
 
 	}
 	if lineBuffer.Size() > 0 {
-		macro.parseContent(lineBuffer, outBuf)
+		compile.parseContent(lineBuffer, outBuf)
 	}
 }
 
-func (macro *PreCompile) judge(line string) bool {
+func (compile *PreCompile) judge(line string) bool {
 	//JUDGE_REPLACE: #if IS_OK && (IS_OK) || (IS_OK == 1) || (NGX_HAVE_FILE_AIO || NGX_COMPAT)
 	//JUDGE_BRACE: #if 1 && (1) || (1 == 1) || (1 || 1)
 	//JUDGE_CALC #if 1 && 1 || 1 || 1
-	line = macro.judgeReplace(line)
-	line = macro.judgeBrace(line)
-	return macro.judgeCalc(line)
+	line = compile.judgeReplace(line)
+	line = compile.judgeBrace(line)
+	return compile.judgeCalc(line)
 }
 
 //第一步 宏替换
-func (macro *PreCompile) judgeReplace(line string) string {
+func (compile *PreCompile) judgeReplace(line string) string {
 	macroSlice := util.GetLegalStrings(line)
 	for _, macroName := range macroSlice {
 		macroValue := "0"
@@ -239,7 +280,7 @@ func (macro *PreCompile) judgeReplace(line string) string {
 }
 
 //第二步 计算括号中的值
-func (macro *PreCompile) judgeBrace(line string) string {
+func (compile *PreCompile) judgeBrace(line string) string {
 	line = util.RemoveBlank(line)
 	start := -1
 	i := 0
@@ -251,7 +292,7 @@ func (macro *PreCompile) judgeBrace(line string) string {
 			tmpLine := line[start+1: i]
 
 			calcVal := "0"
-			if macro.judgeCalc(tmpLine) {
+			if compile.judgeCalc(tmpLine) {
 				calcVal = "1"
 			}
 			line = strings.Replace(line, "("+tmpLine+")", calcVal, -1)
@@ -263,7 +304,7 @@ func (macro *PreCompile) judgeBrace(line string) string {
 }
 
 //将1&&0拆分成：slice{1,&&,0}
-func (macro *PreCompile) split(line string) []string {
+func (compile *PreCompile) split(line string) []string {
 	curVal := ""
 	slice := make([]string, 0, 3)
 	size := len(line)
@@ -290,21 +331,21 @@ func (macro *PreCompile) split(line string) []string {
 }
 
 //第三步 计算 1||2&&3或1>=2||2<3
-func (macro *PreCompile) judgeCalc(line string) bool {
-	operatorSlice := macro.split(line)
+func (compile *PreCompile) judgeCalc(line string) bool {
+	operatorSlice := compile.split(line)
 
 	for size := len(operatorSlice); size > 1;{
 		operatorMap := make(map[int]uint8, size/2)
 		for i := 1; i < size; i += 2 {
-			operatorMap[i] = macro.priority[operatorSlice[i]]
+			operatorMap[i] = compile.priority[operatorSlice[i]]
 		}
 
-		maxIndex := macro.getMinPriorityIndex(operatorMap)
+		maxIndex := compile.getMinPriorityIndex(operatorMap)
 		operator := operatorSlice[maxIndex]
 		index := maxIndex - 1
 		first, _ := strconv.Atoi(operatorSlice[index])
 		second, _ := strconv.Atoi(operatorSlice[maxIndex+1])
-		fun := macro.funMap[operator]
+		fun := compile.funMap[operator]
 		result := "0"
 		if fun != nil && fun(int64(first), int64(second)) {
 			result = "1"
@@ -326,7 +367,7 @@ func (macro *PreCompile) judgeCalc(line string) bool {
 }
 
 //优先级值越小，优先级越高
-func (macro *PreCompile) getMinPriorityIndex(priorityMap map[int]uint8) int {
+func (compile *PreCompile) getMinPriorityIndex(priorityMap map[int]uint8) int {
 	var minKey int = -1
 	for key, value := range priorityMap {
 		if minKey == -1 {

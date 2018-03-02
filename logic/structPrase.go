@@ -37,7 +37,7 @@ func NewStructParsee(structType string) *StructParse {
 
 //判断是不是struct/union头部
 func (stt *StructParse) IsHead(line string) bool {
-	line = util.MergeSequenceChar(line, ' ').ToString()
+	line = util.MergeSequenceChar(line, ' ')
 	token := strings.SplitN(line, " ", 4)
 	tokenLen := len(token)
 	if tokenLen < 3 {
@@ -91,7 +91,7 @@ func (stt *StructParse) IsTail(line string) bool {
 		return false
 	}
 	line = line[0 : len(line)-1]
-	line = util.MergeSequenceChar(line, ' ').ToString()
+	line = util.MergeSequenceChar(line, ' ')
 	token := strings.SplitN(line, " ", 2)
 
 	//结构体尾部就两种结构

@@ -102,10 +102,26 @@ func (asst *Assignment) ParseStruct(filePath string, writer *util.BufferWriter) 
 	return true
 }
 
+//1.宏处理
+func (asst *Assignment) macroHandler(writer *util.BufferWriter) *util.BufferWriter {
+	writer = GetPreCompile().InOneLine(writer) //1.预编译处理成一行
+	writer.Reset()
+	outBuf := util.NewBufferWriter(writer.Size())
+	for writer.MoveNext() {
+		line := writer.Current()
+		if strings.Index(line, "#if") == 0 {
+			line = GetPreCompile().Parse(line[0 : len(line)-1])
+		}
+		outBuf.WriteString(line)
+	}
+	writer.Recycle()
+	return outBuf
+}
+
 func (asst *Assignment) parseFields(lines []string) []string {
 	fieldsLen := len(lines)
 	if fieldsLen > 2 {
-		lines = lines[1 : fieldsLen-1]
+		lines = lines[1: fieldsLen-1]
 		fields := make([]string, 0, fieldsLen-2)
 		for _, val := range lines {
 			fields = append(fields, val)
@@ -118,11 +134,11 @@ func (asst *Assignment) parseFields(lines []string) []string {
 //将buffer中的struct赋值格式化成容易解析的样子
 func (asst *Assignment) formatStruct(bufWriter *util.BufferWriter) *util.BufferWriter {
 	inBuf := bufWriter.GetBuffer()
-	outBuf := util.NewBufferWriter(bufWriter.Size() + 64)
+	outBuf := util.NewBufferWriter(bufWriter.Size())
 	bracketCount := 0
 	inBracketCount := strings.Count(bufWriter.ToString(), "[") + 1 //大括号深度
 	inLittleBracket := false                                       //在小括号内部
-
+	inQuote := false                                               //是否在双引号里面
 	const BEFORE_LINE = 1
 	const AFTER_LINE = 2
 	const BEFORE_AFTER_LINE = 3
@@ -135,6 +151,9 @@ func (asst *Assignment) formatStruct(bufWriter *util.BufferWriter) *util.BufferW
 		//去掉结构体字段中的空格
 		if val == ' ' && bracketCount > 0 {
 			continue
+		}
+		if val == '"' {
+			inQuote = !inQuote
 		}
 		newLine := 0
 		addChar := true
@@ -156,26 +175,30 @@ func (asst *Assignment) formatStruct(bufWriter *util.BufferWriter) *util.BufferW
 			inLittleBracket = false
 		}
 
-		if val == ',' && !inLittleBracket {
-			if bracketCount == inBracketCount {
-				newLine = AFTER_LINE
+		if !inQuote {
+			if val == ',' && !inLittleBracket {
+				if bracketCount == inBracketCount {
+					newLine = AFTER_LINE
+				}
+				//字段后面的,去掉
+				if bracketCount <= inBracketCount {
+					addChar = false
+				}
 			}
-			//字段后面的,去掉
-			if bracketCount <= inBracketCount {
-				addChar = false
-			}
-		}
 
-		isAddN := false
-		if newLine&BEFORE_LINE > 0 && index > 0 && inBuf[index-1] != '\n' {
-			outBuf.WriteChar('\n')
-			isAddN = true
-		}
-		if addChar {
+			isAddN := false
+			if newLine&BEFORE_LINE > 0 && index > 0 && inBuf[index-1] != '\n' {
+				outBuf.WriteChar('\n')
+				isAddN = true
+			}
+			if addChar {
+				outBuf.WriteChar(val)
+			}
+			if !isAddN && newLine&AFTER_LINE > 0 && inBuf[index+1] != '\n' {
+				outBuf.WriteChar('\n')
+			}
+		} else {
 			outBuf.WriteChar(val)
-		}
-		if !isAddN && newLine&AFTER_LINE > 0 && inBuf[index+1] != '\n' {
-			outBuf.WriteChar('\n')
 		}
 	}
 	return outBuf
@@ -183,12 +206,10 @@ func (asst *Assignment) formatStruct(bufWriter *util.BufferWriter) *util.BufferW
 
 //将buffer中的struct赋值格式化成容易解析的样子
 func (asst *Assignment) FormatStruct(bufWriter *util.BufferWriter) *util.BufferWriter {
-	outBuf := asst.formatStruct(bufWriter)
-	fmt.Println(outBuf.ToString())
-	outBuf = asst.replaceMacro(outBuf)
-	fmt.Println(outBuf.ToString())
+	outBuf := asst.macroHandler(bufWriter)
 	outBuf = asst.formatStruct(outBuf)
-	fmt.Println(outBuf.ToString())
+	outBuf = asst.replaceMacro(outBuf)
+	outBuf = asst.formatStruct(outBuf)
 	return outBuf
 }
 
@@ -206,5 +227,6 @@ func (asst *Assignment) replaceMacro(bufWriter *util.BufferWriter) *util.BufferW
 			outBuf.WriteString(line)
 		}
 	}
+	bufWriter.Recycle()
 	return outBuf
 }

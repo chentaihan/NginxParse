@@ -26,11 +26,14 @@ func (tfs *Typedefs) Add(structName, structRename string) {
 
 func (tfs *Typedefs) Parse(defines *Defines) {
 	for key, value := range tfs.Map {
+		if key == "ngx_command_s" {
+			fmt.Println(key)
+		}
 		if _, exist := defines.Map[key]; !exist {
 			delete(tfs.Map, key)
 		} else {
-			if define, exist := defines.Map[value]; !exist {
-				defines.Add(value, define)
+			if _, exist := defines.Map[value]; !exist {
+				defines.Add(value, defines.Map[key])
 			}
 		}
 	}

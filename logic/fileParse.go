@@ -37,7 +37,7 @@ func (fileParse *FileParse) Parse(fullPath string) bool {
 	rd := bufio.NewReader(f)
 	isOK := false
 	inNote := false
-	var buffer *util.BufferWriter
+	buffer := util.NewBufferWriter(0)
 	var curStruct IParse = nil
 	depth := 0
 	for {
@@ -54,14 +54,14 @@ func (fileParse *FileParse) Parse(fullPath string) bool {
 		//过滤注释
 		line = filterNote(line, &inNote)
 		//合并空格
-		line = util.MergeSequenceChar(line, ' ').ToString()
+		line = util.MergeSequenceChar(line, ' ')
 		if util.IsEmptyLine(line) {
 			continue
 		}
 		if curStruct == nil {
 			if curStruct = fileParse.isStartStruct(line); curStruct != nil {
-				buffer = &util.BufferWriter{}
 				isOK = true
+				buffer.Clear()
 			}
 		}
 
@@ -77,11 +77,10 @@ func (fileParse *FileParse) Parse(fullPath string) bool {
 			if depth == 0 && curStruct.IsEndStruct(line) {
 				curStruct.ParseStruct(fullPath, buffer)
 				curStruct = nil
-				buffer = util.NewBufferWriter(0)
 			}
 		}
 	}
-
+	buffer.Recycle()
 	return isOK
 }
 

@@ -18,7 +18,7 @@ func ParseModuleName(fullPath string) string {
 }
 
 //是否是合法字符
-func isLegalChar(c byte) bool {
+func IsLegalChar(c byte) bool {
 	if (c >= '0' && c <= '9') || c == '_' || (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') {
 		return true
 	}
@@ -41,7 +41,7 @@ func IsLegalString(line string) bool {
 		return false
 	}
 	for i := len(line) - 1; i >= 0; i-- {
-		if !isLegalChar(line[i]) {
+		if !IsLegalChar(line[i]) {
 			return false
 		}
 	}
@@ -71,7 +71,7 @@ func GetLegalString(line string) string {
 	isStart := false
 	newLine := make([]byte, 0, len(line))
 	for i := 0; i < len(line); i++ {
-		if isLegalChar(line[i]) {
+		if IsLegalChar(line[i]) {
 			if !isStart {
 				isStart = true
 			}
@@ -91,7 +91,7 @@ func GetLegalStrings(line string) []string {
 	ret := make([]string, 0)
 	newLine := make([]byte, 0, len(line))
 	for i := 0; i < len(line); i++ {
-		if isLegalChar(line[i]) {
+		if IsLegalChar(line[i]) {
 			if !isStart {
 				isStart = true
 			}
@@ -111,8 +111,8 @@ func GetLegalStrings(line string) []string {
 }
 
 //合并指定的连续字符
-func MergeSequenceChar(line string, c byte) *BufferWriter {
-	inBuf := []byte(line)
+func MergeSequenceCharEx(writer *BufferWriter, c byte) *BufferWriter {
+	inBuf := writer.GetBuffer()
 	outBuf := NewBufferWriter(len(inBuf))
 	for index, val := range inBuf {
 		if val == c && index < len(inBuf)-1 && inBuf[index+1] == c {
@@ -122,6 +122,23 @@ func MergeSequenceChar(line string, c byte) *BufferWriter {
 	}
 	return outBuf
 }
+
+//合并指定的连续字符
+func MergeSequenceChar(line string, c byte) string {
+	inBuf := []byte(line)
+	outBuf := make([]byte,len(line),len(line))
+	index := 0
+	for i, val := range inBuf {
+		if val == c && i < len(inBuf)-1 && inBuf[i+1] == c {
+			continue
+		}
+		outBuf[index] = val
+		index++
+	}
+	outBuf = outBuf[0:index]
+	return *(*string)(unsafe.Pointer(&outBuf))
+}
+
 
 //判断字符串是否是空行
 func IsEmptyLine(line string) bool {

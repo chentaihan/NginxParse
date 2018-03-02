@@ -39,7 +39,7 @@ func GetDefines() *Defines {
 
 func (defines *Defines) Add(structName string, sttInfo *StructInfo) bool {
 	if sttInfo != nil {
-		defines.Map[sttInfo.StructName] = sttInfo
+		defines.Map[structName] = sttInfo
 		return true
 	}
 	return false
@@ -58,7 +58,7 @@ func (defines *Defines) Size() int {
 
 func (defines *Defines) StructNameList() []string {
 	structNames := make([]string, 0, defines.Size())
-	for name, _ := range defines.Map {
+	for name := range defines.Map {
 		structNames = append(structNames, name)
 	}
 	return structNames
